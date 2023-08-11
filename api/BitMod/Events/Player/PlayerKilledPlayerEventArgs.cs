@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-using BitMod.Compatibility;
+using BattleBitAPI.Common;
 
-using CommunityServerAPI.BattleBitAPI.Common.Enums;
+using BitMod.Compatibility;
 
 namespace BitMod.Events.Player
 {

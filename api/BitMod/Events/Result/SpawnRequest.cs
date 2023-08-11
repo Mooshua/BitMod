@@ -1,7 +1,6 @@
 ﻿using System.Numerics;
 
-using CommunityServerAPI.BattleBitAPI.Common.Data;
-using CommunityServerAPI.BattleBitAPI.Common.Enums;
+using BattleBitAPI.Common;
 
 namespace BitMod.Events.Result;
 

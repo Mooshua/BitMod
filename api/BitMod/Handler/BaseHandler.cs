@@ -2,11 +2,9 @@
 
 using System.Net;
 
-using CommunityServerAPI.BattleBitAPI;
-using CommunityServerAPI.BattleBitAPI.Common.Arguments;
-using CommunityServerAPI.BattleBitAPI.Common.Data;
-using CommunityServerAPI.BattleBitAPI.Common.Enums;
-using CommunityServerAPI.BattleBitAPI.Server;
+using BattleBitAPI;
+using BattleBitAPI.Common;
+using BattleBitAPI.Server;
 
 #endregion
 

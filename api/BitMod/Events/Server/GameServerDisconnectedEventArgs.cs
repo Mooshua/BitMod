@@ -1,4 +1,4 @@
-﻿using CommunityServerAPI.BattleBitAPI.Server;
+﻿using BattleBitAPI.Server;
 
 namespace BitMod.Events.Server;
 

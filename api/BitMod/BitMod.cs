@@ -1,10 +1,10 @@
-﻿using BitMod.Compatibility;
+﻿using BattleBitAPI.Server;
+
+using BitMod.Compatibility;
 using BitMod.Handler;
 using BitMod.Internal;
 using BitMod.Internal.Public;
 using BitMod.Public;
-
-using CommunityServerAPI.BattleBitAPI.Server;
 
 using Lilikoi.Context;
 

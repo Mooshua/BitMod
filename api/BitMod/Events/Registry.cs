@@ -1,9 +1,9 @@
-﻿using BitMod.Events.Meta;
+﻿using BattleBitAPI.Common;
+
+using BitMod.Events.Meta;
 using BitMod.Events.Player;
 using BitMod.Events.Server;
 using BitMod.Events.Stats;
-
-using CommunityServerAPI.BattleBitAPI.Common.Data;
 
 namespace BitMod.Events;
 
@@ -54,7 +54,7 @@ public static class Registry
 		//	Stats
 		{ typeof(GetPlayerStatsEventArgs), EventType.Value },
 		{ typeof(SavingPlayerStatsEventArgs), EventType.None },
-		
+
 		//	Meta
 		{ typeof(PluginLoadEvent), EventType.None },
 		{ typeof(PluginUnloadEvent), EventType.None },

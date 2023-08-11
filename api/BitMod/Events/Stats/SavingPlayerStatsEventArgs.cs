@@ -1,4 +1,4 @@
-﻿using CommunityServerAPI.BattleBitAPI.Common.Data;
+﻿using BattleBitAPI.Common;
 
 namespace BitMod.Events.Stats
 {

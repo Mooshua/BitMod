@@ -1,6 +1,6 @@
-﻿using BitMod.Compatibility;
+﻿using BattleBitAPI.Common;
 
-using CommunityServerAPI.BattleBitAPI.Common.Data;
+using BitMod.Compatibility;
 
 namespace BitMod.Events.Player
 {

@@ -1,10 +1,10 @@
-﻿using BitMod.Attributes.Targets;
+﻿using BattleBitAPI.Common;
+
+using BitMod.Attributes.Targets;
 using BitMod.Events.Server;
 using BitMod.Events.Stats;
 using BitMod.Internal.Public;
 using BitMod.Plugins.Events;
-
-using CommunityServerAPI.BattleBitAPI.Common.Data;
 
 namespace BitMod.Tests.Plugins;
 
