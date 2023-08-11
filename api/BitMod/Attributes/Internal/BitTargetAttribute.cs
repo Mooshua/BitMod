@@ -6,14 +6,18 @@ using BitMod.Internal;
 using Lilikoi.Attributes;
 using Lilikoi.Compiler.Public;
 
+using Serilog;
+
 namespace BitMod.Attributes.Targets;
 
 
 [EditorBrowsable(EditorBrowsableState.Never)]
 public abstract class BitTargetAttribute : LkTargetAttribute
 {
+	public abstract Type ContextType { get; }
+
 	public override bool IsTargetable<TUserContext>()
-		=> typeof(TUserContext) == typeof(EventRegistrationContext);
+		=> typeof(TUserContext) == ContextType;
 
 	public override void Target<TUserContext>(TUserContext context, LilikoiMutator mutator)
 		=> Target(context as EventRegistrationContext, mutator);
@@ -23,14 +27,16 @@ public abstract class BitTargetAttribute : LkTargetAttribute
 		if (mutator.Parameters == 0)
 			throw new InvalidOperationException("BitMod targets require at least one argument in the handler function!");
 
-		if (!IsValidEvent(mutator.Parameter(0)))
+		var first = mutator.Parameter(0);
+
+		if (!IsValidEvent(first))
 			throw new InvalidOperationException($"Type {mutator.Parameter(0).FullName} is not a valid for BitMod target {Name}!");
 
-		context.Event = mutator.Parameter(0);
-		mutator.Wildcard<UnpackWildcardParameterAttribute>(new UnpackWildcardParameterAttribute(context.Event));
+		context.Event = first;
+		mutator.Wildcard(new UnpackWildcardParameterAttribute(first), first);
 
 		//	Handle async result types
-		if (mutator.Result.IsSubclassOf(typeof(Type)))
+		if (mutator.Result.IsSubclassOf(typeof(Task)) || mutator.Result == typeof(Task))
 			mutator.Implicit(new AsyncAttribute());
 
 		Setup(context, mutator);

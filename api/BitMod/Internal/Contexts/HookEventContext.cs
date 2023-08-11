@@ -1,6 +1,15 @@
-﻿using BitMod.Internal.Handlers;
+﻿using System.Reflection;
+
+using BitMod.Internal.Handlers;
+using BitMod.Internal.LilikoiRouting;
 using BitMod.Internal.Registries;
 using BitMod.Plugins.Events;
+
+using Lilikoi.Compiler.Public;
+using Lilikoi.Context;
+using Lilikoi.Scan;
+
+using Serilog;
 
 namespace BitMod.Internal.Contexts;
 
@@ -30,11 +39,22 @@ internal class HookEventContext
 
 	public void Add(string pluginName, IEnumerable<HookEventHandler> handlers)
 	{
-		_handlers.Add(pluginName, handlers.ToList());
+		if (_handlers.ContainsKey(pluginName))
+		{
+			var existingHandlers = _handlers[pluginName];
+			existingHandlers.AddRange(handlers);
+		}
+		else
+		{
+			_handlers.Add(pluginName, handlers.ToList());
+		}
+
 		Rebuild();
 	}
 
 	public Directive Invoke(EventInput input)
 		=> _currentRegistry.Invoke(input);
 
+	public static List<LilikoiContainer> Scan(EventRegistrationContext ctx, MethodInfo methodInfo, Func<Mount> mount)
+		=> Scanner.Scan<HookRegistrationContext, EventInput, Task<Directive>>(new HookRegistrationContext(ctx), methodInfo, mount);
 }

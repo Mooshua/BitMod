@@ -1,10 +1,12 @@
 ﻿using BitMod.Events;
 
+using Lilikoi.Context;
+
 namespace BitMod.Internal;
 
-internal class EventRegistrationContext
+internal class EventRegistrationContext : Mount
 {
-	public Type Event { get; internal set; }
+	public virtual Type Event { get; internal set; }
 
 	public int EventId => Registry.IndexOf(Event);
 }

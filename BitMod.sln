@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Plugins", "api\BitMo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{11BEBA9D-0E44-4A6D-A5EF-5A53B977EC06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Tests.Events", "tests\BitMod.Tests.Events\BitMod.Tests.Events.csproj", "{A3BE58F5-FB17-4B97-8636-57062741EBFA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Tests", "tests\BitMod.Tests\BitMod.Tests.csproj", "{A3BE58F5-FB17-4B97-8636-57062741EBFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

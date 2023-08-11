@@ -1,6 +1,8 @@
 ﻿using BitMod.Internal.Handlers;
 using BitMod.Plugins.Events;
 
+using Serilog;
+
 namespace BitMod.Internal.Registries;
 
 internal class HookEventRegistry
@@ -19,10 +21,7 @@ internal class HookEventRegistry
 		{
 			var hookResult = hookEvent.Invoke(input);
 
-			if (hookResult == Directive.Allow)
-				return hookResult;
-
-			if (hookResult == Directive.Disallow)
+			if (hookResult != Directive.Neutral)
 				return hookResult;
 		}
 

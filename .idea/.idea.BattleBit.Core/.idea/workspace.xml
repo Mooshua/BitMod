@@ -7,58 +7,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="763cbce6-ea3f-4522-a700-4180d0afc224" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BattleBit.Core/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.BattleBit.Core/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BitMod.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/AsyncAttribute.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/BitTargetAttribute.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/UnpackWildcardParameterAttribute.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Targets/BitEventAttribute.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/BitMod.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Compatibility/BitPlayer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Compatibility/IBitObject.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerChangedRoleEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerChangedTeamEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerConnectedEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerDiedEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerDisconnectedEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerJoinedSquadEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerKilledPlayerEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerLeftSquadEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerReportedEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerRequestingToChangeRoleEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerSpawnedEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerSpawningEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Player/PlayerTypedMessageEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Registry.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Server/GameServerConnectedEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Server/GameServerConnectingEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Server/GameServerDisconnectedEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Server/GameServerReconnectedEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Server/GameServerTickEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Stats/GetPlayerStatsEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Events/Stats/SavingPlayerStatsEventArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Handler/BaseHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Handler/DefaultHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/HookEventContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/ProducerEventContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/EventInput.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/EventInvoker.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/EventRegistrationContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/HookEventHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/ProducerEventHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/SimpleEventHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Registries/HookEventRegistry.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Registries/ProducerEventRegistry.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Registries/SimpleEventRegistry.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Plugins/Events/Directive.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Plugins/Events/Product.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Plugins/IPlugin.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/upstream/BattleBitAPI" afterDir="false" />
+    <list default="true" id="763cbce6-ea3f-4522-a700-4180d0afc224" name="Changes" comment="Initial work">
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Targets/BitHookAttribute.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/BitMod.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Handler/RoutingHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/EventPriority.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/LilikoiRouting/HookRegistrationContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/LilikoiRouting/ProducerRegistrationContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/LilikoiRouting/RegistrationContextProxy.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/LilikoiRouting/SimpleRegistrationContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Public/PluginContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Public/PluginInvoker.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Routing/Router.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/BitMod.Tests/GlobalSetup.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/BitMod.Tests/Plugins/PluginHookInvocation.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/BitMod.Tests/Plugins/PluginSimpleInvocation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BattleBit.Core/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BattleBit.Core/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BitMod.sln" beforeDir="false" afterPath="$PROJECT_DIR$/BitMod.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/BitTargetAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/BitTargetAttribute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/UnpackWildcardParameterAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/UnpackWildcardParameterAttribute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Attributes/Targets/BitEventAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Targets/BitEventAttribute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/BitMod.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/BitMod.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Events/Server/GameServerConnectingEventArgs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Events/Server/GameServerConnectingEventArgs.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/HookEventContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/HookEventContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/ProducerEventContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/ProducerEventContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/SimpleEventContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/SimpleEventContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/EventInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/EventInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/EventRegistrationContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/EventRegistrationContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/HookEventHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/HookEventHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/ProducerEventHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/ProducerEventHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Registries/HookEventRegistry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Registries/HookEventRegistry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/BitMod.Tests.Events/BitMod.Tests.Events.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/tests/BitMod.Tests/BitMod.Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/BitMod.Tests.Events/UnitTest1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/BitMod.Tests.Events/Usings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/BitMod.Tests/Usings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/upstream/BattleBitAPI" beforeDir="false" afterPath="$PROJECT_DIR$/upstream/BattleBitAPI" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,21 +49,24 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/386a422a7d654779969322d43ae88206a400/cb/d976ecd5/LkTypedWrapAttribute`2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7bcf86822005406aa696269415614111a600/63/aa5a5465/LilikoiMutator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7bcf86822005406aa696269415614111a600/8e/39ba5a38/MahoganyCompiler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/api/BitMod/Attributes/Targets/BitTargetAttribute.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/api/BitMod/Attributes/Wraps/AsyncAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/api/BitMod/Attributes/Internal/AsyncAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/api/BitMod/Attributes/Internal/BitTargetAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Events/Registry.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Handler/BaseHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Handler/DefaultHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Internal/EventInput.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Internal/Handlers/HookEventHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Internal/Handlers/SimpleEventHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/api/BitMod/Internal/Interfaces/IHookEvent.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/api/BitMod/Internal/Interfaces/ISimpleEvent.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/BitMod.Tests/Plugins/PluginHookInvocation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/BitMod.Tests/Plugins/PluginSimpleInvocation.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectId" id="2ToTL06fTQ9KF1gb51Wjrgr33ha" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -111,7 +96,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected=".NET Project.CommunityServerAPI">
     <configuration name="CommunityServerAPI" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -139,14 +124,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1691708374951</updated>
-      <workItem from="1691708376008" duration="12356000" />
+      <workItem from="1691708376008" duration="18475000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial work">
+      <created>1691722064150</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1691722064150</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Initial work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial work" />
   </component>
 </project>

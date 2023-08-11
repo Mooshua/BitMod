@@ -14,7 +14,7 @@ namespace BitMod.Events.Server
         /// </summary>
         public bool Allow { get; set; }
 
-        internal GameServerConnectingEventArgs(IPAddress ipAddress)
+        public GameServerConnectingEventArgs(IPAddress ipAddress)
         {
             IPAddress = ipAddress;
             Allow = true;

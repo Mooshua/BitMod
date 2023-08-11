@@ -15,11 +15,14 @@ internal class UnpackWildcardParameterAttribute : LkParameterAttribute
 		Event = @event;
 	}
 
+	public UnpackWildcardParameterAttribute()
+	{
+	}
+
 	public Type Event { get; }
 
 	public override bool IsInjectable<TParameter, TInput>(Mount mount)
-		=>    typeof(TParameter) == Event
-		   && typeof(TInput) == typeof(EventInput);
+		=> throw new Exception(typeof(TParameter).FullName);//typeof(TParameter) == Event;
 
 	public override TParameter Inject<TParameter, TInput>(Mount context, TInput input)
 		=> (input as EventInput)!.Get<TParameter>()!;

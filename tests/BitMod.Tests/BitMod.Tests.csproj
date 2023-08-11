@@ -6,6 +6,8 @@
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
+
+        <RootNamespace>BitMod.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,6 +16,8 @@
         <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
         <PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
         <PackageReference Include="coverlet.collector" Version="3.1.2" />
+        <PackageReference Include="Serilog" Version="3.0.2-dev-02044" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.2.0-dev-00918" />
     </ItemGroup>
 
     <ItemGroup>

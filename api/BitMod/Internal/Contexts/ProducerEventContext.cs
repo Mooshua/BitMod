@@ -1,6 +1,13 @@
-﻿using BitMod.Internal.Handlers;
+﻿using System.Reflection;
+
+using BitMod.Internal.Handlers;
+using BitMod.Internal.LilikoiRouting;
 using BitMod.Internal.Registries;
 using BitMod.Plugins.Events;
+
+using Lilikoi.Compiler.Public;
+using Lilikoi.Context;
+using Lilikoi.Scan;
 
 namespace BitMod.Internal.Contexts;
 
@@ -30,11 +37,23 @@ internal class ProducerEventContext
 
 	public void Add(string pluginName, IEnumerable<ProducerEventHandler> handlers)
 	{
-		_handlers.Add(pluginName, handlers.ToList());
+		if (_handlers.ContainsKey(pluginName))
+		{
+			var existingHandlers = _handlers[pluginName];
+			existingHandlers.AddRange(handlers);
+		}
+		else
+		{
+			_handlers.Add(pluginName, handlers.ToList());
+		}
+
 		Rebuild();
 	}
 
 	public Product Invoke(EventInput input)
 		=> _currentRegistry.Invoke(input);
+
+	public static List<LilikoiContainer> Scan(EventRegistrationContext ctx, MethodInfo methodInfo, Func<Mount> mount)
+		=> Scanner.Scan<ProducerRegistrationContext, EventInput, Task<Product>>( new ProducerRegistrationContext( ctx ), methodInfo, mount);
 
 }

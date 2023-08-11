@@ -7,10 +7,10 @@ namespace BitMod.Internal.Handlers;
 internal class ProducerEventHandler
 {
 
-	public ProducerEventHandler(LilikoiContainer container, byte priority)
+	public ProducerEventHandler(LilikoiContainer container)
 	{
 		Container = container;
-		Priority = priority;
+		Priority = container.Get<EventPriority>()?.Priority ?? Byte.MaxValue;
 		Compiled = container.Compile<EventInput, Task<Product>>();
 	}
 

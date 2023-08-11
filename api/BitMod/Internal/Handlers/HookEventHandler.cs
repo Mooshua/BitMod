@@ -6,10 +6,10 @@ namespace BitMod.Internal.Handlers;
 
 internal class HookEventHandler
 {
-	public HookEventHandler(LilikoiContainer container, byte priority)
+	public HookEventHandler(LilikoiContainer container)
 	{
 		Container = container;
-		Priority = priority;
+		Priority = container.Get<EventPriority>()?.Priority ?? Byte.MaxValue;
 		Compiled = container.Compile<EventInput, Task<Directive>>();
 	}
 
