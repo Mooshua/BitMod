@@ -1,6 +1,9 @@
-﻿using BitMod.Events.Player;
+﻿using BitMod.Events.Meta;
+using BitMod.Events.Player;
 using BitMod.Events.Server;
 using BitMod.Events.Stats;
+
+using CommunityServerAPI.BattleBitAPI.Common.Data;
 
 namespace BitMod.Events;
 
@@ -24,6 +27,7 @@ public static class Registry
 
 	public static Dictionary<Type, EventType> Events = new Dictionary<Type, EventType>()
 	{
+		//	Player
 		{ typeof(PlayerChangedRoleEventArgs), EventType.None },
 		{ typeof(PlayerChangedTeamEventArgs), EventType.None },
 		{ typeof(PlayerConnectedEventArgs), EventType.None },
@@ -39,6 +43,7 @@ public static class Registry
 		{ typeof(PlayerRequestingToChangeRoleEventArgs), EventType.Hook },
 		{ typeof(PlayerTypedMessageEventArgs), EventType.Hook },
 
+		//	Gameserver
 		{ typeof(GameServerConnectedEventArgs), EventType.None },
 		{ typeof(GameServerDisconnectedEventArgs), EventType.None },
 		{ typeof(GameServerReconnectedEventArgs), EventType.None },
@@ -46,8 +51,18 @@ public static class Registry
 
 		{ typeof(GameServerConnectingEventArgs), EventType.Hook },
 
+		//	Stats
 		{ typeof(GetPlayerStatsEventArgs), EventType.Value },
 		{ typeof(SavingPlayerStatsEventArgs), EventType.None },
+		
+		//	Meta
+		{ typeof(PluginLoadEvent), EventType.None },
+		{ typeof(PluginUnloadEvent), EventType.None },
+	};
+
+	public static Dictionary<Type, Type> Producers = new Dictionary<Type, Type>()
+	{
+		{ typeof(GetPlayerStatsEventArgs), typeof(PlayerStats) }
 	};
 
 	/// <summary>

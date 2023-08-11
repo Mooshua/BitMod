@@ -1,4 +1,5 @@
-﻿using BitMod.Events;
+﻿using BitMod.Attributes.Internal;
+using BitMod.Events;
 using BitMod.Internal;
 using BitMod.Internal.LilikoiRouting;
 

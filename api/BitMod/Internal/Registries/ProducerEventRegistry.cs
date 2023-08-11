@@ -9,14 +9,15 @@ internal class ProducerEventRegistry
 {
 	public ProducerEventRegistry(List<ProducerEventHandler> children, ILogger logger)
 	{
-		children.Sort((a,b) => a.Priority.CompareTo( b.Priority ));
-		Children = children;
+		Children = children
+			.OrderByDescending(ev => ev.Priority)
+			.ToList();
 		_logger = logger;
 	}
 
 	private ILogger _logger;
 
-	public IReadOnlyCollection<ProducerEventHandler> Children { get; }
+	public List<ProducerEventHandler> Children { get; }
 
 	public Product Invoke(EventInput input)
     {

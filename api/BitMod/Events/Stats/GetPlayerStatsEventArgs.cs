@@ -14,7 +14,7 @@ namespace BitMod.Events.Stats
         /// </summary>
         public PlayerStats OfficialStats { get; set; }
 
-        internal GetPlayerStatsEventArgs(ulong steamID, PlayerStats officialStats)
+        public GetPlayerStatsEventArgs(ulong steamID, PlayerStats officialStats)
         {
             SteamID = steamID;
             OfficialStats = officialStats;

@@ -1,6 +1,6 @@
 # BitMod
 
-An elegant BattleBit: Remastered modding framework designed to enable plugins of all kinds to operate
+A fast, elegant, and modern BattleBit: Remastered modding framework designed to enable plugins of all kinds to operate
 simultaneously on the same API server.
 
 ## Introduction

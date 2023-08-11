@@ -1,4 +1,5 @@
-﻿using BitMod.Events;
+﻿using BitMod.Attributes.Internal;
+using BitMod.Events;
 using BitMod.Internal;
 using BitMod.Internal.LilikoiRouting;
 
@@ -19,7 +20,7 @@ public class BitHookAttribute : BitTargetAttribute
 
 	public override Type ContextType => typeof(HookRegistrationContext);
 
-	public override string Name => "BitEvent";
+	public override string Name => "BitHook";
 
 	internal override bool IsValidEvent(Type arg)
 		=> Registry.Events[arg] == Registry.EventType.Hook;

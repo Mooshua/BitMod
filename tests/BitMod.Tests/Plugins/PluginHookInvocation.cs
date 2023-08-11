@@ -1,7 +1,11 @@
-﻿using BitMod.Attributes.Targets;
+﻿using System.Diagnostics;
+
+using BitMod.Attributes.Targets;
 using BitMod.Events.Server;
 using BitMod.Internal.Public;
 using BitMod.Plugins.Events;
+
+using Serilog;
 
 namespace BitMod.Tests.Plugins;
 
@@ -12,6 +16,7 @@ public class PluginHookInvocation : GlobalSetup
 		[BitHook]
 		public async Task<Directive> OnEvent(GameServerConnectingEventArgs ev)
 		{
+			Assert.NotNull(ev, "ev != null");
 			await Task.Delay(100);
 
 			return Directive.Allow;
@@ -23,6 +28,8 @@ public class PluginHookInvocation : GlobalSetup
 		[BitHook]
 		public async Task<Directive> OnEvent(GameServerConnectingEventArgs ev)
 		{
+			Assert.NotNull(ev, "ev != null");
+
 			return Directive.Neutral;
 		}
 	}
@@ -32,12 +39,16 @@ public class PluginHookInvocation : GlobalSetup
 		[BitHook(64)]
 		public async Task<Directive> OnEvent(GameServerConnectingEventArgs ev)
 		{
+			Assert.NotNull(ev, "ev != null");
+
 			return Directive.Disallow;
 		}
 
 		[BitHook(128)]
 		public async Task<Directive> OnEventTwo(GameServerConnectingEventArgs ev)
 		{
+			Assert.NotNull(ev, "ev != null");
+
 			return Directive.Allow;
 		}
 	}

@@ -7,7 +7,7 @@ namespace BitMod.Attributes.Internal;
 /// Prevent further "After" wraps from being executed before the provided async task
 /// has completed.
 /// </summary>
-internal class AsyncAttribute : LkTypedWrapAttribute<object, Task>
+public class AsyncAttribute : LkTypedWrapAttribute<object, Task>
 {
 	public override WrapResult<Task> Before(Mount mount, ref object input)
 		=> WrapResult<Task>.Continue();

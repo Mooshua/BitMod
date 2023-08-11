@@ -1,14 +1,11 @@
 ﻿using System.ComponentModel;
 
-using BitMod.Attributes.Internal;
 using BitMod.Internal;
 
 using Lilikoi.Attributes;
 using Lilikoi.Compiler.Public;
 
-using Serilog;
-
-namespace BitMod.Attributes.Targets;
+namespace BitMod.Attributes.Internal;
 
 
 [EditorBrowsable(EditorBrowsableState.Never)]

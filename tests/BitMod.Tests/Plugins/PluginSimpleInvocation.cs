@@ -37,7 +37,7 @@ public class PluginSimpleInvocation : GlobalSetup
 		var invoker = new PluginInvoker( context );
 
 		context.Load("invoke_test", typeof(Host));
-		invoker.Event( new PlayerDiedEventArgs() );
+		invoker.Event( new PlayerDiedEventArgs( null ) );
 
 		Assert.Fail("Did not reach Assert.Pass located within Lilikoi container");
 	}
@@ -50,7 +50,7 @@ public class PluginSimpleInvocation : GlobalSetup
 		var invoker = new PluginInvoker( context );
 
 		context.Load("invoke_block", typeof(DelayingHost));
-		invoker.Event( new PlayerDiedEventArgs() );
+		invoker.Event( new PlayerDiedEventArgs( null ) );
 
 		Assert.Fail("Did not reach Assert.Pass located within Lilikoi container, instead fell through without executing delay.");
 	}

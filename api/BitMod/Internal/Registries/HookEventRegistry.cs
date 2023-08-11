@@ -9,8 +9,9 @@ internal class HookEventRegistry
 {
 	public HookEventRegistry(List<HookEventHandler> children, ILogger logger)
 	{
-		children.Sort((a,b) => a.Priority.CompareTo( b.Priority ));
-		Children = children;
+		Children = children
+			.OrderByDescending(ev => ev.Priority)
+			.ToList();
 		_logger = logger;
 	}
 

@@ -13,46 +13,20 @@ using Serilog;
 
 namespace BitMod.Internal.Contexts;
 
-internal class ProducerEventContext
+internal class ProducerEventContext : BaseEventContext<ProducerEventHandler>
 {
-	private readonly Dictionary<string, List<ProducerEventHandler>> _handlers = new Dictionary<string, List<ProducerEventHandler>>();
-
 	private ProducerEventRegistry _currentRegistry;
 
-	private ILogger _logger;
-
-	public ProducerEventContext(ILogger logger)
+	public ProducerEventContext(ILogger logger) : base(logger)
 	{
-		_logger = logger;
 		_currentRegistry = new ProducerEventRegistry(new List<ProducerEventHandler>(), _logger);
 	}
 
-	private void Rebuild()
+	protected override void Rebuild()
 	{
 		_currentRegistry = new ProducerEventRegistry(_handlers
 			.SelectMany(kv => kv.Value)
 			.ToList(), _logger);
-	}
-
-	public void Remove(string pluginName)
-	{
-		_handlers.Remove(pluginName);
-		Rebuild();
-	}
-
-	public void Add(string pluginName, IEnumerable<ProducerEventHandler> handlers)
-	{
-		if (_handlers.ContainsKey(pluginName))
-		{
-			var existingHandlers = _handlers[pluginName];
-			existingHandlers.AddRange(handlers);
-		}
-		else
-		{
-			_handlers.Add(pluginName, handlers.ToList());
-		}
-
-		Rebuild();
 	}
 
 	public Product Invoke(EventInput input)

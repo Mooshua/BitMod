@@ -3,6 +3,8 @@
 using Lilikoi.Attributes;
 using Lilikoi.Context;
 
+using Serilog;
+
 namespace BitMod.Attributes.Internal;
 
 /// <summary>
@@ -22,8 +24,10 @@ internal class UnpackWildcardParameterAttribute : LkParameterAttribute
 	public Type Event { get; }
 
 	public override bool IsInjectable<TParameter, TInput>(Mount mount)
-		=> throw new Exception(typeof(TParameter).FullName);//typeof(TParameter) == Event;
+		=> typeof(TParameter) == Event;
 
 	public override TParameter Inject<TParameter, TInput>(Mount context, TInput input)
-		=> (input as EventInput)!.Get<TParameter>()!;
+		=> (input as Mount)!.Get<TParameter>()!;
+
+
 }

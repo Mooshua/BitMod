@@ -2,6 +2,8 @@
 
 using BitMod.Compatibility;
 
+using CommunityServerAPI.BattleBitAPI.Common.Enums;
+
 namespace BitMod.Events.Player
 {
     public class PlayerKilledPlayerEventArgs
@@ -31,13 +33,19 @@ namespace BitMod.Events.Player
         /// </summary>
         public string Tool { get; init; }
 
-        internal PlayerKilledPlayerEventArgs(BitPlayer killer, Vector3 killerPosition, BitPlayer target, Vector3 targetPosition, string tool)
+        public PlayerBody BodyPart { get; init; }
+
+        public ReasonOfDamage Source { get; init; }
+
+        internal PlayerKilledPlayerEventArgs(BitPlayer killer, Vector3 killerPosition, BitPlayer target, Vector3 targetPosition, string tool, PlayerBody bodyPart, ReasonOfDamage source)
         {
             Killer = killer;
             KillerPosition = killerPosition;
             Target = target;
             TargetPosition = targetPosition;
             Tool = tool;
+            BodyPart = bodyPart;
+            Source = source;
         }
     }
 }

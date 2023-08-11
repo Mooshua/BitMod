@@ -18,21 +18,25 @@ public class PluginContext
 {
 	private ILogger _logger;
 
-	public PluginContext(ILogger logger)
+	private Mount _global { get; }
+
+	public PluginContext(ILogger logger, Mount global = null)
 	{
 		_logger = logger;
+		_global = global ?? new Mount();
 		Hooks = new (() => new HookEventContext(_logger));
 		Producers = new(() => new ProducerEventContext(_logger));
 		Simple = new(() => new SimpleEventContext(_logger));
+		Mutator = new(() => new MutatorEventContext(_logger));
 	}
-
-	public Mount Global { get; } = new Mount();
 
 	internal Router< HookEventContext > Hooks { get; }
 
 	internal Router< ProducerEventContext > Producers { get; }
 
 	internal Router< SimpleEventContext > Simple { get; }
+
+	internal Router< MutatorEventContext > Mutator { get; }
 
 
 	public void Load(string name, MethodInfo method)
@@ -41,9 +45,10 @@ public class PluginContext
 		{
 			var ctx = new EventRegistrationContext();
 
-			var hooks = HookEventContext.Scan(ctx, method, () => Global);
-			var producers = ProducerEventContext.Scan(ctx, method, () => Global);
-			var simple = SimpleEventContext.Scan(ctx, method, () => Global);
+			var hooks = HookEventContext.Scan(ctx, method, () => _global);
+			var producers = ProducerEventContext.Scan(ctx, method, () => _global);
+			var simple = SimpleEventContext.Scan(ctx, method, () => _global);
+			var mutators = MutatorEventContext.Scan(ctx, method, () => _global);
 
 			if (ctx.Event == null)
 			{
@@ -54,9 +59,10 @@ public class PluginContext
 			Hooks.Get(ctx.Event).Add(name, hooks.Select(hook => new HookEventHandler(hook)));
 			Producers.Get(ctx.Event).Add(name, producers.Select(hook => new ProducerEventHandler(hook)));
 			Simple.Get(ctx.Event).Add(name, simple.Select(hook => new SimpleEventHandler(hook)));
+			Mutator.Get(ctx.Event).Add(name, mutators.Select(hook => new MutatorEventHandler(hook)));
 
-			_logger.Debug("Loaded {@FuncName} with type {@EvType}: {@Hooks} hooks, {@Producers} producers, {@Simple} simple",
-				method.Name, ctx.Event.FullName, hooks.Count, producers.Count, simple.Count);
+			_logger.Debug("Loaded {@FuncName} with type {@EvType}: {@Hooks} hooks, {@Producers} producers, {@Simple} simple, {@Mutators} mutators.",
+				method.Name, ctx.Event.FullName, hooks.Count, producers.Count, simple.Count, mutators.Count);
 		}
 		catch (Exception exception)
 		{
