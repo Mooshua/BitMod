@@ -1,0 +1,3 @@
+[submodule "upstream/BattleBitAPI"]
+	path = upstream/BattleBitAPI
+	url = https://github.com/MrOkiDoki/BattleBit-Community-Server-API/

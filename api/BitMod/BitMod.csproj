@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>BitMod</RootNamespace>
+        <Company>EdgeGamers</Company>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\upstream\BattleBitAPI\CommunityServerAPI.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Lilikoi" Version="0.1.0-prerelease.19" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Attributes\Wraps\" />
+    </ItemGroup>
+
+</Project>
