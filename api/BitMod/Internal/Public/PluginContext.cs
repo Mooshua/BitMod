@@ -21,15 +21,19 @@ public class PluginContext
 	public PluginContext(ILogger logger)
 	{
 		_logger = logger;
+		Hooks = new (() => new HookEventContext(_logger));
+		Producers = new(() => new ProducerEventContext(_logger));
+		Simple = new(() => new SimpleEventContext(_logger));
 	}
 
 	public Mount Global { get; } = new Mount();
 
-	internal Router< HookEventContext > Hooks { get; } = new ();
+	internal Router< HookEventContext > Hooks { get; }
 
-	internal Router< ProducerEventContext > Producers { get; } = new ();
+	internal Router< ProducerEventContext > Producers { get; }
 
-	internal Router< SimpleEventContext > Simple { get; } = new ();
+	internal Router< SimpleEventContext > Simple { get; }
+
 
 	public void Load(string name, MethodInfo method)
 	{

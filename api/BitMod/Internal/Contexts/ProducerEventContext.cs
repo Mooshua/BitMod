@@ -9,6 +9,8 @@ using Lilikoi.Compiler.Public;
 using Lilikoi.Context;
 using Lilikoi.Scan;
 
+using Serilog;
+
 namespace BitMod.Internal.Contexts;
 
 internal class ProducerEventContext
@@ -17,16 +19,19 @@ internal class ProducerEventContext
 
 	private ProducerEventRegistry _currentRegistry;
 
-	public ProducerEventContext()
+	private ILogger _logger;
+
+	public ProducerEventContext(ILogger logger)
 	{
-		_currentRegistry = new ProducerEventRegistry(new List<ProducerEventHandler>());
+		_logger = logger;
+		_currentRegistry = new ProducerEventRegistry(new List<ProducerEventHandler>(), _logger);
 	}
 
 	private void Rebuild()
 	{
 		_currentRegistry = new ProducerEventRegistry(_handlers
 			.SelectMany(kv => kv.Value)
-			.ToList());
+			.ToList(), _logger);
 	}
 
 	public void Remove(string pluginName)

@@ -7,11 +7,14 @@ namespace BitMod.Internal.Registries;
 
 internal class HookEventRegistry
 {
-	public HookEventRegistry(List<HookEventHandler> children)
+	public HookEventRegistry(List<HookEventHandler> children, ILogger logger)
 	{
 		children.Sort((a,b) => a.Priority.CompareTo( b.Priority ));
 		Children = children;
+		_logger = logger;
 	}
+
+	private ILogger _logger;
 
 	public List<HookEventHandler> Children { get; }
 
@@ -19,10 +22,19 @@ internal class HookEventRegistry
 	{
 		foreach (HookEventHandler hookEvent in Children)
 		{
-			var hookResult = hookEvent.Invoke(input);
+			try
+			{
+				var hookResult = hookEvent.Invoke(input);
 
-			if (hookResult != Directive.Neutral)
-				return hookResult;
+				if (hookResult != Directive.Neutral)
+					return hookResult;
+			}
+			catch (Exception ex)
+			{
+				_logger.Error(ex, "Hook failed during execution!");
+				if (Environment.DoNotCatchEventExceptions)
+					throw;
+			}
 		}
 
 		//	Entire chain is completely neutral.

@@ -7,39 +7,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="763cbce6-ea3f-4522-a700-4180d0afc224" name="Changes" comment="Initial work">
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Targets/BitHookAttribute.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/BitMod.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Handler/RoutingHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/EventPriority.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/LilikoiRouting/HookRegistrationContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/LilikoiRouting/ProducerRegistrationContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/LilikoiRouting/RegistrationContextProxy.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/LilikoiRouting/SimpleRegistrationContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Public/PluginContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Public/PluginInvoker.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/BitMod/Internal/Routing/Router.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/BitMod.Tests/GlobalSetup.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/BitMod.Tests/Plugins/PluginHookInvocation.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/BitMod.Tests/Plugins/PluginSimpleInvocation.cs" afterDir="false" />
+    <list default="true" id="763cbce6-ea3f-4522-a700-4180d0afc224" name="Changes" comment="Work on tests, fix behavior, first POC!">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/tests.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/BitMod/Environment.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BattleBit.Core/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BattleBit.Core/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BitMod.sln" beforeDir="false" afterPath="$PROJECT_DIR$/BitMod.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/BitTargetAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/BitTargetAttribute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/UnpackWildcardParameterAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Internal/UnpackWildcardParameterAttribute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BitMod/Attributes/Targets/BitEventAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Attributes/Targets/BitEventAttribute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BitMod/BitMod.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/BitMod.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BitMod/Events/Server/GameServerConnectingEventArgs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Events/Server/GameServerConnectingEventArgs.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/HookEventContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/HookEventContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/ProducerEventContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/ProducerEventContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/SimpleEventContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Contexts/SimpleEventContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/EventInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/EventInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/EventRegistrationContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/EventRegistrationContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/HookEventHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/HookEventHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/ProducerEventHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Handlers/ProducerEventHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Public/PluginContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Public/PluginContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Registries/HookEventRegistry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Registries/HookEventRegistry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/BitMod.Tests.Events/BitMod.Tests.Events.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/tests/BitMod.Tests/BitMod.Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/BitMod.Tests.Events/UnitTest1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/BitMod.Tests.Events/Usings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/BitMod.Tests/Usings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Registries/ProducerEventRegistry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Registries/ProducerEventRegistry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Registries/SimpleEventRegistry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Registries/SimpleEventRegistry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/BitMod/Internal/Routing/Router.cs" beforeDir="false" afterPath="$PROJECT_DIR$/api/BitMod/Internal/Routing/Router.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/BitMod.Tests/GlobalSetup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/BitMod.Tests/GlobalSetup.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/upstream/BattleBitAPI" beforeDir="false" afterPath="$PROJECT_DIR$/upstream/BattleBitAPI" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +35,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Attributes/Internal/AsyncAttribute.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Attributes/Internal/BitTargetAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Repo/eGO/BattleBit/BattleBit.Core/api/BitMod/Attributes/Targets/BitEventAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Events/Registry.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Handler/BaseHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/api/BitMod/Handler/DefaultHandler.cs" root0="FORCE_HIGHLIGHTING" />
@@ -124,7 +106,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1691708374951</updated>
-      <workItem from="1691708376008" duration="18475000" />
+      <workItem from="1691708376008" duration="19966000" />
     </task>
     <task id="LOCAL-00001" summary="Initial work">
       <created>1691722064150</created>
@@ -133,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691722064150</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Work on tests, fix behavior, first POC!">
+      <created>1691729979617</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1691729979617</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +132,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Initial work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial work" />
+    <MESSAGE value="Work on tests, fix behavior, first POC!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Work on tests, fix behavior, first POC!" />
   </component>
 </project>

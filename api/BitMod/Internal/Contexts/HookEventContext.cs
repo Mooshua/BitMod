@@ -19,16 +19,19 @@ internal class HookEventContext
 
 	private HookEventRegistry _currentRegistry;
 
-	public HookEventContext()
+	private ILogger _logger;
+
+	public HookEventContext(ILogger logger)
 	{
-		_currentRegistry = new HookEventRegistry(new List<HookEventHandler>());
+		_logger = logger;
+		_currentRegistry = new HookEventRegistry(new List<HookEventHandler>(), _logger);
 	}
 
 	private void Rebuild()
 	{
 		_currentRegistry = new HookEventRegistry(_handlers
 			.SelectMany(kv => kv.Value)
-			.ToList());
+			.ToList(), _logger);
 	}
 
 	public void Remove(string pluginName)

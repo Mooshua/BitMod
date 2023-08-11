@@ -18,16 +18,19 @@ internal class SimpleEventContext
 
 	private SimpleEventRegistry _currentRegistry;
 
-	public SimpleEventContext()
+	private ILogger _logger;
+
+	public SimpleEventContext(ILogger logger)
 	{
-		_currentRegistry = new SimpleEventRegistry(new List<SimpleEventHandler>());
+		_logger = logger;
+		_currentRegistry = new SimpleEventRegistry(new List<SimpleEventHandler>(), _logger);
 	}
 
 	private void Rebuild()
 	{
 		_currentRegistry = new SimpleEventRegistry(_handlers
 			.SelectMany(kv => kv.Value)
-			.ToList());
+			.ToList(), _logger);
 	}
 
 	public void Remove(string pluginName)
