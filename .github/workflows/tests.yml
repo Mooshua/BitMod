@@ -27,6 +27,6 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Build for ${{ matrix.framework-version }}
-        run: dotnet build tests\BitMod.Tests --framework ${{ matrix.framework-version }} --configuration Release --no-restore
+        run: dotnet build tests/BitMod.Tests --framework ${{ matrix.framework-version }} --configuration Release --no-restore
       - name: Test for ${{ matrix.framework-version }}
-        run: dotnet test tests\BitMod.Tests --framework ${{ matrix.framework-version }} --configuration Release --no-build --no-restore --verbosity normal
+        run: dotnet test tests/BitMod.Tests --framework ${{ matrix.framework-version }} --configuration Release --no-build --no-restore --verbosity normal
