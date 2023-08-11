@@ -1,0 +1,68 @@
+name: BitMod.Tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+          dotnet-quality: 'ga'
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build Win64
+        run: dotnet publish standalone/BitMod.Launcher -c Release -r win-x64 -o build/win64
+
+      - name: Build Win32
+        run: dotnet publish standalone/BitMod.Launcher -c Release -r win-x86 -o build/win32
+
+      - name: Build Linux
+        run: dotnet publish standalone/BitMod.Launcher -c Release -r linux-x64 -o build/linux
+
+      - name: Build Linux (Musl)
+        run: dotnet publish standalone/BitMod.Launcher -c Release -r linux-musl-x64 -o build/linux-musl
+
+      - name: Upload Files
+        uses: actions/upload-artifact@v3
+        with:
+          name: Packages
+          path: build/
+  test:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        framework-version: [ 'net6.0' ]
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+          dotnet-quality: 'ga'
+
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build for ${{ matrix.framework-version }}
+        run: dotnet build tests/BitMod.Tests --framework ${{ matrix.framework-version }} --configuration Release --no-restore
+      - name: Test for ${{ matrix.framework-version }}
+        run: dotnet test tests/BitMod.Tests --framework ${{ matrix.framework-version }} --configuration Release --no-build --no-restore --verbosity normal

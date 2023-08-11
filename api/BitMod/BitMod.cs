@@ -1,6 +1,7 @@
 ﻿using BattleBitAPI.Server;
 
 using BitMod.Compatibility;
+using BitMod.Extensions;
 using BitMod.Handler;
 using BitMod.Internal;
 using BitMod.Internal.Public;
@@ -16,6 +17,10 @@ public sealed class BitMod : Mount
 {
 	public BitMod(ILogger logger, IConfigurationSystem config, IPluginSystem plugins)
 	{
+		Store(logger);
+		Store(plugins);
+		Store(config);
+
 		_server = new ServerListener<BitPlayer>();
 
 		var context = new PluginContext( logger, this );
@@ -26,14 +31,25 @@ public sealed class BitMod : Mount
 		Store(invoker);
 		Store(listener);
 
-		Store(logger);
-		Store(plugins);
-		Store(config);
+		context.Load("bitmod:internal:pluginloader", typeof(Bootstrap));
+
+		config.Start(this);
+		plugins.Start(this);
+
+		logger.Information("[BitMod] Loaded {@PluginCount} plugins and {@ExtCount} extensions from plugin system",
+			plugins.Plugins.Count,
+			plugins.Extensions.Count);
 	}
 
 	private ServerListener<BitPlayer> _server;
 
-	public ILogger Logger => Get<ILogger>();
+	public RoutingHandler Handler => Get<RoutingHandler>()!;
+
+	public PluginInvoker Invoker => Get<PluginInvoker>()!;
+
+	public PluginContext Context => Get<PluginContext>()!;
+
+	public ILogger Logger => Get<ILogger>()!;
 
 	public IConfigurationSystem Config => Get<IConfigurationSystem>()!;
 
@@ -44,7 +60,8 @@ public sealed class BitMod : Mount
 	/// </summary>
 	public void Start()
 	{
-		var network = Config.Get<ListenerConfig>(() => new ListenerConfig());
+		var network = Config.Get("core", () => BitModConfig.Default()).Listener;
+		Logger.Information("[BitMod] Starting server on {@IP}:{@Port}", network.PublicIP, network.Port);
 		_server.Start(network.Address, network.Port);
 	}
 

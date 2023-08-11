@@ -1,0 +1,7 @@
+
+# Choose how BitMod listens to incoming servers.
+[listener]
+# The IP address and port that BitMod will bind to
+# Use "0.0.0.0" to accept ALL connections.
+public_ip = "127.0.0.1"
+port = 9000

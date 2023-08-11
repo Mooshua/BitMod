@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\BitMod\BitMod.csproj" />
+      <PackageReference Include="Tomlyn" Version="0.16.2" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="McMaster.NETCore.Plugins" Version="1.4.0" />
+      <ProjectReference Include="..\BitMod\BitMod.csproj" />
     </ItemGroup>
 
 </Project>

@@ -52,7 +52,7 @@ public class PluginContext
 
 			if (ctx.Event == null)
 			{
-				_logger.Verbose("Loading {@FuncName} encountered no matching events!", method.Name);
+				_logger.Debug("Loading {@FuncName} encountered no matching events!", method.Name);
 				return;
 			}
 
@@ -105,6 +105,9 @@ public class PluginContext
 			context.Remove(name);
 
 		foreach (var context in Producers.All())
+			context.Remove(name);
+
+		foreach (var context in Mutator.All())
 			context.Remove(name);
 	}
 }

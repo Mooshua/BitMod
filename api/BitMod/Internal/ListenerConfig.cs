@@ -4,7 +4,18 @@ namespace BitMod.Internal;
 
 public class ListenerConfig
 {
-	public IPAddress Address { get; set; } = IPAddress.Any;
+	public static ListenerConfig Default()
+	{
+		return new ListenerConfig()
+		{
+			PublicIP = "0.0.0.0",
+			Port = 9000
+		};
+	}
 
-	public ushort Port { get; set; } = 29999;
+	public string PublicIP { get; set; }
+
+	internal IPAddress Address => IPAddress.Parse(PublicIP);
+
+	public ushort Port { get; set; }
 }

@@ -4,22 +4,17 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>BitMod</RootNamespace>
-        <Company>EdgeGamers</Company>
         <DebugType>embedded</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\upstream\BattleBitAPI\CommunityServerAPI.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Lilikoi" Version="0.1.0-prerelease.21" />
       <PackageReference Include="Serilog" Version="3.0.2-dev-02044" />
+      <PackageReference Include="Serilog.Sinks.Console" Version="4.2.0-dev-00918" />
+      <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Attributes\Wraps\" />
+      <ProjectReference Include="..\BitMod\BitMod.csproj" />
     </ItemGroup>
 
 </Project>
