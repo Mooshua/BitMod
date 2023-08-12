@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "upstream", "upstream", "{38
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunityServerAPI", "upstream\BattleBitAPI\CommunityServerAPI.csproj", "{63E2A804-E204-4919-98EC-F60CFC4777FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Plugins", "api\BitMod.Plugins\BitMod.Plugins.csproj", "{8D614C4F-22BE-461A-BD7D-80507EAA823F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Plugins", "standalone\BitMod.Plugins\BitMod.Plugins.csproj", "{8D614C4F-22BE-461A-BD7D-80507EAA823F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{11BEBA9D-0E44-4A6D-A5EF-5A53B977EC06}"
 EndProject
@@ -20,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "standalone", "standalone", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Launcher", "standalone\BitMod.Launcher\BitMod.Launcher.csproj", "{46F25EB1-C8E0-4703-A5CA-616433688BE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Config", "api\BitMod.Config\BitMod.Config.csproj", "{0D18FC47-D9D6-409D-8E7F-18AEE75C4267}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Config", "standalone\BitMod.Config\BitMod.Config.csproj", "{0D18FC47-D9D6-409D-8E7F-18AEE75C4267}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Logging", "api\BitMod.Logging\BitMod.Logging.csproj", "{10FD03DE-6B69-40EA-98C7-5B4D77D46455}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Logging", "standalone\BitMod.Logging\BitMod.Logging.csproj", "{10FD03DE-6B69-40EA-98C7-5B4D77D46455}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D86C6A21-BE31-48C4-BEF3-72DC1871BD85}"
 EndProject
@@ -36,7 +36,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "builtin", "builtin", "{CCEA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Whitelist", "builtin\BitMod.Whitelist\BitMod.Whitelist.csproj", "{24DAB423-21F1-4231-922F-084C415C7D09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Default", "builtin\BitMod.Default\BitMod.Default.csproj", "{68FCC0CF-D014-444F-AF82-BD4525EE3601}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Flags", "builtin\BitMod.Flags\BitMod.Flags.csproj", "{0DF78B4C-26A7-4FF7-BD07-036981815125}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -92,10 +92,10 @@ Global
 		{24DAB423-21F1-4231-922F-084C415C7D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24DAB423-21F1-4231-922F-084C415C7D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24DAB423-21F1-4231-922F-084C415C7D09}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68FCC0CF-D014-444F-AF82-BD4525EE3601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68FCC0CF-D014-444F-AF82-BD4525EE3601}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68FCC0CF-D014-444F-AF82-BD4525EE3601}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68FCC0CF-D014-444F-AF82-BD4525EE3601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DF78B4C-26A7-4FF7-BD07-036981815125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF78B4C-26A7-4FF7-BD07-036981815125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DF78B4C-26A7-4FF7-BD07-036981815125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF78B4C-26A7-4FF7-BD07-036981815125}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{20CD73A1-A74C-4205-AD74-9B48EEEFB3EC} = {621F6C25-527F-4BA1-BF59-1D19021A9B88}
@@ -110,6 +110,6 @@ Global
 		{E3329930-AED7-44DD-89BB-0D4830645020} = {382D2698-5A85-4BA7-85C7-CD58874F8169}
 		{95ECB03D-E249-408B-9B51-EB408D687A38} = {CCEA8B6B-5212-4C12-BB31-A70501DE31D0}
 		{24DAB423-21F1-4231-922F-084C415C7D09} = {CCEA8B6B-5212-4C12-BB31-A70501DE31D0}
-		{68FCC0CF-D014-444F-AF82-BD4525EE3601} = {CCEA8B6B-5212-4C12-BB31-A70501DE31D0}
+		{0DF78B4C-26A7-4FF7-BD07-036981815125} = {CCEA8B6B-5212-4C12-BB31-A70501DE31D0}
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,6 @@
-﻿using BitMod.Plugins.Events;
+﻿using BitMod.Events.Base;
+using BitMod.Internal.Registries;
+using BitMod.Plugins.Events;
 
 using Lilikoi.Context;
 
@@ -6,25 +8,27 @@ using Serilog;
 
 namespace BitMod.Internal.Public;
 
-public class PluginInvoker : Mount
+public class PluginInvoker
 {
-	private PluginContext _context;
+	public PluginContext Context;
 
 	public PluginInvoker(PluginContext context)
 	{
-		_context = context;
+		Context = context;
 	}
 
-	public void Event<TEventArgs>(TEventArgs args) where TEventArgs : class
+	public void Event<TEventArgs>(TEventArgs args)
+		where TEventArgs : class, IEventArgs
 	{
-		var chain = _context.Simple.Get(typeof(TEventArgs));
-		chain.Invoke( EventInput.From(args) );
+		var chain = Context.Get<SimpleEventRegistry, Type>(typeof(TEventArgs));
+		chain?.Invoke( EventInput.From(args) );
 	}
 
-	public bool Hook<TEventArgs>(TEventArgs args, bool defaultValue = false) where TEventArgs : class
+	public bool Hook<TEventArgs>(TEventArgs args, bool defaultValue = false)
+		where TEventArgs : class, IHookArgs
 	{
-		var chain = _context.Hooks.Get(typeof(TEventArgs));
-		var result = chain.Invoke( EventInput.From(args) );
+		var chain = Context.Get<HookEventRegistry, Type>(typeof(TEventArgs));
+		var result = chain?.Invoke( EventInput.From(args) ) ?? Directive.Neutral;
 
 		if (result == Directive.Allow)
 			return true;
@@ -36,22 +40,22 @@ public class PluginInvoker : Mount
 	}
 
 	public TResult Produce<TEventArgs, TResult>(TEventArgs args, Func<TResult> defaultValue)
-		where TEventArgs : class
+		where TEventArgs : class, IProducerArgs<TResult>
 		where TResult : class
 	{
-		var chain = _context.Producers.Get(typeof(TEventArgs));
-		var result = chain.Invoke(EventInput.From(args));
+		var chain = Context.Get<ProducerEventRegistry, Type>(typeof(TEventArgs));
+		var result = chain?.Invoke(EventInput.From(args));
 
-		TResult value = result.As <TResult>() ?? defaultValue();
+		TResult value = result?.As <TResult>() ?? defaultValue();
 
-		var mutatorChain = _context.Mutator.Get(typeof(TEventArgs));
-		mutatorChain.Invoke(EventInput.From(args, value));
+		var mutatorChain = Context.Get<MutatorEventRegistry, Type>(typeof(TEventArgs));
+		mutatorChain?.Invoke(EventInput.From(args, value));
 
 		return value;
 	}
 
 	public TResult Produce<TEventArgs, TResult>(TEventArgs args, TResult defaultValue)
-		where TEventArgs : class
+		where TEventArgs : class, IProducerArgs<TResult>
 		where TResult : class
 		=> Produce(args, () => defaultValue);
 }

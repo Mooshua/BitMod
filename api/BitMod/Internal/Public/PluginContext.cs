@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 
-using BitMod.Internal.Contexts;
 using BitMod.Internal.Handlers;
-using BitMod.Internal.Routing;
+using BitMod.Router;
 
+using Lilikoi.Compiler.Public;
 using Lilikoi.Context;
 using Lilikoi.Scan;
 
@@ -18,55 +18,60 @@ public class PluginContext
 {
 	private ILogger _logger;
 
-	private Mount _global { get; }
+	private BitMod _env { get; }
 
-	public PluginContext(ILogger logger, Mount global = null)
+	private List<BaseRouter> _routers { get; } = new List<BaseRouter>();
+
+	public PluginContext(BitMod env)
 	{
-		_logger = logger;
-		_global = global ?? new Mount();
-		Hooks = new (() => new HookEventContext(_logger));
-		Producers = new(() => new ProducerEventContext(_logger));
-		Simple = new(() => new SimpleEventContext(_logger));
-		Mutator = new(() => new MutatorEventContext(_logger));
+		_logger = env.Logger;
+		_env = env;
 	}
 
-	internal Router< HookEventContext > Hooks { get; }
-
-	internal Router< ProducerEventContext > Producers { get; }
-
-	internal Router< SimpleEventContext > Simple { get; }
-
-	internal Router< MutatorEventContext > Mutator { get; }
-
-
-	public void Load(string name, MethodInfo method)
+	public BaseRouter? Router<TResult, TSearch>()
 	{
-		try
+		foreach (BaseRouter baseRouter in _routers)
 		{
-			var ctx = new EventRegistrationContext();
-
-			var hooks = HookEventContext.Scan(ctx, method, () => _global);
-			var producers = ProducerEventContext.Scan(ctx, method, () => _global);
-			var simple = SimpleEventContext.Scan(ctx, method, () => _global);
-			var mutators = MutatorEventContext.Scan(ctx, method, () => _global);
-
-			if (ctx.Event == null)
-			{
-				_logger.Debug("Loading {@FuncName} encountered no matching events!", method.Name);
-				return;
-			}
-
-			Hooks.Get(ctx.Event).Add(name, hooks.Select(hook => new HookEventHandler(hook)));
-			Producers.Get(ctx.Event).Add(name, producers.Select(hook => new ProducerEventHandler(hook)));
-			Simple.Get(ctx.Event).Add(name, simple.Select(hook => new SimpleEventHandler(hook)));
-			Mutator.Get(ctx.Event).Add(name, mutators.Select(hook => new MutatorEventHandler(hook)));
-
-			_logger.Debug("Loaded {@FuncName} with type {@EvType}: {@Hooks} hooks, {@Producers} producers, {@Simple} simple, {@Mutators} mutators.",
-				method.Name, ctx.Event.FullName, hooks.Count, producers.Count, simple.Count, mutators.Count);
+			if (baseRouter.Is<TResult, TSearch>())
+				return baseRouter;
 		}
-		catch (Exception exception)
+		return null;
+	}
+
+	public TResult? Get<TResult, TSearch>(TSearch search)
+		where TResult : class
+	{
+		var router = Router<TResult, TSearch>();
+
+		if (router == null)
+			return null;
+
+		return router.As<TResult, TSearch>()?.Find(search);
+	}
+
+	internal Router<TResult, TSearch> Router<TResult, TSearch>(Func<IRouteAssembler<TResult, TSearch>> ctor)
+		where TResult : class
+	{
+		var found = this.Router<TResult, TSearch>();
+
+		if (found != null)
+			return found.As<TResult, TSearch>()!;
+
+		var newRouter = new Router<TResult,TSearch>( ctor() );
+		_routers.Add(newRouter);
+		return newRouter;
+	}
+
+	private void Register(List<LilikoiContainer> containers)
+	{
+		foreach (LilikoiContainer lilikoiContainer in containers)
 		{
-			_logger.Error(exception, "Failed loading in {@MethodName} from {@Class}", method.Name, method.DeclaringType.FullName);
+			if (lilikoiContainer.Has<RouterAssignments>())
+			{
+				var assignments = lilikoiContainer.Get<RouterAssignments>();
+				assignments!.Register(lilikoiContainer);
+				_logger.Debug("[BitMod PluginContext] Assigning {@Assignments} to container {@Container}.", assignments, lilikoiContainer);
+			}
 		}
 	}
 
@@ -77,8 +82,10 @@ public class PluginContext
 	/// <param name="type"></param>
 	public void Load(string name, Type type)
 	{
-		foreach (MethodInfo methodInfo in type.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
-			Load(name, methodInfo);
+		var context = new RouterContext(_env, name);
+		var containers = Scanner.Scan<RouterContext, EventInput, Object>(context, type, () => _env);
+
+		Register(containers);
 	}
 
 	/// <summary>
@@ -88,8 +95,10 @@ public class PluginContext
 	/// <param name="assembly"></param>
 	public void Load(string name, Assembly assembly)
 	{
-		foreach (Type type in assembly.GetTypes())
-			Load(name, type);
+		var context = new RouterContext(_env, name);
+		var containers = Scanner.Scan<RouterContext, EventInput, Object>(context, assembly, () => _env);
+
+		Register(containers);
 	}
 
 	/// <summary>
@@ -98,16 +107,9 @@ public class PluginContext
 	/// <param name="name"></param>
 	public void Unload(string name)
 	{
-		foreach (var context in Hooks.All())
-			context.Remove(name);
-
-		foreach (var context in Simple.All())
-			context.Remove(name);
-
-		foreach (var context in Producers.All())
-			context.Remove(name);
-
-		foreach (var context in Mutator.All())
-			context.Remove(name);
+		foreach (BaseRouter baseRouter in _routers)
+		{
+			baseRouter.Remove(name);
+		}
 	}
 }

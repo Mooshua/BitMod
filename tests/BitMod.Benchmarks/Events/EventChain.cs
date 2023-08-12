@@ -34,9 +34,9 @@ public class EventChain
 	[GlobalSetup]
 	public void SetUp()
 	{
-		var logger = Serilog.Log.Logger;
-		_context = new PluginContext( logger );
-		_invoker = new PluginInvoker( _context );
+		var mock = BitMock.Mock();
+		_context = mock.Context;
+		_invoker = mock.Invoker;
 
 		for (int i = 0; i < ChainLength; i++)
 			_context.Load("bench", typeof(Host));

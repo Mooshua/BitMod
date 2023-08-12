@@ -1,10 +1,12 @@
 ﻿using BattleBitAPI.Common;
 
 using BitMod.Compatibility;
+using BitMod.Events.Accessors;
+using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerLeftSquadEventArgs
+    public class PlayerLeftSquadEventArgs : IEventArgs, IResponsiblePlayerAccessor
     {
         /// <summary>
         /// The player who left the squad.
@@ -21,5 +23,8 @@ namespace BitMod.Events.Player
             Player = player;
             Squads = squad;
         }
+
+        /// <inheritdoc />
+        public BitPlayer ResponsiblePlayer => Player;
     }
 }

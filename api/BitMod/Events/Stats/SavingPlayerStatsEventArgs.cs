@@ -1,8 +1,10 @@
 ﻿using BattleBitAPI.Common;
 
+using BitMod.Events.Base;
+
 namespace BitMod.Events.Stats
 {
-    public class SavingPlayerStatsEventArgs
+    public class SavingPlayerStatsEventArgs : IEventArgs
     {
         /// <summary>
         /// The player's SteamID

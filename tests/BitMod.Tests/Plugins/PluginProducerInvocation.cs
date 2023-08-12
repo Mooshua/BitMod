@@ -35,12 +35,10 @@ public class PluginProducerInvocation : GlobalSetup
 	[Test]
 	public void ProducerInvokesMutator()
 	{
-		var logger = Serilog.Log.Logger;
-		var context = new PluginContext( logger );
-		var invoker = new PluginInvoker( context );
+		var mod = BitMock.Mock();
 
-		context.Load("invoke_test", typeof(Host));
-		var result = invoker.Produce<GetPlayerStatsEventArgs, PlayerStats>( new GetPlayerStatsEventArgs(default, null), () => null);
+		mod.Context.Load("invoke_test", typeof(Host));
+		var result = mod.Invoker.Produce<GetPlayerStatsEventArgs, PlayerStats>( new GetPlayerStatsEventArgs(default, null), () => null);
 
 		Assert.Fail("Did not reach mutator block");
 	}

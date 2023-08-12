@@ -22,10 +22,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
+      <ProjectReference Include="..\..\standalone\BitMod.Config\BitMod.Config.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Commands\" />
+      <Folder Include="Config\" />
     </ItemGroup>
 
 </Project>

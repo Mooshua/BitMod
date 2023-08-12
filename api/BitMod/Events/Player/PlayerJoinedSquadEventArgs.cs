@@ -1,10 +1,12 @@
 ﻿using BattleBitAPI.Common;
 
 using BitMod.Compatibility;
+using BitMod.Events.Accessors;
+using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerJoinedSquadEventArgs
+    public class PlayerJoinedSquadEventArgs : IEventArgs, IResponsiblePlayerAccessor
     {
         /// <summary>
         /// The player who joined the squad.
@@ -16,10 +18,13 @@ namespace BitMod.Events.Player
         /// </summary>
         public Squads Squads { get; }
 
-        internal PlayerJoinedSquadEventArgs(BitPlayer player, Squads squad)
+        public PlayerJoinedSquadEventArgs(BitPlayer player, Squads squad)
         {
             Player = player;
             Squads = squad;
         }
+
+        /// <inheritdoc />
+        public BitPlayer ResponsiblePlayer => Player;
     }
 }

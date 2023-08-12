@@ -56,12 +56,10 @@ public class PluginHookInvocation : GlobalSetup
 	[Test]
 	public void CanInvoke()
 	{
-		var logger = Serilog.Log.Logger;
-		var context = new PluginContext( logger );
-		var invoker = new PluginInvoker( context );
+		var mod = BitMock.Mock();
 
-		context.Load("invoke_test", typeof(Host));
-		var result = invoker.Hook( new GameServerConnectingEventArgs(null));
+		mod.Context.Load("invoke_test", typeof(Host));
+		var result = mod.Invoker.Hook( new GameServerConnectingEventArgs(null));
 
 		Assert.True(result);
 	}
@@ -69,12 +67,10 @@ public class PluginHookInvocation : GlobalSetup
 	[Test]
 	public void CanInvokeWithPriorities()
 	{
-		var logger = Serilog.Log.Logger;
-		var context = new PluginContext( logger );
-		var invoker = new PluginInvoker( context );
+		var mod = BitMock.Mock();
 
-		context.Load("invoke_test", typeof(PriorityHost));
-		var result = invoker.Hook( new GameServerConnectingEventArgs(null));
+		mod.Context.Load("invoke_test", typeof(PriorityHost));
+		var result = mod.Invoker.Hook( new GameServerConnectingEventArgs(null));
 
 		//	Ensure that the "Disallow" hook runs before the "Allow" hook
 		Assert.False(result);
@@ -83,12 +79,10 @@ public class PluginHookInvocation : GlobalSetup
 	[Test]
 	public void CanCustomizeDefault()
 	{
-		var logger = Serilog.Log.Logger;
-		var context = new PluginContext( logger );
-		var invoker = new PluginInvoker( context );
+		var mod = BitMock.Mock();
 
-		context.Load("invoke_test", typeof(NeutralHost));
-		var result = invoker.Hook( new GameServerConnectingEventArgs(null), true);
+		mod.Context.Load("invoke_test", typeof(NeutralHost));
+		var result = mod.Invoker.Hook( new GameServerConnectingEventArgs(null), true);
 
 		//	NeutralHost only returns neutral, so let our default override that.
 		Assert.True(result);

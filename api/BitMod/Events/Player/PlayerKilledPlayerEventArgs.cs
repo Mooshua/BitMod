@@ -3,10 +3,12 @@
 using BattleBitAPI.Common;
 
 using BitMod.Compatibility;
+using BitMod.Events.Accessors;
+using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerKilledPlayerEventArgs
+    public class PlayerKilledPlayerEventArgs : IEventArgs, IResponsiblePlayerAccessor
     {
         /// <summary>
         /// The killer.
@@ -47,5 +49,8 @@ namespace BitMod.Events.Player
             BodyPart = bodyPart;
             Source = source;
         }
+
+        /// <inheritdoc />
+        public BitPlayer ResponsiblePlayer => Killer;
     }
 }

@@ -1,7 +1,9 @@
 ﻿using BitMod.Attributes.Internal;
 using BitMod.Events;
+using BitMod.Events.Base;
 using BitMod.Internal;
-using BitMod.Internal.LilikoiRouting;
+using BitMod.Router;
+using BitMod.Router.Extensions;
 
 using Lilikoi.Compiler.Public;
 
@@ -18,15 +20,14 @@ public class BitHookAttribute : BitTargetAttribute
 
 	public byte Priority { get; }
 
-	public override Type ContextType => typeof(HookRegistrationContext);
-
 	public override string Name => "BitHook";
 
 	internal override bool IsValidEvent(Type arg)
-		=> Registry.Events[arg] == Registry.EventType.Hook;
+		=> arg.IsAssignableTo(typeof(IHookArgs));
 
-	internal override void Setup(EventRegistrationContext context, LilikoiMutator mutator)
+	internal override void Setup(RouterContext context, LilikoiMutator mutator)
 	{
 		context.Store( new EventPriority(Priority) );
+		context.Hook( mutator );
 	}
 }

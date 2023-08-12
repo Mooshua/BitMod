@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 
+using BitMod.Events.Base;
+
 using Lilikoi.Context;
 
 namespace BitMod.Events.Meta;
@@ -7,7 +9,7 @@ namespace BitMod.Events.Meta;
 /// <summary>
 /// Called when a plugin is loaded into the
 /// </summary>
-public class PluginLoadEvent
+public class PluginLoadEvent : IEventArgs
 {
 	public PluginLoadEvent(Assembly pluginAssembly, string name)
 	{

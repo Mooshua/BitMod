@@ -1,10 +1,12 @@
 ﻿using BattleBitAPI.Common;
 
 using BitMod.Compatibility;
+using BitMod.Events.Accessors;
+using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerTypedMessageEventArgs
+    public class PlayerTypedMessageEventArgs : IHookArgs, IResponsiblePlayerAccessor
     {
         /// <summary>
         /// The player who typed the message.
@@ -27,5 +29,8 @@ namespace BitMod.Events.Player
             ChatChannel = chatChannel;
             Message = message;
         }
+
+        /// <inheritdoc />
+        public BitPlayer ResponsiblePlayer => Player;
     }
 }

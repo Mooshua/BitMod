@@ -1,10 +1,12 @@
 ﻿using BattleBitAPI.Common;
 
 using BitMod.Compatibility;
+using BitMod.Events.Accessors;
+using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerChangedTeamEventArgs
+    public class PlayerChangedTeamEventArgs : IEventArgs, IResponsiblePlayerAccessor
     {
         /// <summary>
         /// The player who joined a team.
@@ -21,5 +23,8 @@ namespace BitMod.Events.Player
             Player = player;
             Team = team;
         }
+
+        /// <inheritdoc />
+        public BitPlayer ResponsiblePlayer => Player;
     }
 }

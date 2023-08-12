@@ -1,10 +1,12 @@
 ﻿using BattleBitAPI.Common;
 
 using BitMod.Compatibility;
+using BitMod.Events.Accessors;
+using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerReportedEventArgs
+    public class PlayerReportedEventArgs : IEventArgs, IResponsiblePlayerAccessor
     {
         /// <summary>
         /// The player who made the report.
@@ -33,5 +35,8 @@ namespace BitMod.Events.Player
             Reason = reason;
             Detail = detail;
         }
+
+        /// <inheritdoc />
+        public BitPlayer ResponsiblePlayer => Reporter;
     }
 }

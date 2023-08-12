@@ -1,10 +1,12 @@
 ﻿using BattleBitAPI.Common;
 
 using BitMod.Compatibility;
+using BitMod.Events.Accessors;
+using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerChangedRoleEventArgs
+    public class PlayerChangedRoleEventArgs : IEventArgs, IResponsiblePlayerAccessor
     {
         /// <summary>
         /// The player who changed role.
@@ -21,5 +23,8 @@ namespace BitMod.Events.Player
             Player = player;
             Role = role;
         }
+
+        /// <inheritdoc />
+        public BitPlayer ResponsiblePlayer => Player;
     }
 }

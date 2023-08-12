@@ -1,7 +1,9 @@
 ﻿using BitMod.Attributes.Internal;
 using BitMod.Events;
+using BitMod.Events.Base;
 using BitMod.Internal;
-using BitMod.Internal.LilikoiRouting;
+using BitMod.Router;
+using BitMod.Router.Extensions;
 
 using Lilikoi.Compiler.Public;
 
@@ -9,15 +11,13 @@ namespace BitMod.Attributes.Targets;
 
 public class BitEventAttribute : BitTargetAttribute
 {
-	public override Type ContextType => typeof(SimpleRegistrationContext);
-
 	public override string Name => "BitEvent";
 
 	internal override bool IsValidEvent(Type arg)
-		=> Registry.Events[arg] == Registry.EventType.None;
+		=> arg.IsAssignableTo(typeof(IEventArgs));
 
-	internal override void Setup(EventRegistrationContext context, LilikoiMutator mutator)
+	internal override void Setup(RouterContext context, LilikoiMutator mutator)
 	{
-
+		context.Event(mutator);
 	}
 }

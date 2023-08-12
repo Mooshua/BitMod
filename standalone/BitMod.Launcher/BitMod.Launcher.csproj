@@ -7,7 +7,7 @@
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
-    
+
     <PropertyGroup Condition="'$(Configuration)' == 'Release'">
         <AssemblyName>bitmod_standalone</AssemblyName>
         <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
@@ -16,15 +16,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Remove="upstream/BattleBitAPI/obj/Release/net6.0/win-x64/singlefilehost.exe;upstream/BattleBitAPI/obj/Release/net6.0/win-x64/apphost.exe" />
-        <None Include="upstream/BattleBitAPI/obj/Release/net6.0/win-x64/singlefilehost.exe;upstream/BattleBitAPI/obj/Release/net6.0/win-x64/apphost.exe">
-            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-            <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-        </None>
         <None Update="plugins\readme.txt">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
         <None Update="configs\readme.txt">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="configs\flags.kv">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>
@@ -36,9 +34,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\api\BitMod.Config\BitMod.Config.csproj" />
-      <ProjectReference Include="..\..\api\BitMod.Logging\BitMod.Logging.csproj" />
-      <ProjectReference Include="..\..\api\BitMod.Plugins\BitMod.Plugins.csproj" />
+      <ProjectReference Include="..\BitMod.Config\BitMod.Config.csproj" />
+      <ProjectReference Include="..\BitMod.Logging\BitMod.Logging.csproj" />
+      <ProjectReference Include="..\BitMod.Plugins\BitMod.Plugins.csproj" />
       <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
     </ItemGroup>
 

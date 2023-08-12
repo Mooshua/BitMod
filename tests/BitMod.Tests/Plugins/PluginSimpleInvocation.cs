@@ -1,6 +1,7 @@
 ﻿using BitMod.Attributes.Targets;
 using BitMod.Events.Player;
 using BitMod.Internal.Public;
+using BitMod.Tests.Helpers;
 
 namespace BitMod.Tests.Plugins;
 
@@ -32,12 +33,10 @@ public class PluginSimpleInvocation : GlobalSetup
 	[Test]
 	public void CanInvoke()
 	{
-		var logger = Serilog.Log.Logger;
-		var context = new PluginContext( logger );
-		var invoker = new PluginInvoker( context );
+		var mod = BitMock.Mock();
 
-		context.Load("invoke_test", typeof(Host));
-		invoker.Event( new PlayerDiedEventArgs( null ) );
+		mod.Context.Load("invoke_test", typeof(Host));
+		mod.Invoker.Event( new PlayerDiedEventArgs( MockPlayer.New() ) );
 
 		Assert.Fail("Did not reach Assert.Pass located within Lilikoi container");
 	}
@@ -45,12 +44,10 @@ public class PluginSimpleInvocation : GlobalSetup
 	[Test]
 	public void BlocksForInvokeToComplete()
 	{
-		var logger = Serilog.Log.Logger;
-		var context = new PluginContext( logger );
-		var invoker = new PluginInvoker( context );
+		var mod = BitMock.Mock();
 
-		context.Load("invoke_block", typeof(DelayingHost));
-		invoker.Event( new PlayerDiedEventArgs( null ) );
+		mod.Context.Load("invoke_block", typeof(DelayingHost));
+		mod.Invoker.Event( new PlayerDiedEventArgs( MockPlayer.New() ) );
 
 		Assert.Fail("Did not reach Assert.Pass located within Lilikoi container, instead fell through without executing delay.");
 	}

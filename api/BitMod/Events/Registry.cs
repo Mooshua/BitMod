@@ -7,6 +7,7 @@ using BitMod.Events.Stats;
 
 namespace BitMod.Events;
 
+[Obsolete("Only used for documentation. Do not use for binning events.")]
 public static class Registry
 {
 	public enum EventType
@@ -38,8 +39,8 @@ public static class Registry
 		{ typeof(PlayerLeftSquadEventArgs), EventType.None },
 		{ typeof(PlayerReportedEventArgs), EventType.None },
 		{ typeof(PlayerSpawnedEventArgs), EventType.None },
-		{ typeof(PlayerSpawningEventArgs), EventType.None },
 
+		{ typeof(PlayerSpawningEventArgs), EventType.Value },
 		{ typeof(PlayerRequestingToChangeRoleEventArgs), EventType.Hook },
 		{ typeof(PlayerTypedMessageEventArgs), EventType.Hook },
 
@@ -62,6 +63,7 @@ public static class Registry
 
 	public static Dictionary<Type, Type> Producers = new Dictionary<Type, Type>()
 	{
+		{ typeof(PlayerSpawningEventArgs), typeof(PlayerSpawnRequest) },
 		{ typeof(GetPlayerStatsEventArgs), typeof(PlayerStats) }
 	};
 

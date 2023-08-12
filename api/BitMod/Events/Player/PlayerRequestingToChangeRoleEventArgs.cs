@@ -1,10 +1,12 @@
 ﻿using BattleBitAPI.Common;
 
 using BitMod.Compatibility;
+using BitMod.Events.Accessors;
+using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerRequestingToChangeRoleEventArgs
+    public class PlayerRequestingToChangeRoleEventArgs : IHookArgs, IResponsiblePlayerAccessor
     {
         /// <summary>
         /// The player requesting.
@@ -16,10 +18,13 @@ namespace BitMod.Events.Player
         /// </summary>
         public GameRole Role { get; init; }
 
-        internal PlayerRequestingToChangeRoleEventArgs(BitPlayer player, GameRole role)
+        public PlayerRequestingToChangeRoleEventArgs(BitPlayer player, GameRole role)
         {
             Player = player;
             Role = role;
         }
+
+        /// <inheritdoc />
+        public BitPlayer ResponsiblePlayer => Player;
     }
 }

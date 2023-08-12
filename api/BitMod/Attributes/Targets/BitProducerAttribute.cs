@@ -1,7 +1,9 @@
 ﻿using BitMod.Attributes.Internal;
 using BitMod.Events;
+using BitMod.Events.Base;
 using BitMod.Internal;
-using BitMod.Internal.LilikoiRouting;
+using BitMod.Router;
+using BitMod.Router.Extensions;
 
 using Lilikoi.Compiler.Public;
 
@@ -16,15 +18,30 @@ public class BitProducerAttribute : BitTargetAttribute
 
 	public byte Priority { get; }
 
-	public override Type ContextType => typeof(ProducerRegistrationContext);
-
 	public override string Name => "BitProducer";
 
 	internal override bool IsValidEvent(Type arg)
-		=> Registry.Events[arg] == Registry.EventType.Value;
-
-	internal override void Setup(EventRegistrationContext context, LilikoiMutator mutator)
 	{
+		var producerArgType = arg.GetInterfaces();
 
+		foreach (Type type in producerArgType)
+		{
+			if (!type.IsGenericType)
+				continue;
+			
+			var stripped = type.GetGenericTypeDefinition();
+
+			//	This is a subtype of IProducerArgs<>
+			if (stripped == typeof(IProducerArgs<>))
+				return true;
+		}
+
+		return false;
+	}
+
+	internal override void Setup(RouterContext context, LilikoiMutator mutator)
+	{
+		context.Store( new EventPriority(Priority) );
+		context.Producer(mutator);
 	}
 }

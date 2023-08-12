@@ -1,10 +1,13 @@
 ﻿using BattleBitAPI.Common;
 
 using BitMod.Compatibility;
+using BitMod.Events.Accessors;
+using BitMod.Events.Base;
+using BitMod.Events.Result;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerSpawningEventArgs
+    public class PlayerSpawningEventArgs : IProducerArgs<SpawnRequest>, IResponsiblePlayerAccessor
     {
         /// <summary>
         /// The player who is spawning.
@@ -21,5 +24,8 @@ namespace BitMod.Events.Player
             Player = player;
             Request = request;
         }
+
+        /// <inheritdoc />
+        public BitPlayer ResponsiblePlayer => Player;
     }
 }

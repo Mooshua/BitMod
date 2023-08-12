@@ -1,0 +1,32 @@
+"Flags"
+{
+    //  Applies to all servers.
+    "#default"
+    {
+        "Set"
+        {
+            "bitmod_enablecommands"    "1"
+        }
+    }
+
+    //  Specify the server IP to have flags applied to
+    //  Note that if this is not an IP, it will be considered
+    //  a "Group". Read more below:
+    "127.0.0.1"
+    {
+        //  Specify other blocks to inherit from.
+        //  Note that this does not need to be an IP--
+        //  You can for example add a group called "Zombies" to
+        //  configure the zombie gamemode.
+        "Inherit"
+        {
+            "0"     "OtherGroup"
+        }
+
+        //  Now set server-specific flags
+        "Set"
+        {
+            "bitmod_enablecommands"    "0"
+        }
+    }
+}

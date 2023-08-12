@@ -22,15 +22,13 @@ public sealed class BitMod : Mount
 
 		_server = new ServerListener<BitPlayer>();
 
-		var context = new PluginContext( logger, this );
+		var context = new PluginContext( this );
 		var invoker = new PluginInvoker( context );
 		var listener = new RoutingHandler( _server, invoker);
 
 		Store(context);
 		Store(invoker);
 		Store(listener);
-
-		context.Load("bitmod:internal:pluginloader", typeof(Bootstrap));
 
 		config.Start(this);
 		plugins.Start(this);

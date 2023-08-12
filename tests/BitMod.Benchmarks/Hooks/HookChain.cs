@@ -1,4 +1,8 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System.Net;
+
+using BattleBitAPI.Common;
+
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 
 using BitMod.Attributes.Targets;
@@ -38,9 +42,9 @@ public class HookChain
 	[GlobalSetup]
 	public void SetUp()
 	{
-		var logger = Serilog.Log.Logger;
-		_context = new PluginContext( logger );
-		_invoker = new PluginInvoker( _context );
+		var mock = BitMock.Mock();
+		_context = mock.Context;
+		_invoker = mock.Invoker;
 
 		for (int i = 0; i < ChainLength; i++)
 			_context.Load("bench", typeof(Host));
@@ -48,6 +52,6 @@ public class HookChain
 
 	[Benchmark]
 	public bool InvokeHook()
-		=> _invoker.Hook(new PlayerConnectedEventArgs(null));
+		=> _invoker.Hook(new GameServerConnectingEventArgs( IPAddress.Any) );
 
 }

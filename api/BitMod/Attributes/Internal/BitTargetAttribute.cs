@@ -1,6 +1,13 @@
 ﻿using System.ComponentModel;
 
+using BattleBitAPI.Server;
+
+using BitMod.Attributes.Injects;
+using BitMod.Compatibility;
+using BitMod.Events.Accessors;
 using BitMod.Internal;
+using BitMod.Internal.Assemblers;
+using BitMod.Router;
 
 using Lilikoi.Attributes;
 using Lilikoi.Compiler.Public;
@@ -11,15 +18,13 @@ namespace BitMod.Attributes.Internal;
 [EditorBrowsable(EditorBrowsableState.Never)]
 public abstract class BitTargetAttribute : LkTargetAttribute
 {
-	public abstract Type ContextType { get; }
-
 	public override bool IsTargetable<TUserContext>()
-		=> typeof(TUserContext) == ContextType;
+		=> typeof(TUserContext) == typeof(RouterContext);
 
 	public override void Target<TUserContext>(TUserContext context, LilikoiMutator mutator)
-		=> Target(context as EventRegistrationContext, mutator);
+		=> Target(context as RouterContext, mutator);
 
-	internal void Target(EventRegistrationContext context, LilikoiMutator mutator)
+	internal void Target(RouterContext context, LilikoiMutator mutator)
 	{
 		if (mutator.Parameters == 0)
 			throw new InvalidOperationException("BitMod targets require at least one argument in the handler function!");
@@ -29,13 +34,19 @@ public abstract class BitTargetAttribute : LkTargetAttribute
 		if (!IsValidEvent(first))
 			throw new InvalidOperationException($"Type {mutator.Parameter(0).FullName} is not a valid for BitMod target {Name}!");
 
-		context.Event = first;
 		mutator.Wildcard(new UnpackWildcardParameterAttribute(first), first);
 
 		//	Handle async result types
 		if (mutator.Result.IsSubclassOf(typeof(Task)) || mutator.Result == typeof(Task))
 			mutator.Implicit(new AsyncAttribute());
 
+		if (typeof(IResponsiblePlayerAccessor).IsAssignableFrom(first))
+			mutator.Wildcard<BitPlayer>(new ResponsiblePlayerAttribute());
+
+		if (typeof(IRelevantGameserverAccessor).IsAssignableFrom(first))
+			mutator.Wildcard<GameServer>(new RelevantGameserverAttribute());
+
+		mutator.Store(new TypeRouterDirectives(first));
 		Setup(context, mutator);
 	}
 
@@ -53,5 +64,5 @@ public abstract class BitTargetAttribute : LkTargetAttribute
 	/// </summary>
 	/// <param name="context"></param>
 	/// <param name="mutator"></param>
-	internal abstract void Setup(EventRegistrationContext context, LilikoiMutator mutator);
+	internal abstract void Setup(RouterContext context, LilikoiMutator mutator);
 }
