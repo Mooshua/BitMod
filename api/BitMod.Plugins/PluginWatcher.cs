@@ -49,7 +49,12 @@ public class PluginWatcher
 		if (matches.Length == 0)
 			_logger.Error("[BitMod Plugin] Error loading plugin {@Name}: No .dll files in directory!", directory);
 		else
-			_logger.Error("[BitMod Plugin] Error loading plugin {@Name}: Multiple .dll files found! Please put dependencies in the /dependencies folder. Found: {@Matches}", directory, matches);
+		{
+			if (matches.Contains($"{directory}.dll"))
+				return Path.Join(path, $"{directory}.dll");
+
+			_logger.Error("[BitMod Plugin] Error loading plugin {@Name}: Multiple .dll files found--but did not find {@Directory}.dll. Instead found: {@Matches}", directory, directory, matches);
+		}
 
 		return null;
 	}
@@ -67,12 +72,14 @@ public class PluginWatcher
 		if (file == null)
 			return;
 
+		_logger.Information("{@File}", file);
+
 		var loader = PluginLoader.CreateFromAssemblyFile(file, (config) =>
 		{
 			config.EnableHotReload = true;
 			//config.IsUnloadable = true;
 			//config.LoadInMemory = true;
-			config.PreferSharedTypes = true;
+			//config.PreferSharedTypes = true;
 		});
 
 		loader.Reloaded += (sender, args) =>

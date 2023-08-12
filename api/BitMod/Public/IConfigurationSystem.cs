@@ -11,7 +11,6 @@ public interface IConfigurationSystem : IBitModComponent
 	/// <param name="makeDefault"></param>
 	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
-	T Get<T>(string name, Func<T> makeDefault)
-		where T: class, new();
+	T Get<T>(string name, Func<T> makeDefault);
 
 }

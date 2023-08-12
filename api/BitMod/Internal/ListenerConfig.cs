@@ -15,7 +15,8 @@ public class ListenerConfig
 
 	public string PublicIP { get; set; }
 
-	internal IPAddress Address => IPAddress.Parse(PublicIP);
+	internal IPAddress GetAddress()
+		=> IPAddress.Parse(PublicIP);
 
 	public ushort Port { get; set; }
 }

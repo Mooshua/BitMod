@@ -4,12 +4,11 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <DebugType>embedded</DebugType>
+        <AssemblyName>bitmod_whitelist</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\upstream\DotNetCorePlugins\src\Plugins\McMaster.NETCore.Plugins.csproj" />
-      <ProjectReference Include="..\BitMod\BitMod.csproj" />
+      <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
     </ItemGroup>
 
 </Project>

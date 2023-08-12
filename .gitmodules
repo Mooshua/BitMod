@@ -1,3 +1,6 @@
 [submodule "upstream/BattleBitAPI"]
 	path = upstream/BattleBitAPI
 	url = https://github.com/MrOkiDoki/BattleBit-Community-Server-API/
+[submodule "upstream/DotNetCorePlugins"]
+	path = upstream/DotNetCorePlugins
+	url = https://github.com/Mooshua/DotNetCorePlugins

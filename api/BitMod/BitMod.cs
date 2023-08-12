@@ -1,7 +1,6 @@
 ﻿using BattleBitAPI.Server;
 
 using BitMod.Compatibility;
-using BitMod.Extensions;
 using BitMod.Handler;
 using BitMod.Internal;
 using BitMod.Internal.Public;
@@ -62,7 +61,7 @@ public sealed class BitMod : Mount
 	{
 		var network = Config.Get("core", () => BitModConfig.Default()).Listener;
 		Logger.Information("[BitMod] Starting server on {@IP}:{@Port}", network.PublicIP, network.Port);
-		_server.Start(network.Address, network.Port);
+		_server.Start(network.GetAddress(), network.Port);
 	}
 
 	public void Stop()

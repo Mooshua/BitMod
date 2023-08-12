@@ -1,4 +1,5 @@
-﻿namespace BitMod.Internal;
+﻿
+namespace BitMod.Internal;
 
 public class BitModConfig
 {

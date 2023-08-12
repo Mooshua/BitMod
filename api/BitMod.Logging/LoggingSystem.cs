@@ -8,12 +8,10 @@ namespace BitMod.Logging;
 public class LoggingSystem
 {
 	private IConfigurationSystem _config;
-	private LoggingConfiguration _loggingConfiguration;
 
 	public LoggingSystem(IConfigurationSystem config)
 	{
 		_config = config;
-		_loggingConfiguration = config.Get("logging", () => new LoggingConfiguration());
 	}
 
 	public static string LOG_PATH = "logs";

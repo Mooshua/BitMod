@@ -9,6 +9,13 @@ namespace BitMod.Attributes.Targets;
 
 public class BitProducerAttribute : BitTargetAttribute
 {
+	public BitProducerAttribute(byte priority = 128)
+	{
+		Priority = priority;
+	}
+
+	public byte Priority { get; }
+
 	public override Type ContextType => typeof(ProducerRegistrationContext);
 
 	public override string Name => "BitProducer";

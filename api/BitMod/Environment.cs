@@ -2,5 +2,7 @@
 
 public static class Environment
 {
+
 	public static bool DoNotCatchEventExceptions = false;
+
 }
