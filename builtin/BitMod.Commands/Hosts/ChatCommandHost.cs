@@ -22,13 +22,13 @@ public class ChatCommandHost
 	private ILogger _logger;
 
 	[BitHook(Priority.HIGH)]
-	public Task<Directive> OnChatMessage(PlayerTypedMessageEventArgs ev, BitPlayer sender)
+	public Task<Directive> OnChatMessage(PlayerTypedMessageEventArgs ev, BitServer server, BitPlayer sender)
 	{
 		if (ev.Message.StartsWith("!") || ev.Message.StartsWith("/"))
 		{
 			//	This is a command (starts with ! or /)
 			//	Send to command handler and prevent it from being shown in chat.
-			var source = new InGameSource(sender, _logger);
+			var source = new InGameSource(server, sender, _logger);
 			var input = CommandInput.FromString(source, ev.Message);
 
 			_logger.Information("Player {@Name} {@SteamId} used command: {@Command} {@Args} (From string {@Message})",

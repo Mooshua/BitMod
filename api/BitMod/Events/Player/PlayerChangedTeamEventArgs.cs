@@ -6,7 +6,7 @@ using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerChangedTeamEventArgs : IEventArgs, IResponsiblePlayerAccessor
+    public class PlayerChangedTeamEventArgs : IEventArgs, IResponsiblePlayerEvent
     {
         /// <summary>
         /// The player who joined a team.
@@ -18,13 +18,17 @@ namespace BitMod.Events.Player
         /// </summary>
         public Team Team { get; init; }
 
-        internal PlayerChangedTeamEventArgs(BitPlayer player, Team team)
+        internal PlayerChangedTeamEventArgs(BitServer server, BitPlayer player, Team team)
         {
             Player = player;
             Team = team;
+            Server = server;
         }
 
         /// <inheritdoc />
         public BitPlayer ResponsiblePlayer => Player;
+
+        /// <inheritdoc />
+        public BitServer Server { get; }
     }
 }

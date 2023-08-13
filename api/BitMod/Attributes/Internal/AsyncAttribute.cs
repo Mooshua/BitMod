@@ -1,4 +1,6 @@
-﻿using Lilikoi.Attributes.Typed;
+﻿using System.Threading.Tasks;
+
+using Lilikoi.Attributes.Typed;
 using Lilikoi.Context;
 
 namespace BitMod.Attributes.Internal;

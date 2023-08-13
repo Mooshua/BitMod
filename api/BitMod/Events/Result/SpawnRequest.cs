@@ -6,12 +6,12 @@ namespace BitMod.Events.Result;
 
 public class SpawnRequest
 {
-	public SpawnRequest(PlayerSpawnRequest request)
+	public SpawnRequest(OnPlayerSpawnArguments request)
 	{
 		_request = request;
 	}
 
-	private PlayerSpawnRequest _request;
+	private OnPlayerSpawnArguments _request;
 
 	public PlayerSpawningPosition RequestedPoint
 	{
@@ -55,6 +55,6 @@ public class SpawnRequest
 		set => _request.SpawnProtection = value;
 	}
 
-	public static implicit operator PlayerSpawnRequest(SpawnRequest req) => req._request;
+	public static implicit operator OnPlayerSpawnArguments(SpawnRequest req) => req._request;
 
 }

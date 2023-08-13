@@ -1,4 +1,7 @@
-﻿using BitMod.Commands.Handlers;
+﻿using System.Reflection;
+
+using BitMod.Commands.Handlers;
+using BitMod.Internal;
 using BitMod.Internal.Public;
 
 namespace BitMod.Commands.Extensions;
@@ -14,6 +17,6 @@ public static class PluginInvokerExtensions
 	public static void Command(this PluginInvoker self, CommandInput command)
 	{
 		var chain = self.Context.Get<CommandHandlerRegistry, string>(command.Command);
-		chain?.Invoke( command );
+		chain?.Invoke( EventInput.From( command ) );
 	}
 }

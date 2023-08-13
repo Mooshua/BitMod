@@ -30,7 +30,7 @@ public interface ICommandSource
 	/// If the command is from a user in a gameserver, this will be that server.
 	/// Note: Not always paired with a non-null bitplayer, depending on the source.
 	/// </summary>
-	public GameServer? GameServer { get; }
+	public BitServer? GameServer { get; }
 
 	/// <summary>
 	/// If the command is from a user in a gameserver, this will be that user.

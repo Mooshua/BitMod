@@ -3,17 +3,24 @@
 A fast, elegant, and modern BattleBit: Remastered modding framework designed to enable plugins of all kinds to operate
 simultaneously on the same API server.
 
-> **Warning**
+> [!IMPORTANT]
 > 
 > Just like the Community API, BitMod is in very early development. Tread carefully!
+
+> [!WARNING]
+> 
+> **BitMod is currently broken due to Community Server API changes.**
+> This banner will be removed when it is fixed.
 
 ## Features
 
 - **Hot Reloading & Unloading**: Plugins can be loaded and unloaded on the fly
+- **Out of the Box**: BitMod includes critical plugins for server administration, and can run a server
+  completely out of the box.
 - **Compatibility**: Using BitMod, plugins don't need to be aware of one another to launch, hook game events, and
-  send commands.
+  send commands. Plugins can use behavior of other plugins without needing to be aware of their existence.
 - **Sky's The Limit**: All non-core functionality (eg configuration, commands) are implemented as plugins,
-  A testament to the extreme flexibility of BitMod's design
+  A demonstration of the extreme flexibility of BitMod's design
 
 ## Introduction
 
@@ -35,7 +42,7 @@ public class MyPlugin
 ```
 
 **Hooks** expect a response of either *Allow*, *Disallow*, or *Neutral*. The first plugin to express
-an opinion will have it's opinion selected. Plugins are executed in ascending order of priority (0 = highest, 255 = lowest).
+an opinion will have it's opinion selected. Plugins are executed in ascending order of priority (0 = lowest, 255 = highest).
 The priority is specified by the plugin.
 
 **Events** are one-off alerts that do not require any form of response:

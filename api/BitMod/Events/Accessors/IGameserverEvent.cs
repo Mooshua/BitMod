@@ -1,8 +1,10 @@
 ﻿using BattleBitAPI.Server;
 
+using BitMod.Compatibility;
+
 namespace BitMod.Events.Accessors;
 
-public interface IRelevantGameserverAccessor
+public interface IGameserverEvent
 {
 
 	#region IRelevantGameserver
@@ -10,7 +12,7 @@ public interface IRelevantGameserverAccessor
 	/// <summary>
 	/// Gets the gameserver that this event occured on.
 	/// </summary>
-	public GameServer? RelevantGameserver { get; }
+	BitServer Server { get; }
 
 	#endregion
 }

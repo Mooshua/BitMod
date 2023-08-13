@@ -5,12 +5,14 @@ using BattleBitAPI.Server;
 using BitMod.Commands.Sources;
 using BitMod.Compatibility;
 using BitMod.Events.Accessors;
+using BitMod.Events.Base;
+using BitMod.Internal;
 
 using Lilikoi.Context;
 
 namespace BitMod.Commands.Handlers;
 
-public class CommandInput : Mount, IResponsiblePlayerAccessor, IRelevantGameserverAccessor
+public class CommandInput : IBaseArgs, IResponsiblePlayerEvent, IGameserverEvent
 {
 	public CommandInput(ICommandSource sender, string command, string[] arguments)
 	{
@@ -32,7 +34,7 @@ public class CommandInput : Mount, IResponsiblePlayerAccessor, IRelevantGameserv
 	public BitPlayer? ResponsiblePlayer => Sender.Player;
 
 	/// <inheritdoc />
-	public GameServer? RelevantGameserver => Sender.GameServer;
+	public BitServer? Server => Sender.GameServer;
 
 	public static CommandInput FromString(ICommandSource source, string command)
 	{

@@ -1,13 +1,14 @@
 ﻿using BattleBitAPI.Server;
 
+using BitMod.Compatibility;
 using BitMod.Events.Accessors;
 using BitMod.Events.Base;
 
 namespace BitMod.Events.Server;
 
-public class GameServerTickEventArgs : IEventArgs, IRelevantGameserverAccessor
+public class GameServerTickEventArgs : IEventArgs, IGameserverEvent
 {
-	public GameServerTickEventArgs(GameServer server)
+	public GameServerTickEventArgs(BitServer server)
 	{
 		Server = server;
 	}
@@ -15,8 +16,8 @@ public class GameServerTickEventArgs : IEventArgs, IRelevantGameserverAccessor
 	/// <summary>
 	/// The server that is currently ticking
 	/// </summary>
-	public GameServer Server { get; init; }
+	public BitServer Server { get; init; }
 
 	/// <inheritdoc />
-	public GameServer RelevantGameserver => Server;
+	public BitServer RelevantGameserver => Server;
 }

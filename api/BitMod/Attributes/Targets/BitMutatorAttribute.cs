@@ -1,4 +1,6 @@
-﻿using BitMod.Attributes.Internal;
+﻿using System;
+
+using BitMod.Attributes.Internal;
 using BitMod.Events;
 using BitMod.Events.Base;
 using BitMod.Internal;
@@ -31,6 +33,7 @@ public class BitMutatorAttribute : BitTargetAttribute
 
 		return false;
 	}
+
 
 
 	internal override void Setup(RouterContext context, LilikoiMutator mutator)

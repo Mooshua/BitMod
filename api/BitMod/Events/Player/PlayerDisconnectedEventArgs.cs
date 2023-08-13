@@ -4,11 +4,12 @@ using BitMod.Events.Base;
 
 namespace BitMod.Events.Player;
 
-public class PlayerDisconnectedEventArgs : IEventArgs, IResponsiblePlayerAccessor
+public class PlayerDisconnectedEventArgs : IEventArgs, IResponsiblePlayerEvent
 {
-	public PlayerDisconnectedEventArgs(BitPlayer player)
+	public PlayerDisconnectedEventArgs(BitServer server, BitPlayer player)
 	{
 		Player = player;
+		Server = server;
 	}
 
 	/// <summary>
@@ -18,4 +19,7 @@ public class PlayerDisconnectedEventArgs : IEventArgs, IResponsiblePlayerAccesso
 
 	/// <inheritdoc />
 	public BitPlayer ResponsiblePlayer => Player;
+
+	/// <inheritdoc />
+	public BitServer Server { get; }
 }

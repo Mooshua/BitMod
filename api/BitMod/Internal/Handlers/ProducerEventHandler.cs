@@ -1,4 +1,7 @@
-﻿using BitMod.Plugins.Events;
+﻿using System;
+using System.Threading.Tasks;
+
+using BitMod.Plugins.Events;
 
 using Lilikoi.Compiler.Public;
 

@@ -1,4 +1,7 @@
-﻿using BitMod.Internal.Handlers;
+﻿using System;
+using System.Collections.Generic;
+
+using BitMod.Internal.Handlers;
 
 using Serilog;
 

@@ -20,7 +20,7 @@ public class PluginWildcards : GlobalSetup
 	public class Host
 	{
 		[BitEvent]
-		public async Task GetRelevant(PlayerJoinedSquadEventArgs ev, BitPlayer player, GameServer gameServer)
+		public async Task GetRelevant(PlayerJoinedSquadEventArgs ev, BitPlayer player, BitServer gameServer)
 		{
 			Assert.NotNull(player, "player != null");
 			Assert.NotNull(gameServer, "gameServer != null");
@@ -33,10 +33,11 @@ public class PluginWildcards : GlobalSetup
 	public void ProducerInvokesMutator()
 	{
 		var mod = BitMock.Mock();
+		var (player, server) = MockPlayer.New();
 
 
 		mod.Context.Load("invoke_test", typeof(Host));
-		mod.Invoker.Event( new PlayerJoinedSquadEventArgs( MockPlayer.New(), Squads.Ace));
+		mod.Invoker.Event( new PlayerJoinedSquadEventArgs( server, player, Squads.Ace));
 
 		Assert.Fail("Did not reach container host");
 	}

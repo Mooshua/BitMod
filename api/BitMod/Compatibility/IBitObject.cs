@@ -21,7 +21,6 @@ public interface IBitObject
 	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
 	public bool Has<T>()
-		where T : class
 		=> Mount.Has<T>();
 
 	/// <summary>

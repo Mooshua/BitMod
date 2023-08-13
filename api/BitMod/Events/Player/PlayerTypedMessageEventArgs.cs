@@ -6,7 +6,7 @@ using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerTypedMessageEventArgs : IHookArgs, IResponsiblePlayerAccessor
+    public class PlayerTypedMessageEventArgs : IHookArgs, IResponsiblePlayerEvent
     {
         /// <summary>
         /// The player who typed the message.
@@ -23,8 +23,9 @@ namespace BitMod.Events.Player
         /// </summary>
         public string Message { get; init; }
 
-        internal PlayerTypedMessageEventArgs(BitPlayer player, ChatChannel chatChannel, string message)
+        internal PlayerTypedMessageEventArgs(BitServer server, BitPlayer player, ChatChannel chatChannel, string message)
         {
+            Server = server;
             Player = player;
             ChatChannel = chatChannel;
             Message = message;
@@ -32,5 +33,8 @@ namespace BitMod.Events.Player
 
         /// <inheritdoc />
         public BitPlayer ResponsiblePlayer => Player;
+
+        /// <inheritdoc />
+        public BitServer Server { get; }
     }
 }

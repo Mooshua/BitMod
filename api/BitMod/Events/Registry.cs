@@ -1,7 +1,12 @@
-﻿using BattleBitAPI.Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using BattleBitAPI.Common;
 
 using BitMod.Events.Meta;
 using BitMod.Events.Player;
+using BitMod.Events.Result;
 using BitMod.Events.Server;
 using BitMod.Events.Stats;
 
@@ -63,7 +68,7 @@ public static class Registry
 
 	public static Dictionary<Type, Type> Producers = new Dictionary<Type, Type>()
 	{
-		{ typeof(PlayerSpawningEventArgs), typeof(PlayerSpawnRequest) },
+		{ typeof(PlayerSpawningEventArgs), typeof(SpawnRequest) },
 		{ typeof(GetPlayerStatsEventArgs), typeof(PlayerStats) }
 	};
 

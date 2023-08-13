@@ -1,4 +1,6 @@
-﻿using BitMod.Internal;
+﻿using System;
+
+using BitMod.Internal;
 
 using Lilikoi.Attributes;
 using Lilikoi.Context;

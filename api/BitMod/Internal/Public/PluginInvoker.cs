@@ -1,4 +1,6 @@
-﻿using BitMod.Events.Base;
+﻿using System;
+
+using BitMod.Events.Base;
 using BitMod.Internal.Registries;
 using BitMod.Plugins.Events;
 

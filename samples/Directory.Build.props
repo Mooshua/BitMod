@@ -1,0 +1,5 @@
+<Project>
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+        <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
+    </PropertyGroup>
+</Project>

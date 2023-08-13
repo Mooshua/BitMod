@@ -1,4 +1,6 @@
-﻿using BitMod.Attributes.Internal;
+﻿using System;
+
+using BitMod.Attributes.Internal;
 using BitMod.Events;
 using BitMod.Events.Base;
 using BitMod.Internal;

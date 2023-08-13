@@ -1,13 +1,14 @@
 ﻿using BattleBitAPI.Server;
 
+using BitMod.Compatibility;
 using BitMod.Events.Accessors;
 using BitMod.Events.Base;
 
 namespace BitMod.Events.Server;
 
-public class GameServerReconnectedEventArgs : IEventArgs, IRelevantGameserverAccessor
+public class GameServerReconnectedEventArgs : IEventArgs, IGameserverEvent
 {
-	public GameServerReconnectedEventArgs(GameServer server)
+	public GameServerReconnectedEventArgs(BitServer server)
 	{
 		Server = server;
 	}
@@ -15,8 +16,8 @@ public class GameServerReconnectedEventArgs : IEventArgs, IRelevantGameserverAcc
 	/// <summary>
 	/// The server that successfully reconnected
 	/// </summary>
-	public GameServer Server { get; init; }
+	public BitServer Server { get; init; }
 
 	/// <inheritdoc />
-	public GameServer RelevantGameserver => Server;
+	public BitServer RelevantGameserver => Server;
 }

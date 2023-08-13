@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 using BattleBitAPI.Server;
 
@@ -40,11 +42,11 @@ public abstract class BitTargetAttribute : LkTargetAttribute
 		if (mutator.Result.IsSubclassOf(typeof(Task)) || mutator.Result == typeof(Task))
 			mutator.Implicit(new AsyncAttribute());
 
-		if (typeof(IResponsiblePlayerAccessor).IsAssignableFrom(first))
+		if (typeof(IResponsiblePlayerEvent).IsAssignableFrom(first))
 			mutator.Wildcard<BitPlayer>(new ResponsiblePlayerAttribute());
 
-		if (typeof(IRelevantGameserverAccessor).IsAssignableFrom(first))
-			mutator.Wildcard<GameServer>(new RelevantGameserverAttribute());
+		if (typeof(IGameserverEvent).IsAssignableFrom(first))
+			mutator.Wildcard<BitServer>(new RelevantGameserverAttribute());
 
 		mutator.Store(new TypeRouterDirectives(first));
 		Setup(context, mutator);

@@ -47,6 +47,8 @@ public class Plugin : IPluginSystem.IPlugin
 		_logger.Information("[BitMod Plugins] Hot reloading plugin {@PluginName} due to changed file {@File}", _pluginName, ev.Name);
 		UnloadPlugin();
 		LoadPlugin();
+
+
 	}
 
 
@@ -74,26 +76,41 @@ public class Plugin : IPluginSystem.IPlugin
 
 	public void LoadPlugin()
 	{
-		var file = GetPluginFile();
-		if (file == null)
-			return;
-
-		Loader = PluginLoader.CreateFromAssemblyFile(file, (config) =>
+		try
 		{
-			config.IsUnloadable = true;
-			config.LoadInMemory = true;
-			config.PreferSharedTypes = true;
-		});
+			var file = GetPluginFile();
+			if (file == null)
+				return;
 
-		Assembly = Loader.LoadDefaultAssembly();
+			Loader = PluginLoader.CreateFromAssemblyFile(file, (config) =>
+			{
+				config.IsUnloadable = true;
+				config.LoadInMemory = true;
+				config.PreferSharedTypes = true;
+			});
 
-		_parent.Load(this);
+			Assembly = Loader.LoadDefaultAssembly();
+
+			_parent.Load(this);
+		}
+		catch (Exception e)
+		{
+			_logger.Error(e, "[BitMod Plugins] Error loading plugin {@Name}", _pluginName);
+		}
+
 	}
 
 	public void UnloadPlugin()
 	{
-		_parent.Unload(this);
-		Loader.Dispose();
+		try
+		{
+			_parent.Unload(this);
+			Loader.Dispose();
+		}
+		catch (Exception e)
+		{
+			_logger.Error(e, "[BitMod Plugins] Error unloading plugin {@Name}", _pluginName);
+		}
 	}
 
 	public string Name => _pluginName;

@@ -6,7 +6,7 @@ using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerReportedEventArgs : IEventArgs, IResponsiblePlayerAccessor
+    public class PlayerReportedEventArgs : IEventArgs, IResponsiblePlayerEvent
     {
         /// <summary>
         /// The player who made the report.
@@ -28,15 +28,19 @@ namespace BitMod.Events.Player
         /// </summary>
         public string Detail { get; init; }
 
-        internal PlayerReportedEventArgs(BitPlayer reporter, BitPlayer reported, ReportReason reason, string detail)
+        internal PlayerReportedEventArgs(BitServer server, BitPlayer reporter, BitPlayer reported, ReportReason reason, string detail)
         {
             Reporter = reporter;
             Reported = reported;
             Reason = reason;
             Detail = detail;
+            Server = server;
         }
 
         /// <inheritdoc />
         public BitPlayer ResponsiblePlayer => Reporter;
+
+        /// <inheritdoc />
+        public BitServer Server { get; }
     }
 }

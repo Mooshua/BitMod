@@ -1,4 +1,6 @@
-﻿using BitMod.Internal.Public;
+﻿using System;
+
+using BitMod.Internal.Public;
 
 using Lilikoi.Compiler.Public;
 using Lilikoi.Context;

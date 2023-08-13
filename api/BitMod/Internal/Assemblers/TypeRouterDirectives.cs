@@ -1,4 +1,6 @@
-﻿namespace BitMod.Internal.Assemblers;
+﻿using System;
+
+namespace BitMod.Internal.Assemblers;
 
 public class TypeRouterDirectives
 {

@@ -1,5 +1,9 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Threading.Tasks;
 
+using BitMod.Events.Base;
 using BitMod.Internal.Handlers;
 using BitMod.Plugins.Extensions;
 using BitMod.Router;
@@ -93,7 +97,7 @@ public class PluginContext
 	public void Load(string name, Type type)
 	{
 		var context = new RouterContext(_env, name);
-		var containers = Scanner.Scan<RouterContext, EventInput, Object>(context, type, () => _env);
+		var containers = Scanner.Scan<RouterContext, EventInput, Task>(context, type, () => _env);
 
 		Register(containers);
 	}
@@ -106,7 +110,7 @@ public class PluginContext
 	public void Load(string name, Assembly assembly)
 	{
 		var context = new RouterContext(_env, name);
-		var containers = Scanner.Scan<RouterContext, EventInput, Object>(context, assembly, () => _env);
+		var containers = Scanner.Scan<RouterContext, EventInput, Task>(context, assembly, () => _env);
 
 		Register(containers);
 	}

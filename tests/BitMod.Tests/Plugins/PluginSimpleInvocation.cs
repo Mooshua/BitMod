@@ -34,9 +34,10 @@ public class PluginSimpleInvocation : GlobalSetup
 	public void CanInvoke()
 	{
 		var mod = BitMock.Mock();
+		var (player, server) = MockPlayer.New();
 
 		mod.Context.Load("invoke_test", typeof(Host));
-		mod.Invoker.Event( new PlayerDiedEventArgs( MockPlayer.New() ) );
+		mod.Invoker.Event( new PlayerDiedEventArgs( server, player ) );
 
 		Assert.Fail("Did not reach Assert.Pass located within Lilikoi container");
 	}
@@ -45,9 +46,10 @@ public class PluginSimpleInvocation : GlobalSetup
 	public void BlocksForInvokeToComplete()
 	{
 		var mod = BitMock.Mock();
+		var (player, server) = MockPlayer.New();
 
 		mod.Context.Load("invoke_block", typeof(DelayingHost));
-		mod.Invoker.Event( new PlayerDiedEventArgs( MockPlayer.New() ) );
+		mod.Invoker.Event( new PlayerDiedEventArgs( server, player ) );
 
 		Assert.Fail("Did not reach Assert.Pass located within Lilikoi container, instead fell through without executing delay.");
 	}

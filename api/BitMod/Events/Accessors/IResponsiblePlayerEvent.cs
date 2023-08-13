@@ -4,7 +4,7 @@ using BitMod.Compatibility;
 
 namespace BitMod.Events.Accessors;
 
-public interface IResponsiblePlayerAccessor : IRelevantGameserverAccessor
+public interface IResponsiblePlayerEvent : IGameserverEvent
 {
 	#region IResponsiblePlayer
 	/// <summary>
@@ -13,9 +13,6 @@ public interface IResponsiblePlayerAccessor : IRelevantGameserverAccessor
 	/// that reported that player.
 	/// </summary>
 	public BitPlayer? ResponsiblePlayer { get; }
-
-	/// <inheritdoc />
-	GameServer IRelevantGameserverAccessor.RelevantGameserver => ResponsiblePlayer.GameServer;
 
 	#endregion
 }

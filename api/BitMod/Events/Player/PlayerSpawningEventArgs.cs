@@ -7,7 +7,7 @@ using BitMod.Events.Result;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerSpawningEventArgs : IProducerArgs<SpawnRequest>, IResponsiblePlayerAccessor
+    public class PlayerSpawningEventArgs : IProducerArgs<SpawnRequest>, IResponsiblePlayerEvent
     {
         /// <summary>
         /// The player who is spawning.
@@ -17,15 +17,19 @@ namespace BitMod.Events.Player
         /// <summary>
         /// The spawn request (which you can modify).
         /// </summary>
-        public PlayerSpawnRequest Request { get; set; }
+        public OnPlayerSpawnArguments Request { get; set; }
 
-        internal PlayerSpawningEventArgs(BitPlayer player, PlayerSpawnRequest request)
+        internal PlayerSpawningEventArgs(BitServer server, BitPlayer player, OnPlayerSpawnArguments request)
         {
             Player = player;
             Request = request;
+            Server = server;
         }
 
         /// <inheritdoc />
         public BitPlayer ResponsiblePlayer => Player;
+
+        /// <inheritdoc />
+        public BitServer Server { get; }
     }
 }

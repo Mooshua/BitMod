@@ -1,4 +1,6 @@
-﻿using BattleBitAPI.Server;
+﻿using System;
+
+using BattleBitAPI.Server;
 
 using BitMod.Compatibility;
 using BitMod.Events.Accessors;
@@ -8,7 +10,7 @@ using Lilikoi.Context;
 
 namespace BitMod.Internal;
 
-public class EventInput : Mount, IResponsiblePlayerAccessor, IRelevantGameserverAccessor
+public class EventInput : Mount, IResponsiblePlayerEvent, IGameserverEvent
 {
 	public EventInput(IBaseArgs args, Type type)
 	{
@@ -25,14 +27,14 @@ public class EventInput : Mount, IResponsiblePlayerAccessor, IRelevantGameserver
 
 	public BitPlayer? ResponsiblePlayer { get; private set; }
 
-	public GameServer? RelevantGameServer { get; private set; }
+	public BitServer Server { get; private set; }
 
 	private void Write<T>(T eventArgs)
 	{
-		if (typeof(IResponsiblePlayerAccessor).IsAssignableFrom(typeof(T)))
-			ResponsiblePlayer = (eventArgs as IResponsiblePlayerAccessor).ResponsiblePlayer;
-		if (typeof(IRelevantGameserverAccessor).IsAssignableFrom(typeof(T)))
-			RelevantGameServer = (eventArgs as IRelevantGameserverAccessor).RelevantGameserver;
+		if (typeof(IResponsiblePlayerEvent).IsAssignableFrom(typeof(T)))
+			ResponsiblePlayer = (eventArgs as IResponsiblePlayerEvent).ResponsiblePlayer;
+		if (typeof(IGameserverEvent).IsAssignableFrom(typeof(T)))
+			Server = (eventArgs as IGameserverEvent).Server;
 	}
 
 	public static EventInput From<T>(T eventArgs)

@@ -1,4 +1,6 @@
-﻿using BitMod.Attributes.Internal;
+﻿using System;
+
+using BitMod.Attributes.Internal;
 using BitMod.Events;
 using BitMod.Events.Base;
 using BitMod.Internal;
@@ -28,7 +30,7 @@ public class BitProducerAttribute : BitTargetAttribute
 		{
 			if (!type.IsGenericType)
 				continue;
-			
+
 			var stripped = type.GetGenericTypeDefinition();
 
 			//	This is a subtype of IProducerArgs<>
@@ -38,6 +40,7 @@ public class BitProducerAttribute : BitTargetAttribute
 
 		return false;
 	}
+
 
 	internal override void Setup(RouterContext context, LilikoiMutator mutator)
 	{

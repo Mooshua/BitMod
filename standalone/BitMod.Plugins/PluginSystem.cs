@@ -76,11 +76,13 @@ public class PluginSystem : IPluginSystem
 
 	internal IEnumerable<Type> ExtensionsIn(Assembly assembly)
 		=> assembly.GetTypes()
-			.Where(type => typeof(IExtension).IsAssignableFrom(type));
+			.Where(type => typeof(IExtension).IsAssignableFrom(type))
+			.ToList();
 
 	internal IEnumerable<IExtension> ExtensionObjectsIn(Assembly assembly)
 	{
-		var extensions = ExtensionsIn(assembly);
+		var extensions = ExtensionsIn(assembly)
+			.ToList();
 
 		foreach (Type type in extensions)
 		{

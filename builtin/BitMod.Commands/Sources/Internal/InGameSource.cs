@@ -10,11 +10,13 @@ public class InGameSource : ICommandSource
 {
 	private ILogger _logger;
 	private BitPlayer _player;
+	private BitServer _server;
 
-	public InGameSource(BitPlayer player, ILogger logger)
+	public InGameSource(BitServer server, BitPlayer player, ILogger logger)
 	{
 		_player = player;
 		_logger = logger;
+		_server = server;
 	}
 
 	public bool IsRemote => false;
@@ -23,7 +25,7 @@ public class InGameSource : ICommandSource
 
 	public ulong Steam64 => _player.SteamID;
 
-	public GameServer? GameServer => _player.GameServer;
+	public BitServer? GameServer => _server;
 
 	public BitPlayer? Player => _player;
 

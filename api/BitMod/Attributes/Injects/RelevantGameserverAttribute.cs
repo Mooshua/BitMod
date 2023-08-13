@@ -1,4 +1,6 @@
-﻿using BattleBitAPI.Server;
+﻿using System;
+
+using BattleBitAPI.Server;
 
 using BitMod.Compatibility;
 using BitMod.Events.Accessors;
@@ -9,12 +11,12 @@ using Lilikoi.Context;
 
 namespace BitMod.Attributes.Injects;
 
-public class RelevantGameserverAttribute : LkTypedParameterAttribute<GameServer, EventInput>
+public class RelevantGameserverAttribute : LkTypedParameterAttribute<BitServer, EventInput>
 {
-	public override GameServer Inject(Mount context, EventInput input)
+	public override BitServer Inject(Mount context, EventInput input)
 	{
-		if (input.RelevantGameServer is not null)
-			return input.RelevantGameServer;
+		if (input.Server is not null)
+			return input.Server;
 
 		throw new InvalidOperationException("No relevant gameserver found!");
 	}

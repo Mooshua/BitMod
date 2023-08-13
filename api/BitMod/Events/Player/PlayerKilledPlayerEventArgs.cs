@@ -8,7 +8,7 @@ using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerKilledPlayerEventArgs : IEventArgs, IResponsiblePlayerAccessor
+    public class PlayerKilledPlayerEventArgs : IEventArgs, IResponsiblePlayerEvent
     {
         /// <summary>
         /// The killer.
@@ -39,7 +39,7 @@ namespace BitMod.Events.Player
 
         public ReasonOfDamage Source { get; init; }
 
-        internal PlayerKilledPlayerEventArgs(BitPlayer killer, Vector3 killerPosition, BitPlayer target, Vector3 targetPosition, string tool, PlayerBody bodyPart, ReasonOfDamage source)
+        internal PlayerKilledPlayerEventArgs(BitServer server, BitPlayer killer, Vector3 killerPosition, BitPlayer target, Vector3 targetPosition, string tool, PlayerBody bodyPart, ReasonOfDamage source)
         {
             Killer = killer;
             KillerPosition = killerPosition;
@@ -48,9 +48,13 @@ namespace BitMod.Events.Player
             Tool = tool;
             BodyPart = bodyPart;
             Source = source;
+            Server = server;
         }
 
         /// <inheritdoc />
         public BitPlayer ResponsiblePlayer => Killer;
+
+        /// <inheritdoc />
+        public BitServer Server { get; }
     }
 }

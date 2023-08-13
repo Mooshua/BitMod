@@ -1,4 +1,7 @@
-﻿using Lilikoi.Compiler.Public;
+﻿using System;
+using System.Threading.Tasks;
+
+using Lilikoi.Compiler.Public;
 
 namespace BitMod.Internal.Handlers;
 

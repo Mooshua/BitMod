@@ -1,4 +1,6 @@
-﻿using BitMod.Attributes.Internal;
+﻿using System;
+
+using BitMod.Attributes.Internal;
 using BitMod.Events;
 using BitMod.Events.Base;
 using BitMod.Internal;
@@ -24,6 +26,7 @@ public class BitHookAttribute : BitTargetAttribute
 
 	internal override bool IsValidEvent(Type arg)
 		=> arg.IsAssignableTo(typeof(IHookArgs));
+
 
 	internal override void Setup(RouterContext context, LilikoiMutator mutator)
 	{

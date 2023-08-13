@@ -2,6 +2,7 @@
 using BenchmarkDotNet.Jobs;
 
 using BitMod.Attributes.Targets;
+using BitMod.Compatibility;
 using BitMod.Events.Player;
 using BitMod.Internal.Public;
 
@@ -30,6 +31,8 @@ public class EventChain
 
 	private PluginContext _context;
 	private PluginInvoker _invoker;
+	private BitServer _server = new BitServer();
+	private BitPlayer _player = new BitPlayer();
 
 	[GlobalSetup]
 	public void SetUp()
@@ -44,6 +47,6 @@ public class EventChain
 
 	[Benchmark]
 	public void InvokeEvent()
-		=> _invoker.Event(new PlayerConnectedEventArgs(null));
+		=> _invoker.Event(new PlayerConnectedEventArgs(_server, _player));
 
 }

@@ -6,7 +6,7 @@ using BitMod.Events.Base;
 
 namespace BitMod.Events.Player
 {
-    public class PlayerRequestingToChangeRoleEventArgs : IHookArgs, IResponsiblePlayerAccessor
+    public class PlayerRequestingToChangeRoleEventArgs : IHookArgs, IResponsiblePlayerEvent
     {
         /// <summary>
         /// The player requesting.
@@ -18,13 +18,17 @@ namespace BitMod.Events.Player
         /// </summary>
         public GameRole Role { get; init; }
 
-        public PlayerRequestingToChangeRoleEventArgs(BitPlayer player, GameRole role)
+        public PlayerRequestingToChangeRoleEventArgs(BitServer server, BitPlayer player, GameRole role)
         {
             Player = player;
             Role = role;
+            Server = server;
         }
 
         /// <inheritdoc />
         public BitPlayer ResponsiblePlayer => Player;
+
+        /// <inheritdoc />
+        public BitServer Server { get; }
     }
 }

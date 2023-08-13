@@ -1,4 +1,6 @@
-﻿using BattleBitAPI.Server;
+﻿using System;
+
+using BattleBitAPI.Server;
 
 using BitMod.Compatibility;
 using BitMod.Handler;
@@ -20,11 +22,11 @@ public sealed class BitMod : Mount
 		Store(plugins);
 		Store(config);
 
-		_server = new ServerListener<BitPlayer>();
+		_server = new ServerListener<BitPlayer, BitServer>();
 
 		var context = new PluginContext( this );
 		var invoker = new PluginInvoker( context );
-		var listener = new RoutingHandler( _server, invoker);
+		var listener = new RoutingGameserver(invoker);
 
 		Store(context);
 		Store(invoker);
@@ -38,9 +40,9 @@ public sealed class BitMod : Mount
 			plugins.Extensions.Count);
 	}
 
-	private ServerListener<BitPlayer> _server;
+	private ServerListener<BitPlayer, BitServer> _server;
 
-	public RoutingHandler Handler => Get<RoutingHandler>()!;
+	public RoutingGameserver Gameserver => Get<RoutingGameserver>()!;
 
 	public PluginInvoker Invoker => Get<PluginInvoker>()!;
 
@@ -64,7 +66,10 @@ public sealed class BitMod : Mount
 
 	public void Stop()
 	{
-
+		Logger.Information("[BitMod] Stopping server.");
+		_server.Stop();
+		Plugins.Stop();
+		Logger.Fatal("[BitMod] Goodbye!");
 	}
 
 }

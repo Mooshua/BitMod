@@ -1,4 +1,6 @@
-﻿using BitMod.Internal.Assemblers;
+﻿using System;
+
+using BitMod.Internal.Assemblers;
 using BitMod.Internal.Registries;
 
 using Lilikoi.Compiler.Public;

@@ -1,4 +1,6 @@
-﻿using Serilog;
+﻿using BitMod.Internal;
+
+using Serilog;
 
 namespace BitMod.Commands.Handlers;
 
@@ -14,7 +16,7 @@ internal class CommandHandlerRegistry
 
 	public List<CommandHandler> Children { get; }
 
-	public void Invoke(CommandInput input)
+	public void Invoke(EventInput input)
 	{
 		foreach (CommandHandler eventHandler in Children)
 		{
@@ -24,7 +26,7 @@ internal class CommandHandlerRegistry
 			}
 			catch (Exception ex)
 			{
-				_logger.Warning(ex, "Event handler failed during execution!");
+				_logger.Warning(ex, "Command handler failed during execution!");
 				if (Environment.DoNotCatchEventExceptions)
 					throw;
 			}

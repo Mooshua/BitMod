@@ -22,14 +22,12 @@ public class WhitelistHooks
 	[Singleton]
 	private ILogger _logger;
 
-	[Feature]
 	[BitHook(Priority.LOW)]
 	private async Task<Directive> ServerConnectionRequest(GameServerConnectingEventArgs ev)
 	{
 		_logger.Information("Using file {@Config}", _whitelist);
 		foreach (IPAddress allowedConnection in _whitelist.Parse(_logger))
 		{
-
 			if (allowedConnection.GetAddressBytes().SequenceEqual(ev.IPAddress.GetAddressBytes()))
 			{
 				_logger.Information("[BitMod Whitelist] Allowing IP {@Remote} to connect with rule {@IP}", ev.IPAddress.ToString(), allowedConnection.ToString());
@@ -38,6 +36,6 @@ public class WhitelistHooks
 		}
 
 		_logger.Warning("[BitMod Whitelist] Rejecting {Remote}", ev.IPAddress.ToString());
-		return Directive.Disallow;
+		return Directive.Neutral;
 	}
 }

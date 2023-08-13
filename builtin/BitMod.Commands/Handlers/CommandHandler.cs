@@ -10,13 +10,13 @@ internal class CommandHandler
 	public CommandHandler(LilikoiContainer container)
 	{
 		Container = container;
-		Compiled = container.Compile<CommandInput, Task<Directive>>();
+		Compiled = container.Compile<EventInput, Task<Directive>>();
 	}
 
 	public LilikoiContainer Container { get; }
 
-	public Func<CommandInput, Task<Directive>> Compiled { get; }
+	public Func<EventInput, Task<Directive>> Compiled { get; }
 
-	public Directive Invoke(CommandInput input)
+	public Directive Invoke(EventInput input)
 		=> Compiled(input).Result;
 }
