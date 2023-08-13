@@ -33,7 +33,7 @@ public class HookChain
 
 	}
 
-	[Params(0, 5, 10)]
+	[Params(1, 5, 10)]
 	public int ChainLength;
 
 	private PluginContext _context;

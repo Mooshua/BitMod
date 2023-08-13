@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 
 using BitMod.Internal.Handlers;
+using BitMod.Plugins.Extensions;
 using BitMod.Router;
 
 using Lilikoi.Compiler.Public;
@@ -72,6 +73,15 @@ public class PluginContext
 				assignments!.Register(lilikoiContainer);
 				_logger.Debug("[BitMod PluginContext] Assigning {@Assignments} to container {@Container}.", assignments, lilikoiContainer);
 			}
+		}
+	}
+
+	private IEnumerable<IExtension> GetExtensions(Assembly assembly)
+	{
+		foreach (Type type in assembly.GetTypes())
+		{
+			if (typeof(IExtension).IsAssignableFrom(type))
+				yield return Activator.CreateInstance(type) as IExtension;
 		}
 	}
 

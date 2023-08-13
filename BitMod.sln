@@ -28,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{D86C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SamplePlugin", "samples\SamplePlugin\SamplePlugin.csproj", "{190C983D-FD0D-466B-B8B5-D294EA495698}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Commands", "api\BitMod.Commands\BitMod.Commands.csproj", "{95ECB03D-E249-408B-9B51-EB408D687A38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMod.Commands", "builtin\BitMod.Commands\BitMod.Commands.csproj", "{95ECB03D-E249-408B-9B51-EB408D687A38}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McMaster.NETCore.Plugins", "upstream\DotNetCorePlugins\src\Plugins\McMaster.NETCore.Plugins.csproj", "{E3329930-AED7-44DD-89BB-0D4830645020}"
 EndProject

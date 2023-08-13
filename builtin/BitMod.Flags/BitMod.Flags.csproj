@@ -4,16 +4,12 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AssemblyName>bitmod_whitelist</AssemblyName>
-    </PropertyGroup>
+        <AssemblyName>bitmod_flags</AssemblyName>
 
+    </PropertyGroup>
+    
     <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
         <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
-      <ProjectReference Include="..\BitMod.Flags\BitMod.Flags.csproj" />
-    </ItemGroup>
 
 </Project>

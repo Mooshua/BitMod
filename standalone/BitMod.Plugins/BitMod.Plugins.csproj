@@ -4,16 +4,12 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AssemblyName>bitmod_whitelist</AssemblyName>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-        <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
+        <DebugType>embedded</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\upstream\DotNetCorePlugins\src\Plugins\McMaster.NETCore.Plugins.csproj" />
       <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
-      <ProjectReference Include="..\BitMod.Flags\BitMod.Flags.csproj" />
     </ItemGroup>
 
 </Project>

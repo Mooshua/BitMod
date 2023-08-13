@@ -3,6 +3,7 @@
 using BitMod.Attributes.Injects;
 using BitMod.Attributes.Targets;
 using BitMod.Events.Server;
+using BitMod.Flags.Attribute;
 using BitMod.Plugins.Events;
 using BitMod.Whitelist.Configuration;
 
@@ -21,6 +22,7 @@ public class WhitelistHooks
 	[Singleton]
 	private ILogger _logger;
 
+	[Feature]
 	[BitHook(Priority.LOW)]
 	private async Task<Directive> ServerConnectionRequest(GameServerConnectingEventArgs ev)
 	{

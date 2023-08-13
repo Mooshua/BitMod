@@ -6,6 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+        <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
+    </PropertyGroup>
+
     <ItemGroup>
       <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
     </ItemGroup>

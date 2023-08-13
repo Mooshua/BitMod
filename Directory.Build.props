@@ -1,0 +1,15 @@
+<Project>
+    <PropertyGroup>
+        <!--Build reference assemblies and place them in output dir-->
+        <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+        <ProduceReferenceAssemblyInOutDir>true</ProduceReferenceAssemblyInOutDir>
+
+        <!--dotnet publish should use release profile-->
+        <PublishRelease>true</PublishRelease>
+
+        <!--No deps.json files-->
+        <PreserveCompilationReferences>true</PreserveCompilationReferences>
+
+        <DebugType>embedded</DebugType>
+    </PropertyGroup>
+</Project>

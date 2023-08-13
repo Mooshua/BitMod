@@ -3,6 +3,18 @@
 A fast, elegant, and modern BattleBit: Remastered modding framework designed to enable plugins of all kinds to operate
 simultaneously on the same API server.
 
+> **Warning**
+> 
+> Just like the Community API, BitMod is in very early development. Tread carefully!
+
+## Features
+
+- **Hot Reloading & Unloading**: Plugins can be loaded and unloaded on the fly
+- **Compatibility**: Using BitMod, plugins don't need to be aware of one another to launch, hook game events, and
+  send commands.
+- **Sky's The Limit**: All non-core functionality (eg configuration, commands) are implemented as plugins,
+  A testament to the extreme flexibility of BitMod's design
+
 ## Introduction
 
 BitMod features four kinds of "callback" objects: **Events**, **Hooks**, **Producers**, and **Mutators**.

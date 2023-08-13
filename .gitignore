@@ -6,3 +6,7 @@ riderModule.iml
 
 # Files produced during BitMod builds
 standalone/build/
+build/
+
+# Development server location
+dev/

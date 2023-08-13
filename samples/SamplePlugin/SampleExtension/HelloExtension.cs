@@ -12,11 +12,11 @@ public class HelloExtension : IExtension
 
 	public void Register(Mount mount)
 	{
-		mount.Get<ILogger>().Warning("Hello from extension! New Version!");
+		mount.Get<ILogger>().Warning("Hello from extension! Even Newer Version!");
 	}
 
 	public void Unregister(Mount mount)
 	{
-
+		mount.Get<ILogger>().Warning("Goodbye!");
 	}
 }

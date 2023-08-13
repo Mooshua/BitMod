@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>BitMod</RootNamespace>
+        <AssemblyName>bitmod</AssemblyName>
         <Company>EdgeGamers</Company>
         <DebugType>embedded</DebugType>
     </PropertyGroup>
