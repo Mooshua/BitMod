@@ -7,14 +7,14 @@
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
         <AssemblyName>bitmod_standalone</AssemblyName>
-        
-    </PropertyGroup>
+        <Configurations>Debug;Release;Publish</Configurations>
+        <Platforms>AnyCPU</Platforms>
 
-    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+        <PublishDir>../../build</PublishDir>
         <OutDir>../../dev</OutDir>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PropertyGroup>
         <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
         <PublishSingleFile>true</PublishSingleFile>
         <DebugType>embedded</DebugType>
@@ -27,7 +27,10 @@
         <None Update="configs\readme.txt">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="configs\flags.kv">
+        <None Update="configs\flags.cfg">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="configs\whitelist.cfg">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
     </ItemGroup>

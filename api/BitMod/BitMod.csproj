@@ -8,6 +8,8 @@
         <AssemblyName>bitmod</AssemblyName>
         <Company>EdgeGamers</Company>
         <DebugType>embedded</DebugType>
+        <Configurations>Debug;Release;Publish</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <ItemGroup>

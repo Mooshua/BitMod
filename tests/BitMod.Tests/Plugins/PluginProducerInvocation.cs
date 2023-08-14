@@ -22,7 +22,7 @@ public class PluginProducerInvocation : GlobalSetup
 			Assert.Pass("I'm the mutator!");
 		}
 
-		[BitProducer]
+		[BitProducer(Priority.LOW)]
 		public async Task<Product> Producer(GetPlayerStatsEventArgs ev)
 		{
 			Assert.NotNull(ev, "Producer ev != null");

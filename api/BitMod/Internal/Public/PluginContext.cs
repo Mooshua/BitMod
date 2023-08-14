@@ -99,6 +99,8 @@ public class PluginContext
 		var context = new RouterContext(_env, name);
 		var containers = Scanner.Scan<RouterContext, EventInput, Task>(context, type, () => _env);
 
+		_logger.Information("[PluginContext] Found {@ContainerCount} containers in type {@Type}", containers.Count, type.FullName);
+
 		Register(containers);
 	}
 
@@ -111,6 +113,8 @@ public class PluginContext
 	{
 		var context = new RouterContext(_env, name);
 		var containers = Scanner.Scan<RouterContext, EventInput, Task>(context, assembly, () => _env);
+
+		_logger.Information("[PluginContext] Found {@ContainerCount} containers in assembly {@Assembly}", containers.Count, assembly.FullName);
 
 		Register(containers);
 	}

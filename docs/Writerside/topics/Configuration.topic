@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Configuration" id="Configuration">
+
+    <p>
+        BitMod contains a rich configuration system accessible to all plugins.
+        Config files are written in the Valve KeyValue format, which is at the same time
+        familiar to json users and... not familiar to json users.
+    </p>
+
+    <p>
+        All configuration files are reloaded when they are updated, but plugins may not
+        immediately fetch the new version depending on how they are written.
+        BitMod will by default always try and get them on the latest version.
+        If a file fails to load (eg, syntax errors) then it will keep using the old version
+        until the file is successfully parsed.
+    </p>
+
+    <p>
+        Plugins are encouraged to use the configuration system, but are not required to.
+    </p>
+
+    <deflist collapsible="true">
+        <def title="KeyValue Objects">
+            <p>
+                KeyValue objects are key-value pairs. All keys and values are strings,
+                and should generally be wrapped in quotes.
+                (Values can also be objects themselves, but otherwise should be strings)
+            </p>
+            <code-block lang="c#">
+                "ObjectName"
+                {
+                    //  This is a property "Key" with value "Value"
+                    "Key"   "Value"
+
+                    //  This is a sub-object named "SubObject"
+                    "SubObject"
+                    {
+                        "MoreKeys"  "MoreValues"
+                    }
+                }
+            </code-block>
+        </def>
+        <def title="KeyValue Arrays">
+            <p>
+                KeyValue arrays are the same as objects, but the index is the key.
+            </p>
+            <code-block lang="c#">
+                "ListName"
+                {
+                    "0"     "Entry 0"
+                    "1"     "Entry 1"
+                    "2"     "Last Entry!"
+                }
+            </code-block>
+        </def>
+    </deflist>
+</topic>

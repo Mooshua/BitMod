@@ -1,5 +1,8 @@
-﻿using BitMod.Commands.Handlers;
+﻿using BitMod.Attributes.Internal;
+using BitMod.Commands.Attributes.Inject;
+using BitMod.Commands.Handlers;
 using BitMod.Commands.Router;
+using BitMod.Commands.Sources;
 using BitMod.Router;
 
 using Lilikoi.Attributes;
@@ -30,6 +33,14 @@ public class BitCommandAttribute : LkTargetAttribute
 		context.Register<CommandHandlerRegistry, string>(() => new CommandAssembler());
 		context.Append<CommandHandlerRegistry, string>(mutator);
 
+		//	Add wildcards for common parameters
+		mutator.Wildcard<CommandInput, CommandInputAttribute>();
+		mutator.Wildcard<ICommandSource, CommandSenderAttribute>();
+
+		//	Proper async-await code handling
+		mutator.Implicit(new AsyncAttribute());
+
+		//	Store metadata so the command assembler can tell what kind of command we are.
 		mutator.Store(new CommandMetadata(Command));
 	}
 }

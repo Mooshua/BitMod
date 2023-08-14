@@ -6,6 +6,9 @@ jobs:
   build:
     needs: [test]
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        runtime: [ 'win-x64', 'win-x86', 'linux-x64', linux-musl-x64 ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,22 +25,13 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
 
-      - name: Build Win64
-        run: dotnet publish standalone/BitMod.Launcher -c Release -r win-x64 -o build/win64
-
-      - name: Build Win32
-        run: dotnet publish standalone/BitMod.Launcher -c Release -r win-x86 -o build/win32
-
-      - name: Build Linux
-        run: dotnet publish standalone/BitMod.Launcher -c Release -r linux-x64 -o build/linux
-
-      - name: Build Linux (Musl)
-        run: dotnet publish standalone/BitMod.Launcher -c Release -r linux-musl-x64 -o build/linux-musl
+      - name: Build ${{ matrix.runtime }}
+        run: dotnet publish -c Release -r ${{ matrix.runtime }}
 
       - name: Upload Files
         uses: actions/upload-artifact@v3
         with:
-          name: Packages
+          name: Nightly ${{ matrix.runtime }}
           path: build/
   test:
 

@@ -1,0 +1,16 @@
+<buildprofiles xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <variables>
+        <color-preset>vivid</color-preset>
+        <primary-color>halloween</primary-color>
+        <header-logo>bitmod.svg</header-logo>
+    </variables>
+    <build-profile instance="BitMod Docs"></build-profile>
+    <footer>
+        <copyright>Mooshua 2023</copyright>
+        <social type="blog" href="https://github.com/mooshua/bitmod" />
+        <link href="https://github.com/mooshua/bitmod">Source</link>
+        <link href="https://github.com/Mooshua/BitMod/blob/master/LICENSE">License</link>
+        <link href="https://github.com/Mooshua/BitMod/issues">Issues</link>
+    </footer>
+</buildprofiles>

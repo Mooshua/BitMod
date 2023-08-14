@@ -36,7 +36,7 @@ public class FlagAttribute : LkTypedParameterAttribute<FlagEntry, IGameserverEve
 
 		var gameserver = input?.Server;
 		if (gameserver != null)
-			return flagfile.Get(gameserver.GameIP.ToString()).Get(_value);
+			return flagfile.Get($"{gameserver.GameIP.ToString()}:{gameserver.GamePort.ToString()}").Get(_value);
 
 		return flagfile.Get("#default").Get(_value);
 	}

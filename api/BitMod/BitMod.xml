@@ -1,0 +1,562 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>bitmod</name>
+    </assembly>
+    <members>
+        <member name="T:BitMod.Attributes.Internal.AsyncAttribute">
+            <summary>
+            Prevent further "After" wraps from being executed before the provided async task
+            has completed.
+            </summary>
+        </member>
+        <member name="M:BitMod.Attributes.Internal.BitTargetAttribute.IsValidEvent(System.Type)">
+            <summary>
+            Given the provided type, determine if it a valid event type.
+            </summary>
+            <param name="arg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BitMod.Attributes.Internal.BitTargetAttribute.Setup(BitMod.Router.RouterContext,Lilikoi.Compiler.Public.LilikoiMutator)">
+            <summary>
+            Set up any required wildcards or wraps
+            </summary>
+            <param name="context"></param>
+            <param name="mutator"></param>
+        </member>
+        <member name="T:BitMod.Attributes.Internal.UnpackWildcardParameterAttribute">
+            <summary>
+            To avoid generic propagation, we'll use a mount to store the actual event information.
+            </summary>
+        </member>
+        <member name="M:BitMod.BitMod.Start">
+            <summary>
+            Start the BitMod system
+            </summary>
+        </member>
+        <member name="M:BitMod.Compatibility.IBitObject.Get``1">
+            <summary>
+            Fetch the specified type from this player's TypeDictionary.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:BitMod.Compatibility.IBitObject.Has``1">
+            <summary>
+            Determine if the specified type is in the player's TypeDictionary
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:BitMod.Compatibility.IBitObject.Store``1(``0)">
+            <summary>
+            Create a new type in the specified type dictionary
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:BitMod.Events.Accessors.IGameserverEvent.Server">
+            <summary>
+            Gets the gameserver that this event occured on.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Accessors.IResponsiblePlayerEvent.ResponsiblePlayer">
+            <summary>
+            Gets the player responsible for the event.
+            For example, when a player is reported, this will be the player
+            that reported that player.
+            </summary>
+        </member>
+        <member name="T:BitMod.Events.Meta.PluginLoadEvent">
+            <summary>
+            Called when a plugin is loaded into the
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Meta.PluginLoadEvent.PluginAssembly">
+            <summary>
+            The assembly that was loaded
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerChangedRoleEventArgs.Player">
+            <summary>
+            The player who changed role.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerChangedRoleEventArgs.Role">
+            <summary>
+            The new role of the player.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerChangedRoleEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerChangedRoleEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerChangedTeamEventArgs.Player">
+            <summary>
+            The player who joined a team.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerChangedTeamEventArgs.Team">
+            <summary>
+            The new team which the player joined.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerChangedTeamEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerChangedTeamEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerConnectedEventArgs.Player">
+            <summary>
+            The player that connected
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerConnectedEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerConnectedEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerDiedEventArgs.Player">
+            <summary>
+            The player that died.
+            For information on the killer, hook PlayerKilledPlayer instead.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerDiedEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerDiedEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerDisconnectedEventArgs.Player">
+            <summary>
+            The player that just disconnected.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerDisconnectedEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerDisconnectedEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerJoinedSquadEventArgs.Player">
+            <summary>
+            The player who joined the squad.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerJoinedSquadEventArgs.Squads">
+            <summary>
+            The squad the player joined.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerJoinedSquadEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerJoinedSquadEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerKilledPlayerEventArgs.Killer">
+            <summary>
+            The killer.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerKilledPlayerEventArgs.KillerPosition">
+            <summary>
+            The position of the killer.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerKilledPlayerEventArgs.Target">
+            <summary>
+            The target.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerKilledPlayerEventArgs.TargetPosition">
+            <summary>
+            The position of the target.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerKilledPlayerEventArgs.Tool">
+            <summary>
+            The tool used to kill the target.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerKilledPlayerEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerKilledPlayerEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerLeftSquadEventArgs.Player">
+            <summary>
+            The player who left the squad.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerLeftSquadEventArgs.Squads">
+            <summary>
+            The squad the player left.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerLeftSquadEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerLeftSquadEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerReportedEventArgs.Reporter">
+            <summary>
+            The player who made the report.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerReportedEventArgs.Reported">
+            <summary>
+            The player being reported.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerReportedEventArgs.Reason">
+            <summary>
+            The report reason.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerReportedEventArgs.Detail">
+            <summary>
+            Additional details about the report.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerReportedEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerReportedEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerRequestingToChangeRoleEventArgs.Player">
+            <summary>
+            The player requesting.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerRequestingToChangeRoleEventArgs.Role">
+            <summary>
+            The role the player asking to change.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerRequestingToChangeRoleEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerRequestingToChangeRoleEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerSpawnedEventArgs.Player">
+            <summary>
+            The player that just spawned.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerSpawnedEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerSpawnedEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerSpawningEventArgs.Player">
+            <summary>
+            The player who is spawning.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerSpawningEventArgs.Request">
+            <summary>
+            The spawn request (which you can modify).
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerSpawningEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerSpawningEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerTypedMessageEventArgs.Player">
+            <summary>
+            The player who typed the message.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerTypedMessageEventArgs.ChatChannel">
+            <summary>
+            The channel the message was sent in.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerTypedMessageEventArgs.Message">
+            <summary>
+            The message.
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerTypedMessageEventArgs.ResponsiblePlayer">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Player.PlayerTypedMessageEventArgs.Server">
+            <inheritdoc />
+        </member>
+        <member name="F:BitMod.Events.Registry.EventType.None">
+            <summary>
+            No response type
+            </summary>
+        </member>
+        <member name="F:BitMod.Events.Registry.EventType.Hook">
+            <summary>
+            Plugins decide whether the result is "true" or "false".
+            </summary>
+        </member>
+        <member name="F:BitMod.Events.Registry.EventType.Value">
+            <summary>
+            Plugins decide which value is used for the return
+            </summary>
+        </member>
+        <member name="F:BitMod.Events.Registry.EventTypes">
+            <summary>
+            Deterministally ordered list of events
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Server.GameServerConnectedEventArgs.Server">
+            <summary>
+            The server that successfully connected
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Server.GameServerConnectedEventArgs.RelevantGameserver">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Server.GameServerConnectingEventArgs.IPAddress">
+            <summary>
+            IP of incoming connection
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Server.GameServerDisconnectedEventArgs.Server">
+            <summary>
+            The server that was disconnected
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Server.GameServerDisconnectedEventArgs.RelevantGameserver">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Server.GameServerReconnectedEventArgs.Server">
+            <summary>
+            The server that successfully reconnected
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Server.GameServerReconnectedEventArgs.RelevantGameserver">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Server.GameServerTickEventArgs.Server">
+            <summary>
+            The server that is currently ticking
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Server.GameServerTickEventArgs.RelevantGameserver">
+            <inheritdoc />
+        </member>
+        <member name="P:BitMod.Events.Stats.GetPlayerStatsEventArgs.SteamID">
+            <summary>
+            The player's SteamID
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Stats.GetPlayerStatsEventArgs.OfficialStats">
+            <summary>
+            The player's stats (which you can modify)
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Stats.SavingPlayerStatsEventArgs.SteamID">
+            <summary>
+            The player's SteamID
+            </summary>
+        </member>
+        <member name="P:BitMod.Events.Stats.SavingPlayerStatsEventArgs.PlayerStats">
+            <summary>
+            The player's stats
+            </summary>
+        </member>
+        <member name="P:BitMod.Internal.EventInput.Type">
+            <summary>
+            The event arg input being routed
+            </summary>
+        </member>
+        <member name="T:BitMod.Internal.Public.PluginContext">
+            <summary>
+            APIs for plugin loaders to load plugins into BitMod
+            </summary>
+        </member>
+        <member name="M:BitMod.Internal.Public.PluginContext.Load(System.String,System.Type)">
+            <summary>
+            Load a single type in with the unique name "name"
+            </summary>
+            <param name="name"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:BitMod.Internal.Public.PluginContext.Load(System.String,System.Reflection.Assembly)">
+            <summary>
+            Load a whole assembly with the unique name "name"
+            </summary>
+            <param name="name"></param>
+            <param name="assembly"></param>
+        </member>
+        <member name="M:BitMod.Internal.Public.PluginContext.Unload(System.String)">
+            <summary>
+            Unload an assembly and completely remove it's hooks
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="F:BitMod.Plugins.Events.Directive.Neutral">
+            <summary>
+            This plugin does not have an opinion on the direction to take
+            </summary>
+        </member>
+        <member name="F:BitMod.Plugins.Events.Directive.Disallow">
+            <summary>
+            The plugin wishes to disallow the action from happening
+            </summary>
+        </member>
+        <member name="F:BitMod.Plugins.Events.Directive.Allow">
+            <summary>
+            The plugin wishes to allow the action
+            </summary>
+        </member>
+        <member name="M:BitMod.Plugins.Events.Product.None">
+            <summary>
+            Do not produce a value, instead delegating responsibility
+            for creating the value to another entry in the handler chain
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BitMod.Plugins.Events.Product.Produce``1(``0)">
+            <summary>
+            Produce an item, immediately ending the handler chain
+            and passing this value through mutators
+            </summary>
+            <param name="value"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:BitMod.Plugins.Extensions.IExtension">
+             <summary>
+             Extensions extend the global plugin context
+             and add additional types to plugins.
+            
+             Extensions are extremely powerful and are utilized
+             within BitMod to provide functionality.
+             </summary>
+        </member>
+        <member name="M:BitMod.Plugins.Extensions.IExtension.Register(Lilikoi.Context.Mount)">
+            <summary>
+            Register this extension into the global application mount.
+            This makes your types you place here accessible throughout
+            the application.
+            </summary>
+            <param name="mount"></param>
+        </member>
+        <member name="M:BitMod.Plugins.Extensions.IExtension.Unregister(Lilikoi.Context.Mount)">
+            <summary>
+            Un-register this extension. This is called before
+            a plugin is unloaded.
+            </summary>
+            <param name="mount"></param>
+        </member>
+        <member name="M:BitMod.Public.IConfigurationSystem.Get``1(System.String,System.Func{``0})">
+            <summary>
+            Get the configuration class
+            </summary>
+            <param name="makeDefault"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:BitMod.Public.IPluginSystem.Extensions">
+            <summary>
+            Extensions are logical ways of keeping track of any
+            components added to the root mount.
+            </summary>
+        </member>
+        <member name="M:BitMod.Public.IPluginSystem.Load(BitMod.Plugins.Extensions.IExtension)">
+            <summary>
+            Request the plugin system initialize this extension
+            </summary>
+            <param name="extension"></param>
+        </member>
+        <member name="M:BitMod.Public.IPluginSystem.Unload(BitMod.Plugins.Extensions.IExtension)">
+            <summary>
+            As this extension to uninitialize itself
+            </summary>
+            <param name="extension"></param>
+        </member>
+        <member name="M:BitMod.Router.Extensions.RouterExtensions.Hook(BitMod.Router.RouterContext,Lilikoi.Compiler.Public.LilikoiMutator)">
+            <summary>
+            Register this mutator as a hook
+            </summary>
+            <param name="context"></param>
+            <param name="self"></param>
+        </member>
+        <member name="M:BitMod.Router.Extensions.RouterExtensions.Event(BitMod.Router.RouterContext,Lilikoi.Compiler.Public.LilikoiMutator)">
+            <summary>
+            Register this mutator as an event
+            </summary>
+            <param name="context"></param>
+            <param name="self"></param>
+        </member>
+        <member name="M:BitMod.Router.Extensions.RouterExtensions.Producer(BitMod.Router.RouterContext,Lilikoi.Compiler.Public.LilikoiMutator)">
+            <summary>
+            Register this mutator as an event
+            </summary>
+            <param name="context"></param>
+            <param name="self"></param>
+        </member>
+        <member name="M:BitMod.Router.Extensions.RouterExtensions.Mutator(BitMod.Router.RouterContext,Lilikoi.Compiler.Public.LilikoiMutator)">
+            <summary>
+            Register this mutator as an event
+            </summary>
+            <param name="context"></param>
+            <param name="self"></param>
+        </member>
+        <member name="M:BitMod.Router.IRouteAssembler`2.Bin(Lilikoi.Compiler.Public.LilikoiContainer)">
+            <summary>
+            When provided with the given Lilikoi container,
+            get the TSearch value which is used to route to the container.
+            Used to bin containers before final assembly.
+            </summary>
+            <param name="container"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BitMod.Router.IRouteAssembler`2.Assemble(System.Collections.Generic.IEnumerable{Lilikoi.Compiler.Public.LilikoiContainer})">
+            <summary>
+            When provided with a list of containers (each having the same TSearch),
+            build the final TResult object.
+            </summary>
+            <param name="containers"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BitMod.Router.Router`2">
+            <summary>
+            A router is a utility class which manages
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <typeparam name="TSearch"></typeparam>
+            <typeparam name="TRouter"></typeparam>
+        </member>
+        <member name="T:BitMod.Router.RouterContext">
+            <summary>
+            A lilikoi context used to register plugins' routes
+            </summary>
+        </member>
+        <member name="M:BitMod.Router.RouterContext.Register``2(System.Func{BitMod.Router.IRouteAssembler{``0,``1}})">
+            <summary>
+            Ensure a router of the same type exists
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <typeparam name="TSearch"></typeparam>
+            <typeparam name="TAssembler"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:BitMod.Router.RouterContext.Append``2(Lilikoi.Compiler.Public.LilikoiMutator)">
+             <summary>
+            
+             </summary>
+             <param name="mutator"></param>
+             <typeparam name="TResult"></typeparam>
+             <typeparam name="TSearch"></typeparam>
+        </member>
+    </members>
+</doc>

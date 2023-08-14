@@ -8,13 +8,13 @@ using Lilikoi.Context;
 
 namespace BitMod.Commands.Attributes;
 
-public class BitCommandRequire : LkTypedWrapAttribute<EventInput, Task>
+public class BitCommandRequireAttribute : LkTypedWrapAttribute<EventInput, Task>
 {
 	public bool InGame { get; set; } = false;
 
 	public bool IsLoggedIn { get; set; } = false;
 
-	public BitCommandRequire()
+	public BitCommandRequireAttribute()
 	{
 	}
 

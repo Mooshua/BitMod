@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Event Types" id="Plugins-Events">
+
+    <link-summary>
+        A simple and straightforward way of receiving events
+        and blocking/enabling actions from occuring.
+    </link-summary>
+
+    <p>
+        Events are built into BitMod, and are not a part of any plugin
+        (but can be extended and used by one)
+    </p>
+
+    <p>
+        BitMod has four built-in types of event handlers
+        (with others being created by plugins) which are used to
+        handle events invoked by the native Community Server API.
+    </p>
+
+    <tip>
+        All event handlers are required by BitMod to return a subclass of <code>Task</code>.
+        This is further refined by each handler, specified below:
+    </tip>
+
+    <note>
+        All handlers can be async! <code>await</code> your heart out :^)
+    </note>
+
+    <deflist>
+        <def title="Event">
+            <p>
+                Events provide no return value (besides a `Task`) and
+                are invoked when something happens that either cannot be stopped
+                or does not need any form of intervention.
+            </p>
+            <p>
+                Events have no priority and are invoked in a random order.
+            </p>
+        </def>
+        <def title="Hook">
+            <p>
+                Hooks allow plugins to intercept an event and either forcefully allow
+                the event to occur or prevent it from happening.
+            </p>
+            <p>
+                Hook handlers return a <code>Task&lt;Directive></code> which can be one of
+                <code>Allow</code>, <code>Neutral</code>, and <code>Disallow</code>.
+
+                Hooks continue executing until a plugin returns a non-neutral response.
+                The value of the response is then used to decide whether the event should continue
+                or be blocked (Allow and Disallow, respectively).
+            </p>
+            <p>
+                Hooks have a priority which is expressed on the attribute as a byte value.
+                Higher value = higher priority. Events execute in descending order of priority.
+            </p>
+        </def>
+        <def title="Producer">
+            <p>
+                Producers allow plugins to create a value out of thin air. The value of a producer
+                is then passed on to Mutators (below) to mutate the value.
+            </p>
+            <p>
+                Producers are used for eg. fetching player stats. One plugin has to make an authoritative
+                decision on the original player stats object, and other plugins (mutators) can then
+                make their own changes without having to provide an original copy.
+            </p>
+            <p>
+                Producers return a <code>Task&lt;Product></code>, created from <code>Product.Produce(value)</code> or
+                <code>Produce.None()</code>. As soon as a handler returns a <code>Product.Produce(value)</code>,
+                the event chain is stopped and the value is passed on to the mutator chain.
+                If no handler returns a product, then the producer invoker is required to provide a default
+                for the mutator chain.
+            </p>
+            <warning>
+                Producers must provide the correct type in the <code>Product.Produce()</code> call,
+                or BitMod will fall back to default <emphasis>without executing any further producers.</emphasis>
+                The producer return type is the generic on the
+                <code>IProducerArgs&lt;TResult></code> inherited by the producer args class.
+            </warning>
+        </def>
+        <def title="Mutator">
+            <p>
+                Mutators accept the value returned by a producer and do something with it.
+                Besides accepting the result of a producer, they behave exactly the same as an
+                event (always execute, no priority, random order).
+            </p>
+            <p>
+                Mutators have an extra wildcard parameter: the <code>TResult</code> in
+                <code>IProducerArgs&lt;TResult></code>. As an example, <code>GetPlayerStatsEventArgs</code>
+                inherits from <code>IProducerArgs&lt;PlayerStats></code>, meaning
+                <emphasis>
+                    Any argument with a type of <code>PlayerStats</code> are filled in with
+                    the value provided to <code>Product.Produce()</code>
+                </emphasis>
+            </p>
+        </def>
+    </deflist>
+
+    <chapter id="plugin-types-events" title="Events">
+        <p>
+            Events are extremely simple: their event type is the first argument
+            in the method, and they return a plain old <code>Task</code> object.
+
+            As stated above, events have no priority, always run, and in a random order.
+        </p>
+
+        <code-block lang="c#">
+            public class MyPlugin
+            {
+                [BitEvent]
+                public Task OnEvent(PluginLoadEvent ev)
+                {
+                    return Task.CompletedTask;
+                }
+            }
+        </code-block>
+    </chapter>
+
+    <chapter id="plugin-types-hooks" title="Hooks">
+        <p>
+            Hooks are ordered event handlers which do not always run, and run in descending order of priority.
+        </p>
+        <p>
+            Hooks can choose to return an opinion (<code>Disallow</code> and <code>Allow</code>) or not (<code>Neutral</code>).
+            The first hook to express an opinion will end the hook chain and will use that opinion as the result.
+            (Allow = true, Disallow = false).
+        </p>
+        <p>
+            If no plugin expresses an opinion, then BitMod will use a sensible default.
+            (eg, this is false for new gameserver connections, but true for player spawn requests)
+        </p>
+
+        <code-block lang="c#">
+            public class MyPlugin
+            {
+                [BitHook(Priority.LOW)]
+                public async Task&lt;Directive> OnPlayerChatted(PlayerTypedMessageEventArgs ev)
+                {
+                    //  No hate speech!
+                    if (ev.Message.Contains("i hate you"))
+                        return Directive.Disallow;
+
+                    return Directive.Neutral;
+                }
+            }
+        </code-block>
+    </chapter>
+
+    <chapter id="plugin-types-producer-mutator" title="Producers &amp; Mutators">
+        <p>
+            Producers are ordered event handlers which do not always run, and run in descending order of priority.
+            The first producer to return a <code>Product.Produce(value)</code> response will end the producer
+            chain and immediately switch to the mutator chain.
+        </p>
+        <warning>
+            Producers must provide the correct type in the <code>Product.Produce()</code> call,
+            or BitMod will fall back to default <emphasis>without executing any further producers.</emphasis>
+            The producer return type is the generic on the
+            <code>IProducerArgs&lt;TResult></code> inherited by the producer args class.
+        </warning>
+        <p>
+            Mutators are unordered event handlers which always run in a random order.
+            They can change the value made by the producer however they want.
+        </p>
+        <p>
+            An important distinction is the responsibilities of each. For example, you would not
+            use a producer for a SourceBans++ plugin, as SourceBans++ does not need to create
+            the original copy of the stats, it just needs to set the <code>IsBanned</code> flag.
+        </p>
+        <p>
+            However, for an SQL backend, you <emphasis>would</emphasis> use a producer,
+            as the backend needs to provide the original stats object that will be used by the
+            game--it doesn't make sense for it to grab all values from the backend and then
+            just set them on the object as a mutator.
+        </p>
+        <p>
+            If no plugin expresses an opinion, then BitMod will use a sensible default.
+            (eg, this is the official player stats object for GetPlayerStats)
+        </p>
+
+        <tip>
+            Mutators will have the response from the producer placed in any parameter
+            with a matching type. For <code>GetPlayerStatsEventArgs</code>, that is
+            <code>PlayerStats</code>. This behavior is demonstrated below:
+        </tip>
+
+        <code-block lang="c#">
+            public class MyPlugin
+            {
+                [BitProducer(Priority.LOW)]
+                public async Task&lt;Product> Producer(GetPlayerStatsEventArgs ev)
+                {
+                    return Product.Produce( new PlayerStats() );
+                }
+
+                [BitMutator]
+                public async Task Mutator(GetPlayerStatsEventArgs ev, PlayerStats stats)
+                {
+                    stats.IsBanned = true;
+                }
+            }
+        </code-block>
+    </chapter>
+</topic>

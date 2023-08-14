@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Custom Routing" id="Plugins-Routing">
+
+    <link-summary>
+        Advanced internal functionality of BitMod allows you to define
+        more than custom events. Used by BitMod's builtin plugins to provide
+        lots of additional functionality, such as commands.
+    </link-summary>
+
+    <p>
+        BitMod contains built-in support for defining your own event types
+        and invoking them in other plugins. BitMod does this with <emphasis>routing</emphasis>,
+        where <emphasis>you</emphasis> define a custom router that BitMod
+        uses to find handlers for specific invocations.
+    </p>
+
+    <note>
+        <p>
+            Looking to invoke your own BitMod events, such as <code>BitEvent</code>s,
+            <code>BitHook</code>s, or mutators/producers? Check out the Event Invocation page.
+        </p>
+        <p>
+            This page is for advanced usage of BitMod internals.
+        </p>
+    </note>
+
+    <p>
+        Routing is simplified by BitMod: You have to specify a <emphasis>Key</emphasis>
+        and <emphasis>Value</emphasis>, which are interpreted by your plugin
+        (very much like a dictionary). You then specify an <a href="#plugins-routing-assembler">Assembler</a>
+        which takes a list of Lilikoi containers and transforms them into
+        a key-value pair which is then placed into the router.
+    </p>
+
+    <p>
+        You then create a target attribute, which accepts a <emphasis>RouterContext</emphasis>
+        and informs BitMod which router the target wants to be routed with.
+    </p>
+
+    <p>
+        Fun fact: BitMod uses this system internally for all events! So don't worry, you're
+        in good company (with lots of examples to work with).
+    </p>
+
+    <code-block lang="mermaid">
+        graph RL
+
+            subgraph Your Code
+                as[Assembler]
+                tar[LkTargetAttribute]
+            end
+
+            ext[External Plugins]
+
+            subgraph Internal
+                rc[RoutingContext]
+                lkco[LilikoiCompiler]
+                lkct[LilikoiContainer]
+                rt[Router]
+                pi[PluginInvoker]
+                pc[PluginContext]
+            end
+
+            pc -- Scan --> lkco
+            pc -- Register --> rt
+            pi -- Get Router --> pc
+
+            lkco -- Compile --> lkct
+            lkct -- Finish --> pc
+            lkco -- Target --> tar
+
+            tar -- Assign --> rc
+            rc -- Assign --> pc
+
+            rt -- Bin and Assemble --> as
+
+            ext -- Invoke --> pi
+
+    </code-block>
+
+    <warning>
+        BitMod will fail to find containers that do not have an input
+        derived from <code>EventInput</code> or don't have a result derived
+        from <code>Task</code>. (Note: This means any Task type is a valid response)
+    </warning>
+
+    <chapter title="Input" id="plugins-routing-input">
+        <p>
+            The input must derive from <code>EventInput</code>.
+            EventInput contains some information like an optional associated
+            player and gameserver. This is also a mount, and you can place
+            whatever metadata you want inside it.
+        </p>
+        <p>
+            For example, the <code>CommandInput</code> class used by
+            the built-in command system is itself stored in the
+            <code>EventInput</code> mount and is extracted from there
+            by a parameter injection.
+        </p>
+        <code-block lang="c#">
+            public class CommandInputAttribute
+                : LkTypedParameterAttribute<CommandInput, EventInput>
+            {
+                public override CommandInput Inject(Mount context, EventInput input)
+                    => input.Get&lt;CommandInput>();
+            }
+        </code-block>
+    </chapter>
+
+    <chapter title="Output" id="plugins-routing-output">
+        <p>
+            The output can be any subclass of <code>Type</code>.
+            This means your router can request any kind of class or value
+            as a return type.
+        </p>
+
+
+    </chapter>
+
+    <chapter title="Metadata" id="plugins-routing-metadata">
+        <p>
+            Your metadata type will be placed in the <code>LilikoiMutator</code>
+            and will be read by your assembler when you are constructing your routes.
+
+            Your metadata class can contain whatever information you like, but should be
+            it's own unique class (and NOT a generic class like <code>string</code> or <code>Type</code>)
+        </p>
+
+        <p>
+            For example, here is the metadata object used in BitMod's command system:
+        </p>
+
+        <code-block lang="c#">
+            public class CommandMetadata
+            {
+                public CommandMetadata(string command)
+                {
+                    Command = command;
+                }
+
+                public string Command { get; }
+            }
+        </code-block>
+
+        <p>
+            And here is the class used by BitMod itself:
+        </p>
+
+        <code-block lang="c#">
+            public class TypeRouterDirectives
+            {
+                public TypeRouterDirectives(Type route)
+                {
+                    Route = route;
+                }
+
+                public Type Route { get; }
+            }
+        </code-block>
+    </chapter>
+
+    <chapter title="Assembler" id="plugins-routing-assembler">
+
+        <note>
+            For a simple, concise, and real-world example, check out the
+            <a href="https://github.com/Mooshua/BitMod/blob/master/builtin/BitMod.Commands/Router/CommandAssembler.cs">
+                CommandAssembler
+            </a> source code.
+        </note>
+
+        <p>
+            Now you have to write your own assembler. All assemblers inherit from
+            the <code>IRouteAssembler&lt;TValue, TSearchKey></code> interface.
+
+            Your <code>TValue</code> will be the thing that BitMod fetches from the router,
+            while your <code>TSearchKey</code> will be what differentiates each <code>TValue</code>.
+        </p>
+
+        <p>
+            To start with, we recommend making the <code>TSearchKey</code> a <code>string</code>
+            and the <code>TValue</code> a simple class that accepts a list of LilikoiContainers
+            in the constructor and has a method to execute them all, one by one.
+        </p>
+
+        <p>
+            Your <code>Bin()</code> method will accept a single container and return it's
+            <code>TSearchKey</code>. In BitMod's core event system, this is:
+        </p>
+
+        <note>
+            Refer to the <code>TypeRouterDirectives</code> definition in the Metadata chapter for context.
+        </note>
+
+        <code-block lang="c#">
+            public Type Bin(LilikoiContainer container)
+                => container.Get&lt;TypeRouterDirectives>().Route;
+        </code-block>
+
+        <p>
+            Your <code>Assemble()</code> method now accepts a list of lilikoi containers (each with the same
+            <code>TSearchKey</code> returned by <code>Bin()</code>) and group them into one
+            <code>TValue</code> object.
+        </p>
+
+        <p>
+            This is where we recommend creating a class that accepts a list of containers and
+            invokes all of them with a method&mdash;It makes the result of assembly lookups nice and clean!
+        </p>
+
+        <warning>
+            For the love of god do no be lazy and use <code>List&lt;LilikoiContainer></code> as your
+            <code>TValue</code>. Every time you do, a cute puppy dies a long and painful death.
+        </warning>
+
+    </chapter>
+
+    <chapter title="Target Attribute" id="plugins-routing-target-attribute">
+
+        <note>
+            For a simple, concise, and real-world example, check out the
+            <a href="https://github.com/Mooshua/BitMod/blob/master/builtin/BitMod.Commands/Attributes/BitCommandAttribute.cs">
+                BitCommandAttribute
+            </a> source code.
+        </note>
+
+        <p>
+            Now it's time to write your target attribute! Create a class that inherits from
+            <code>LkTargetAttribute</code> and set up your override methods. Your
+            <code>IsTargetable</code> override should return true when the passed
+            <code>TUserContext</code> is a <code>RouterContext</code>.
+            (Its good hygiene to return false if it isn't, otherwise you may run into issues down the road)
+        </p>
+
+        <code-block lang="c#">
+            public override bool IsTargetable&lt;TUserContext>()
+                => typeof(TUserContext) == typeof(RouterContext);
+        </code-block>
+
+        <p>
+            Now it's time to tell BitMod which router you want this container
+            to use. The RouterContext class includes two helper utilities for this
+            (both of which are required to properly register your route).
+        </p>
+
+        <p>
+            First you need to define information about the router for BitMod
+            (including specifying a method which will create an assembler if one does not exist).
+            Then, you provide your assembler with whatever metadata it needs to construct a
+            <code>TSearchKey</code> for the router.
+        </p>
+
+        <code-block lang="c#">
+            public override void Target&lt;TUserContext>(TUserContext context, LilikoiMutator mutator)
+                => Target(context as RouterContext, mutator);
+
+            public void Target(RouterContext context, LilikoiMutator mutator)
+            {
+                context.Register&lt;CommandHandlerRegistry, string>(() => new CommandAssembler());
+                context.Append&lt;CommandHandlerRegistry, string>(mutator);
+
+                mutator.Store(new YourMetadataHere(WhateverYouWant));
+
+                //	Proper async-await code handling
+                mutator.Implicit(new AsyncAttribute());
+            }
+        </code-block>
+
+        <p>
+            Make sure to use the built-in <code>AsyncAttribute</code> wrap
+            to <code>await</code> any asynchronous entry points.
+        </p>
+
+        <code-block lang="c#">
+            mutator.Implicit(new AsyncAttribute());
+        </code-block>
+
+        <warning>
+            <p>
+                You must use an implicit wrap to <code>await</code>
+                async entry points or you <emphasis>will have subtle bugs in your code</emphasis>.
+            </p>
+            <p>
+                DO NOT SKIP THIS STEP!
+            </p>
+        </warning>
+    </chapter>
+
+    <chapter id="plugin-routing-invocation" title="Invocation">
+        <p>
+            Now you just have to get ahold of a <code>PluginContext</code>
+            to invoke your event. This is a singleton object, so using the
+            <code>SingletonAttribute</code> on a PluginContext field will work.
+        </p>
+        <p>
+            To get your <code>TValue</code>, you just have to pass the key and value generics
+            to the context, and provide a search key for the router:
+        </p>
+        <code-block lang="c#">
+            YourValueType result = _pluginContext.Get&lt;YourValueType, YourKey>(new YourKey())
+        </code-block>
+        <p>
+            You can then use whatever system you defined for invoking your list of
+            lilikoi containers. It's highly recommended to write an extension to the
+            <code>PluginInvoker</code> class to do this, to reduce code-reuse and
+            make it easier for others to use your events:
+        </p>
+        <code-block lang="c#">
+            public static class PluginInvokerExtensions
+            {
+
+                /// &lt;summary>
+                /// Invoke your custom event!
+                /// &lt;/summary>
+                /// &lt;param name="self">&lt;/param>
+                /// &lt;param name="command">&lt;/param>
+                public static void Command(this PluginInvoker self, MyInput command)
+                {
+                    var chain = self.Context.Get&lt;MyValue, MyKey>(MyInput.Key);
+                    chain?.Invoke( EventInput.From( command ) );
+                }
+            }
+        </code-block>
+    </chapter>
+
+    <p>
+        And you're done! If you need more examples, check out BitMod's own event handler registration,
+        which contains both string keys and type keys for looking up events and commands.
+    </p>
+</topic>

@@ -5,13 +5,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>bitmod_commands</AssemblyName>
+        <Configurations>Debug;Release;Publish</Configurations>
+        <Platforms>AnyCPU</Platforms>
 
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
         <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
+        <PublishDir>../../build/plugins/$(AssemblyName)</PublishDir>
     </PropertyGroup>
-
+    
     <ItemGroup>
       <ProjectReference Private="true" Include="..\..\api\BitMod\BitMod.csproj" />
     </ItemGroup>

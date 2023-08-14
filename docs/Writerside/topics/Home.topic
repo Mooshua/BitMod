@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Home" id="Home">
+
+    <section-starting-page>
+        <title>BitMod</title>
+        <description>
+            BitMod is a plugin loading, event handling, and dynamic linking framework for BattleBit: Remastered.
+        </description>
+
+
+
+        <primary>
+            <title>For Server Owners</title>
+            <a href="Installation.topic"></a>
+            <a href="Configuration.topic"></a>
+        </primary>
+
+        <secondary>
+            <title>For Developers</title>
+            <a href="Plugins-Getting-Started.topic"></a>
+            <a href="Plugins.topic"></a>
+        </secondary>
+
+    </section-starting-page>
+    
+</topic>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Whitelists" id="Configuration-Whitelists">
+
+    <link-summary>
+        BitMod's built-in system that makes your BitMod server secure by default.
+    </link-summary>
+
+    <tldr>
+        <p>
+            File: <ui-path>config / whitelist.cfg</ui-path>
+        </p>
+    </tldr>
+
+    <p>
+        Allowing anyone to connect to your BitMod server is <emphasis>extremely</emphasis> dangerous.
+        BitMod has built in support for IP whitelisting, and automatically rejects all requests not
+        in the whitelist file.
+    </p>
+
+    <tip>
+        <p>
+            Other plugins can override BitMod's whitelist or even add their own on top.
+            Whitelists are implemented as a plugin, and thus all of it's functionality uses
+            the public plugin API.
+        </p>
+    </tip>
+
+    <p>
+        A whitelist file is a single array containing a list of all allowed IPs.
+        Each entry must follow the KeyValues list conventions.
+    </p>
+
+    <p>
+        As an example, to only allow connections over localhost:
+    </p>
+
+    <chapter id="config-whitelist-example" title="Example">
+        <code-block lang="c#">
+            "Whitelist"
+            {
+                //  A list of IP addresses that will be allowed by the BitMod
+                //  default handler. Note that if you do not specify any here,
+                //  other plugins will still be able to accept connections.
+                //  Plugins can also override this list, and reject connections listed here.
+                "AllowedIPs"
+                {
+                    //  Format: "entryNumber"   "ipAddress"
+                    "0"	"127.0.0.1"
+                }
+            }
+
+        </code-block>
+    </chapter>
+</topic>

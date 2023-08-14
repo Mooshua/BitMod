@@ -5,12 +5,13 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>bitmod_flags</AssemblyName>
+        <Configurations>Debug;Release;Publish</Configurations>
+        <Platforms>AnyCPU</Platforms>
 
+        <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
+        <PublishDir>../../build/plugins/$(AssemblyName)</PublishDir>
     </PropertyGroup>
     
-    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-        <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
-    </PropertyGroup>
     
     <ItemGroup>
       <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />

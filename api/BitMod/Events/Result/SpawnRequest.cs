@@ -2,6 +2,8 @@
 
 using BattleBitAPI.Common;
 
+using BitMod.Events.Base;
+
 namespace BitMod.Events.Result;
 
 public class SpawnRequest

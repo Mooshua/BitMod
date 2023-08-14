@@ -8,6 +8,10 @@
         <IsPackable>false</IsPackable>
 
         <RootNamespace>BitMod.Tests</RootNamespace>
+
+        <Configurations>Debug;Release;Publish</Configurations>
+
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <ItemGroup>

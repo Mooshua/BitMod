@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Custom Events" id="Plugins-Custom-Events">
+
+    <link-summary>
+        A powerful tool for invoking functionality in other plugins
+        without needing to be aware of their existance.
+    </link-summary>
+
+    <seealso style="cards">
+        <category ref="related">
+            <a href="Plugins-Routing.topic">Custom Routing</a>
+            <a href="Plugins-Events.topic">Event Types</a>
+        </category>
+    </seealso>
+
+    <p>
+        Custom events are a fast and easy way to invoke code in other plugins.
+        (Compare this to <a href="Plugins-Routing.topic">Custom Routing</a>,
+        which takes a lot of set-up work).
+    </p>
+
+    <p>
+        BitMod contains native support for defining your own events, hooks, and producers/mutators.
+        In order to make an event, all you have to do is inherit it's argument interface:
+    </p>
+
+    <deflist style="medium">
+        <def title="Events">
+            <code>IEventArgs</code>
+        </def>
+        <def title="Hooks">
+            <code>IHookArgs</code>
+        </def>
+        <def title="Mutators/Producers">
+            <code>IProducerArgs&lt;TResult></code> (where <code>TResult</code>
+            is the result type and the type that mutators will be able to edit)
+        </def>
+    </deflist>
+
+    <p>
+        You should also inherit from <code>IGameserverEvent</code> if your event
+        is specific to one gameserver (or any of the players on that server), and
+        inherit from <code>IResponsiblePlayerEvent</code> if any player is responsible
+        for initiating the action.
+    </p>
+
+    <warning>
+        If you do not appropriately inherit from <code>IGameserverEvent</code>
+        and <code>IResponsiblePlayerEvent</code>, certain BitMod APIs may not work,
+        confusing other develoeprs. <emphasis>Do not skip this step!</emphasis>
+    </warning>
+
+    <p>
+        For example, a custom hook would look like this:
+    </p>
+
+    <code-block lang="c#">
+        public class PlayerBanningEventArgs : IHookArgs, IResponsiblePlayerEvent, IGameserverEvent
+        {
+            public long Duration { get; }
+            public BitPlayer Banned { get; }
+            public BitPlayer Admin { get; }
+            public string Reason { get; }
+
+            //  Now implement IGameserverEvent
+            public BitServer? Server { get; }
+
+            //  Implement IResponsiblePlayerEvent by getting the player
+            //  who initiated the ban process.
+            public BitPlayer? ResponsiblePlayer => Admin;
+        }
+
+    </code-block>
+
+    <p>
+        To invoke your custom event, you just need to call the appropiate method on the
+        <code>PluginInvoker</code> class.
+    </p>
+
+    <code-block lang="c#">
+        public class MyPlugin
+        {
+            [Singleton]
+            private PluginInvoker _invoker;
+
+            [BitCommand("ban")]
+            public Task OnBan(ICommandSource source)
+            {
+                //  ...
+                //  do some logic
+                //  ...
+
+                PlayerBanningEventArgs banningArgs = new PlayerBanningEventArgs( /* ... */ );
+                if (_invoker.Hook(banningArgs, defaultValue: true))
+                {
+                    //  ban player
+                    source.Reply("Banned player!");
+                }
+            }
+        }
+    </code-block>
+</topic>

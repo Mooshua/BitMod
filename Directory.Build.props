@@ -1,5 +1,10 @@
 <Project>
+
     <PropertyGroup>
+        <!--Language version-->
+        <LangVersion>11</LangVersion>
+        <Deterministic>false</Deterministic>
+
         <!--Build reference assemblies and place them in output dir-->
         <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
         <ProduceReferenceAssemblyInOutDir>true</ProduceReferenceAssemblyInOutDir>
@@ -10,6 +15,12 @@
         <!--No deps.json files-->
         <PreserveCompilationReferences>true</PreserveCompilationReferences>
 
+        <!--No external .pdb-->
         <DebugType>embedded</DebugType>
+
+        <!--XMLDocs-->
+        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+        <DocumentationFile>$(MSBuildProjectName).xml</DocumentationFile>
     </PropertyGroup>
+
 </Project>

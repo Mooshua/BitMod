@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Plugins" id="Plugins">
+
+    <p>
+        Each plugin is a .NET assembly and it's dependencies which are loaded into BitMod at runtime.
+        Plugins can depend on any .NET assembly (eg, Newtonsoft.JSON, BitMod itself, other plugins...)
+        as long as they are in the same directory as the plugin.
+    </p>
+
+    <warning>
+        <p>
+            If a plugin depends on another plugin, it also has to be installed by itself.
+            Plugin dependencies will <emphasis>not</emphasis> be scanned for event handlers,
+            and will be only used for loading types.
+        </p>
+    </warning>
+
+    <p>
+        Plugins can also contain <emphasis>extensions</emphasis>, which are logical ways of
+        representing objects within the global BitMod mount. Plugins should use extensions wherever
+        possible when it needs to place values in the mount, and should respect when BitMod requests
+        they remove all items from the mount. (Not doing so could be problematic for eg hot reloading)
+    </p>
+</topic>

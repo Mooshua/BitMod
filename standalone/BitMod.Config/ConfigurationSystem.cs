@@ -11,7 +11,7 @@ namespace BitMod.Config;
 public class ConfigurationSystem : IConfigurationSystem
 {
 	public static string CONFIG_PATH = "configs";
-	public static string CONFIG_EXT = ".kv";
+	public static string CONFIG_EXT = ".cfg";
 
 	public static KVSerializer Serializer => KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
 

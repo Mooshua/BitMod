@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Core" id="Configuration-Core">
+
+    <tldr>
+        <p>
+            File: <ui-path>config / core.cfg</ui-path>
+        </p>
+    </tldr>
+
+    <p>
+        The core file provides critical configuration for BitMod.
+        Currently, this only contains the IP and port that BitMod binds to when starting.
+    </p>
+
+    <chapter title="Example" id="config-core-example">
+        <code-block lang="c#">
+            "Core"
+            {
+                //  Configures the port and IP where BitMod will listen for requests.
+                //  If this is not present, BitMod will listen on all IPs at port 9000.
+                "Listener"
+                {
+                    "PublicIP"  "0.0.0.0"
+                    "Port"      "9000"
+                }
+            }
+        </code-block>
+    </chapter>
+</topic>

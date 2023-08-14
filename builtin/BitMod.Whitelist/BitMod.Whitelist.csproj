@@ -5,10 +5,11 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>bitmod_whitelist</AssemblyName>
-    </PropertyGroup>
+        <Configurations>Debug;Release;Publish</Configurations>
+        <Platforms>AnyCPU</Platforms>
 
-    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
         <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
+        <PublishDir>../../build/plugins/$(AssemblyName)</PublishDir>
     </PropertyGroup>
 
     <ItemGroup>

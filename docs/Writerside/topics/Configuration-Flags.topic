@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Flags" id="Configuration-Flags">
+
+    <link-summary>
+        A configuration system that enables options to be fine-tuned for
+        specific gameservers with minimal complexity
+    </link-summary>
+
+    <tldr>
+        <p>
+            File: <ui-path>config / flags.cfg</ui-path>
+        </p>
+    </tldr>
+
+    <p>
+        Flags provide a simplified interface for managing gameserver-specific configurations.
+        When a plugin wishes to look up a flag, BitMod will find the flag's value for the relevant gameserver,
+        without needing the plugin's input.
+    </p>
+
+    <p>
+        Flags can be used to enable or disable gamemodes on servers, or act as config files themselves:
+        numbers and strings are valid flag values.
+    </p>
+
+    <p>
+        Groups specify inheritance (which are groups that will have their values applied as well),
+        and values ("Set") which will apply to that group.
+
+        Inherit values are applied first, and will be overwritten if another value is set by the
+        group that inherits it.
+
+        (In other words, the below example will have it's bitmod_enablething flag set to 0, despite
+        #default defining it as 1.)
+    </p>
+
+    <tip>
+        <p>
+            <emphasis>Inheritance is ordered!</emphasis>
+            Inheritance is applied in ascending order of index ("0" -> "1" -> "2"...)
+            and newer inheritances will overwrite older ones.
+        </p>
+        <p>
+            <emphasis>Inheritance is optional!</emphasis>
+            Groups that do not exist will be ignored. BitMod will give a warning in console
+            if this occurs.
+        </p>
+    </tip>
+
+    <p>
+        The #default block by default applies to all groups. When looking up a gameserver, BitMod will
+        use the IP:Port to find which group applies to the gameserver.
+    </p>
+
+    <chapter id="config-flag-example" title="Example">
+        <code-block lang="c#">
+            "Flags"
+            {
+                //  Applies to all servers.
+                "#default"
+                {
+                    "Set"
+                    {
+                        "bitmod_enablething"    "1"
+                    }
+                }
+
+                //  Specify the server IP to have flags applied to
+                //  Note that if this is not an IP, it will be considered
+                //  a "Group". Read more below:
+                "127.0.0.1"
+                {
+                    //  Specify other blocks to inherit from.
+                    //  Note that this does not need to be an IP--
+                    //  You can for example add a group to configure a specific
+                    //  gamemode and only add it to servers running that mode.
+                    "Inherit"
+                    {
+                        "0"     "OtherGroup"
+                    }
+
+                    //  Now set server-specific flags
+                    "Set"
+                    {
+                        "bitmod_enablething"    "0"
+                    }
+                }
+
+                //  A group which can be inherited but will not
+                //  by default apply to a gameserver.
+                "OtherGroup"
+                {
+                    "Set"
+                    {
+                        "bitmod_thing_power"    "30"
+                    }
+                }
+            }
+
+        </code-block>
+    </chapter>
+</topic>
