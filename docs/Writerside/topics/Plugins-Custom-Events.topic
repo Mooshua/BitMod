@@ -10,13 +10,6 @@
         without needing to be aware of their existance.
     </link-summary>
 
-    <seealso style="cards">
-        <category ref="related">
-            <a href="Plugins-Routing.topic">Custom Routing</a>
-            <a href="Plugins-Events.topic">Event Types</a>
-        </category>
-    </seealso>
-
     <p>
         Custom events are a fast and easy way to invoke code in other plugins.
         (Compare this to <a href="Plugins-Routing.topic">Custom Routing</a>,

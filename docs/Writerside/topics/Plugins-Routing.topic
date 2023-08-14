@@ -103,7 +103,7 @@
         </p>
         <code-block lang="c#">
             public class CommandInputAttribute
-                : LkTypedParameterAttribute<CommandInput, EventInput>
+                : LkTypedParameterAttribute&lt;CommandInput, EventInput>
             {
                 public override CommandInput Inject(Mount context, EventInput input)
                     => input.Get&lt;CommandInput>();

@@ -4,7 +4,7 @@ on:
   # If specified, the workflow will be triggered automatically once you push to the `main` branch.
   # Replace `main` with your branch’s name
   push:
-    branches: ["main"]
+    branches: ["master"]
   # Specify to run a workflow manually from the Actions tab on GitHub
   workflow_dispatch:
 
@@ -27,7 +27,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -47,7 +47,7 @@ jobs:
             artifacts/${{ env.ARTIFACT }}
             artifacts/report.json
           retention-days: 7
-      
+
       # Add the step below to upload Algolia indexes
       - name: Upload algolia-indexes
         uses: actions/upload-artifact@v3
@@ -55,13 +55,13 @@ jobs:
           name: algolia-indexes
           path: artifacts/${{ env.ALGOLIA_ARTIFACT }}
           retention-days: 7
-  
+
   # Add the job below and artifacts/report.json on Upload documentation step above if you want to fail the build when documentation contains errors
   test:
     # Requires build job results
     needs: build
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v1
@@ -73,7 +73,7 @@ jobs:
         uses: JetBrains/writerside-checker-action@v1
         with:
           instance: ${{ env.INSTANCE }}
-  
+
   deploy:
     environment:
       name: github-pages
