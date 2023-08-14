@@ -3,7 +3,7 @@
     <variables>
         <color-preset>vivid</color-preset>
         <primary-color>halloween</primary-color>
-        <header-logo>bitmod.svg</header-logo>
+        <header-logo>../images/bitmod.svg</header-logo>
     </variables>
     <build-profile instance="BitMod Docs"></build-profile>
     <footer>

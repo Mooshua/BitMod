@@ -23,4 +23,10 @@
         <DocumentationFile>$(MSBuildProjectName).xml</DocumentationFile>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <Version>0.1.0</Version>
+        <AssemblyVersion>$(Version)</AssemblyVersion>
+        <FileVersion>$(Version)</FileVersion>
+    </PropertyGroup>
+
 </Project>

@@ -8,10 +8,13 @@
     <section-starting-page>
         <title>BitMod</title>
         <description>
-            BitMod is a plugin loading, event handling, and dynamic linking framework for BattleBit: Remastered.
+            BitMod is a plugin framework for BattleBit: Remastered.
         </description>
 
-
+        <spotlight>
+            <a type="documents" href="Installation.topic"></a>
+            <a type="check-list" href="Plugins-Getting-Started.topic"></a>
+        </spotlight>
 
         <primary>
             <title>For Server Owners</title>
@@ -24,7 +27,6 @@
             <a href="Plugins-Getting-Started.topic"></a>
             <a href="Plugins.topic"></a>
         </secondary>
-
     </section-starting-page>
     
 </topic>
