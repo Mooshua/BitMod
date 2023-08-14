@@ -1,6 +1,7 @@
 ﻿using System.Numerics;
 
 using BattleBitAPI.Common;
+using BattleBitAPI.Common.Enums;
 
 using BitMod.Compatibility;
 using BitMod.Events.Accessors;

@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using BattleBitAPI.Common;
+using BattleBitAPI.Common.Enums;
 using BattleBitAPI.Server;
 
 using BitMod.Attributes.Targets;

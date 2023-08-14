@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using BattleBitAPI.Common;
+using BattleBitAPI.Common.Data;
 
 using BitMod.Events.Meta;
 using BitMod.Events.Player;

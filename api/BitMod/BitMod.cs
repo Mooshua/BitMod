@@ -22,11 +22,11 @@ public sealed class BitMod : Mount
 		Store(plugins);
 		Store(config);
 
-		_server = new ServerListener<BitPlayer, BitServer>();
-
 		var context = new PluginContext( this );
 		var invoker = new PluginInvoker( context );
-		var listener = new RoutingGameserver(invoker);
+
+		_server = new ServerListener<BitPlayer, BitServer>(new RoutingHandlerFactory(invoker));
+		var listener = new RoutingHandler(_server, invoker);
 
 		Store(context);
 		Store(invoker);

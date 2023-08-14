@@ -1,7 +1,5 @@
 ﻿using BattleBitAPI;
 
-using CommunityServerAPI.BattleBitAPI;
-
 using Lilikoi.Context;
 
 namespace BitMod.Compatibility;

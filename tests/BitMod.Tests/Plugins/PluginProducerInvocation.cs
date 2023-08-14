@@ -1,4 +1,5 @@
 ﻿using BattleBitAPI.Common;
+using BattleBitAPI.Common.Data;
 
 using BitMod.Attributes.Targets;
 using BitMod.Events.Server;

@@ -13,7 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\upstream\BattleBitAPI\CommunityServerAPI.csproj" />
+        <ProjectReference Include="..\..\upstream\BattleBitAPI\BattleBitAPI\BattleBitAPI.csproj" />
     </ItemGroup>
 
     <ItemGroup>

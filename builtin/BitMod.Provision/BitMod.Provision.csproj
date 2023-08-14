@@ -4,7 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AssemblyName>bitmod_moderation</AssemblyName>
+
+        <AssemblyName>bitmod_provision</AssemblyName>
 
         <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
         <PublishDir>../../build/plugins/$(AssemblyName)</PublishDir>
@@ -12,8 +13,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
-      <ProjectReference Include="..\BitMod.Flags\BitMod.Flags.csproj" />
-        <ProjectReference Include="..\BitMod.Commands\BitMod.Commands.csproj" />
     </ItemGroup>
 
 </Project>

@@ -31,6 +31,7 @@ public class ConfigurationCache<T>
 
 	internal void OnChanged(object sender, FileSystemEventArgs fileSystemEventArgs)
 	{
+		_logger.Information("[BitMod Config] Reloading config file {@Name} due to changes", _name);
 		try
 		{
 			Value = ConfigurationSystem.ReadFile(_file, _name, _makeDefault);

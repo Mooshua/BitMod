@@ -7,11 +7,6 @@ simultaneously on the same API server.
 > 
 > Just like the Community API, BitMod is in very early development. Tread carefully!
 
-> [!WARNING]
-> 
-> **BitMod is currently broken due to Community Server API changes.**
-> This banner will be removed when it is fixed.
-
 ## Features
 
 - **Hot Reloading & Unloading**: Plugins can be loaded and unloaded on the fly
