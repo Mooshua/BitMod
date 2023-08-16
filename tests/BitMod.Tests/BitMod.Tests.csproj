@@ -9,7 +9,7 @@
 
         <RootNamespace>BitMod.Tests</RootNamespace>
 
-        <Configurations>Debug;Release;Publish</Configurations>
+        <Configurations>Debug;Release</Configurations>
 
         <Platforms>AnyCPU</Platforms>
 

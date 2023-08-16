@@ -1,0 +1,6 @@
+<Project>
+    <PropertyGroup>
+        <IsPublishable>false</IsPublishable>
+        <DebugType>embedded</DebugType>
+    </PropertyGroup>
+</Project>
