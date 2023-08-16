@@ -5,12 +5,15 @@ using BattleBitAPI.Server;
 using BitMod.Compatibility;
 using BitMod.Events.Accessors;
 using BitMod.Events.Base;
+using BitMod.Logging;
 
 using Lilikoi.Context;
 
+using Serilog.Core;
+
 namespace BitMod.Internal;
 
-public class EventInput : Mount, IResponsiblePlayerEvent, IGameserverEvent
+public class EventInput : Mount, IResponsiblePlayerEvent, IGameserverEvent, ILogMetadataSource
 {
 	public EventInput(IBaseArgs args, Type type)
 	{
@@ -59,4 +62,7 @@ public class EventInput : Mount, IResponsiblePlayerEvent, IGameserverEvent
 
 		return eventInput;
 	}
+
+	public IEnumerable<ILogEventEnricher> GetMetadata()
+		=> new ILogEventEnricher[0];
 }

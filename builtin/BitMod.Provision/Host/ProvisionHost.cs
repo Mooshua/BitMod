@@ -15,7 +15,7 @@ namespace BitMod.Provision.Host;
 public class ProvisionHost
 {
 
-	[Config("provisions")]
+	/*[Config("provisions")]
 	private Dictionary<string, ProvisionServer> _servers;
 
 	[Singleton]
@@ -27,10 +27,7 @@ public class ProvisionHost
 	[BitEvent]
 	public async Task OnPluginLoad(PluginLoadEvent ev)
 	{
-		_config.Get<Dictionary<string, ProvisionServer>>("provisions", () => new()
-		{
-			{ "127.0.0.1:12345", new ProvisionServer() }
-		});
+
 	}
 
 	[BitEvent]
@@ -82,5 +79,5 @@ public class ProvisionHost
 			foreach (string provisionGamemode in provision.Maps)
 				server.MapRotation.AddToRotation(provisionGamemode);
 		}
-	}
+	}*/
 }

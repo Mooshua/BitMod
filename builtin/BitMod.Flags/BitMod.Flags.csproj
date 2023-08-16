@@ -16,5 +16,10 @@
     <ItemGroup>
       <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
     </ItemGroup>
+    
+    
+    <ItemGroup>
+      <Folder Include="Attribute\" />
+    </ItemGroup>
 
 </Project>

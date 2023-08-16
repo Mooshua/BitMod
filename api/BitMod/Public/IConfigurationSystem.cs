@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Net;
 
+using BitMod.Configuration.Model;
+
 namespace BitMod.Public;
 
 public interface IConfigurationSystem : IBitModComponent
 {
 
 	/// <summary>
-	/// Get the configuration class
+	/// Get the configuration object for
+	/// the specified file.
 	/// </summary>
-	/// <param name="makeDefault"></param>
-	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
-	T Get<T>(string name, Func<T> makeDefault);
+	IConfigObject Get(string name);
 
 }

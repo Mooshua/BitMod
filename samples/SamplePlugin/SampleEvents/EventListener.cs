@@ -1,4 +1,6 @@
-﻿using BitMod.Attributes.Targets;
+﻿using BitMod.Attributes.Injects;
+using BitMod.Attributes.Mutators;
+using BitMod.Attributes.Targets;
 using BitMod.Events.Meta;
 
 using Lilikoi.Standard;
@@ -9,13 +11,11 @@ namespace SamplePlugin.SampleEvents;
 
 public class EventListener
 {
-	[Singleton]
-	private ILogger _logger;
-
 	[BitEvent]
-	public Task OnEvent(PluginLoadEvent ev)
+	[Log]
+	public Task OnEvent(PluginLoadEvent ev, ILogger logger)
 	{
-		_logger.Information("hello there, {@Name}!", ev.Name);
+		logger.Information("hello there, {@Name}!", ev.Name);
 
 		return Task.CompletedTask;
 	}

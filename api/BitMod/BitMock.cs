@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using BitMod.Configuration.Model;
 using BitMod.Plugins.Extensions;
 using BitMod.Public;
 
@@ -24,7 +25,7 @@ public static class BitMock
 
 		}
 
-		public T Get<T>(string name, Func<T> makeDefault)
+		public IConfigObject Get(string name)
 		{
 			throw new NotImplementedException();
 		}

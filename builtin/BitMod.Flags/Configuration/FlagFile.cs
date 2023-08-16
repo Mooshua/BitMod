@@ -1,71 +1,73 @@
-﻿using Serilog;
+using BitMod.Configuration.Model;
+
+using Serilog;
 
 namespace BitMod.Flags.Configuration;
 
 public class FlagFile
 {
-	public Dictionary<string, FlagGroup> Groups { get; } = new ();
 
+	private IConfigObject _configObject;
 	private ILogger _logger;
 
-	public FlagFile(Dictionary<string, FlagFileEntry> file, ILogger logger)
+	private Dictionary<string, FlagGroup> _groups = new();
+	private FlagGroup _default;
+
+	public FlagFile(IConfigObject configObject, ILogger logger)
 	{
+		_configObject = configObject;
 		_logger = logger;
-		foreach (var (key, _) in file)
-			Groups[key] = DoGroup(file, key);
+		_default = Get("#default");
 	}
 
-	private void Dive(Dictionary<string, FlagFileEntry> file, string[] visited, FlagFileEntry current, FlagGroup applyTo)
-	{
-		if (current.Inherit != null)
-		{
-			foreach (string inheritFrom in current.Inherit)
-			{
-				if (visited.Contains(inheritFrom))
-					continue;
+	private IEnumerable<string> GetInherits(IConfigObject configObject)
+		=> configObject.Get<IConfigObject>("Inherit")
+			   ?.AsList()
+			   ?.Select(entry => entry as IConfigSymbol)
+			   ?.Where(entry => entry != null)
+			   ?.Select(entry => entry.Symbol)
+		   ?? Enumerable.Empty<string>();
 
-				if (!file.ContainsKey(inheritFrom))
-				{
-					_logger.Warning("Warning: Group {@GroupName} inherits from {@InheritName} which does not exist.", visited[visited.Length - 1], inheritFrom);
-					continue;
-				}
-
-				var newVisited = visited.Append(inheritFrom).ToArray();
-				Dive(file, newVisited, file[inheritFrom], applyTo);
-			}
-		}
-
-		if (current.Set != null)
-		{
-			foreach (var (key, value) in current.Set)
-			{
-				applyTo.Add(key, new FlagEntry(value));
-			}
-		}
-	}
-
-	private FlagGroup DoGroup(Dictionary<string, FlagFileEntry> file, string group)
-	{
-		var entry = file[group];
-		FlagGroup result = new FlagGroup();
-
-		//	Apply default values first
-		if (file.ContainsKey("#default"))
-			Dive(file, new[] { group, "#default"}, file["#default"], result );
-
-		Dive(file, new [] {group}, entry, result);
-
-		return result;
-	}
+	private IEnumerable<KeyValuePair<IConfigSymbol, IConfigSymbol>> GetSets(IConfigObject configObject)
+		=> configObject.Get<IConfigObject>("Set")
+			   ?.Select(kv => new KeyValuePair<IConfigSymbol, IConfigSymbol>(kv.Key, kv.Value as IConfigSymbol))
+			   ?.Where(kv => kv.Value != null)
+		   ?? Enumerable.Empty<KeyValuePair<IConfigSymbol, IConfigSymbol>>();
 
 	public FlagGroup Get(string key)
 	{
-		if (Groups.TryGetValue(key, out var result))
-			return result;
+		if (_groups.TryGetValue(key, out var cached))
+			return cached;
 
-		if (Groups.TryGetValue("#default", out var def))
-			return def;
+		List<string> seen = new();
+		FlagGroup group = new();
 
-		return new FlagGroup();
+		//	Inherit from default
+		if (_default != null)
+			foreach (var (s, value) in _default)
+				group[s] = value;
+
+		Dive(key, seen, group);
+
+		return group;
+	}
+
+	private void Dive(string key, List<string> seen, FlagGroup group)
+	{
+		var obj = _configObject.Get<IConfigObject>(key);
+		if (obj == null)
+			return;
+
+		seen.Add(key);
+
+		foreach (string inherit in GetInherits(obj))
+		{
+			if (seen.Contains(inherit))
+				continue;
+			Dive(inherit, seen, group);
+		}
+
+		foreach (var (configSymbol, value) in GetSets(obj))
+			group[configSymbol.Symbol] = value;
 	}
 }

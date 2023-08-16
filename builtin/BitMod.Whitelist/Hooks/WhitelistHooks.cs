@@ -2,10 +2,10 @@
 
 using BitMod.Attributes.Injects;
 using BitMod.Attributes.Targets;
+using BitMod.Configuration.Model;
 using BitMod.Events.Server;
-using BitMod.Flags.Attribute;
 using BitMod.Plugins.Events;
-using BitMod.Whitelist.Configuration;
+using BitMod.Whitelist.Adapter;
 
 using Lilikoi.Standard;
 
@@ -17,7 +17,7 @@ public class WhitelistHooks
 {
 
 	[Config("whitelist")]
-	private WhitelistFile _whitelist;
+	private IConfigObject _whitelist;
 
 	[Singleton]
 	private ILogger _logger;
@@ -25,12 +25,13 @@ public class WhitelistHooks
 	[BitHook(Priority.LOW)]
 	private async Task<Directive> ServerConnectionRequest(GameServerConnectingEventArgs ev)
 	{
-		_logger.Information("Using file {@Config}", _whitelist);
-		foreach (IPAddress allowedConnection in _whitelist.Parse(_logger))
+		var config = new WhitelistConfigAdapter(_whitelist);
+
+		foreach (IPAddress allowedAddress in config.GetAllowedAddresses())
 		{
-			if (allowedConnection.GetAddressBytes().SequenceEqual(ev.IPAddress.GetAddressBytes()))
+			if (allowedAddress.Equals(ev.IPAddress) == true)
 			{
-				_logger.Information("[BitMod Whitelist] Allowing IP {@Remote} to connect with rule {@IP}", ev.IPAddress.ToString(), allowedConnection.ToString());
+				_logger.Information("[BitMod Whitelist] Allowing IP {@Remote} to connect with rule {@IP}", ev.IPAddress.ToString(), allowedAddress.ToString());
 				return Directive.Allow;
 			}
 		}

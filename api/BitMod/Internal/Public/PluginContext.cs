@@ -75,7 +75,7 @@ public class PluginContext
 			{
 				var assignments = lilikoiContainer.Get<RouterAssignments>();
 				assignments!.Register(lilikoiContainer);
-				_logger.Debug("[BitMod PluginContext] Assigning {@Assignments} to container {@Container}.", assignments, lilikoiContainer);
+				//_logger.Debug("[BitMod PluginContext] Assigning {@Assignments} to container {@Container}.", assignments, lilikoiContainer);
 			}
 		}
 	}
@@ -99,7 +99,7 @@ public class PluginContext
 		var context = new RouterContext(_env, name);
 		var containers = Scanner.Scan<RouterContext, EventInput, Task>(context, type, () => _env);
 
-		_logger.Information("[PluginContext] Found {@ContainerCount} containers in type {@Type}", containers.Count, type.FullName);
+		_logger.Debug("[PluginContext] Found {@ContainerCount} containers in type {@Type}", containers.Count, type.FullName);
 
 		Register(containers);
 	}
@@ -114,7 +114,7 @@ public class PluginContext
 		var context = new RouterContext(_env, name);
 		var containers = Scanner.Scan<RouterContext, EventInput, Task>(context, assembly, () => _env);
 
-		_logger.Information("[PluginContext] Found {@ContainerCount} containers in assembly {@Assembly}", containers.Count, assembly.FullName);
+		_logger.Debug("[PluginContext] Found {@ContainerCount} containers in assembly {@Assembly}", containers.Count, assembly.FullName);
 
 		Register(containers);
 	}

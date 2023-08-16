@@ -1,5 +1,6 @@
 ﻿using System;
 
+using BitMod.Configuration.Model;
 using BitMod.Public;
 
 using Lilikoi.Attributes;
@@ -8,7 +9,7 @@ using Lilikoi.Context;
 
 namespace BitMod.Attributes.Injects;
 
-public class ConfigAttribute : LkInjectionAttribute
+public class ConfigAttribute : LkTypedInjectionAttribute<IConfigObject>
 {
 	public ConfigAttribute(string file)
 	{
@@ -17,14 +18,9 @@ public class ConfigAttribute : LkInjectionAttribute
 
 	public string File { get; set; }
 
-	public override bool IsInjectable<TInjectable>(Mount mount)
-		=> true;
-
-
-	public override TInjectable Inject<TInjectable>(Mount context)
+	public override IConfigObject Inject(Mount context)
 	{
 		var config = context.Get<IConfigurationSystem>();
-		var model = config.Get<TInjectable>(File, () => Activator.CreateInstance(typeof(TInjectable)) as TInjectable);
-		return model;
+		return config.Get(File);
 	}
 }

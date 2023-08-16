@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Running" id="Running">
+
+    <p>
+        Starting BitMod is an incredibly simple process.
+        Once you have <a href="Installation.topic">installed BitMod</a>,
+        you just need to shell into the current directory and run
+        the standalone launcher:
+    </p>
+
+    <tabs>
+        <tab title="Windows">
+            <code-block lang="shell">
+                ./bitmod_standalone.exe
+            </code-block>
+        </tab>
+        <tab title="Linux">
+            <code-block lang="shell">
+                ./bitmod_standalone
+            </code-block>
+        </tab>
+    </tabs>
+
+    <p>
+        The standalone launcher can be run anywhere there is a valid
+        BitMod project tree:
+    </p>
+
+    <list>
+        <li>
+            <code>/configs</code>
+            <list>
+                <li><code>core.cfg</code></li>
+            </list>
+        </li>
+        <li>
+            <code>/logs</code>
+        </li>
+        <li>
+            <code>/plugins</code>
+        </li>
+    </list>
+
+    <chapter title="Hot Reloading" id="running-hotreload">
+
+        <p>
+            Hot reloading is enabled by default. All readable files, including plugins and configs,
+            are automatically refreshed when they are modified.
+        </p>
+    </chapter>
+
+</topic>

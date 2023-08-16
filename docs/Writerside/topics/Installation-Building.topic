@@ -3,12 +3,7 @@
         SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
 <topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
-       title="Installation" id="Installation">
+       title="Building" id="Installation-Building">
 
-    <p>Installation instructions coming soon&trade;.</p>
-
-    <p>
-        For now, you can download nightlies from the
-        <a href="https://github.com/Mooshua/BitMod/actions">GitHub Actions</a>.
-    </p>
+    <p>Start typing here...</p>
 </topic>

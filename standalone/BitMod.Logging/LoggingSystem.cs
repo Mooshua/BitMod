@@ -2,6 +2,7 @@
 
 using Serilog;
 using Serilog.Events;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace BitMod.Logging;
 
@@ -20,7 +21,13 @@ public class LoggingSystem
 	public ILogger GetLogger()
 	{
 		return new LoggerConfiguration()
-			.WriteTo.Console( LogEventLevel.Debug )
+			.MinimumLevel.Verbose()
+			.Enrich.WithThreadId()
+			.Enrich.WithThreadName()
+			.WriteTo.Console(
+				LevelAlias.Minimum,
+				theme: AnsiConsoleTheme.Sixteen,
+				outputTemplate: "[{Timestamp:HH:mm:ss}] {Properties} {Level:u4}: {Message:lj}{NewLine}{Exception}" )
 			.WriteTo.File(Path.Join(System.Environment.CurrentDirectory, LOG_PATH, LOG_NAME), LogEventLevel.Debug)
 			.CreateLogger();
 	}

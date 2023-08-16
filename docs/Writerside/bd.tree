@@ -7,7 +7,10 @@
                  start-page="Home.topic">
 
     <toc-element topic="Home.topic"/>
-    <toc-element topic="Installation.topic"/>
+    <toc-element topic="Running.topic"/>
+    <toc-element topic="Installation.topic">
+        <toc-element topic="Installation-Building.topic"/>
+    </toc-element>
     <toc-element topic="Configuration.topic">
         <toc-element topic="Configuration-Core.topic"/>
         <toc-element topic="Configuration-Flags.topic"/>

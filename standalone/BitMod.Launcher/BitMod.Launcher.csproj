@@ -33,6 +33,9 @@
         <None Update="configs\whitelist.cfg">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="configs\core.cfg">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>

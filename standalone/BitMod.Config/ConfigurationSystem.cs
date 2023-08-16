@@ -1,4 +1,6 @@
-﻿using BitMod.Public;
+﻿using BitMod.Config.Cache;
+using BitMod.Configuration.Model;
+using BitMod.Public;
 
 using Lilikoi.Context;
 
@@ -10,9 +12,6 @@ namespace BitMod.Config;
 
 public class ConfigurationSystem : IConfigurationSystem
 {
-	public static string CONFIG_PATH = "configs";
-	public static string CONFIG_EXT = ".cfg";
-
 	public static KVSerializer Serializer => KVSerializer.Create(KVSerializationFormat.KeyValues1Text);
 
 	public static KVSerializerOptions Options => KVSerializerOptions.DefaultOptions;
@@ -26,46 +25,11 @@ public class ConfigurationSystem : IConfigurationSystem
 	{
 		_parent = env;
 		_logger = _parent.Logger;
+
+		//	Set up the cache
+		_parent.Store(new ConfigCache(Options, Serializer, _logger));
 	}
 
-	private void StartFileWatcher()
-	{
-
-	}
-
-	public static T ReadFile<T>(string path, string name, Func<T> makeDefault)
-	{
-		if (!File.Exists(path))
-		{
-			var def = makeDefault();
-
-			using (var stream = File.OpenWrite(path))
-				Serializer.Serialize(stream, def, name, Options);
-		}
-
-		using (var stream = File.OpenRead(path))
-		{
-			var model = Serializer.Deserialize<T>(stream, Options);
-			return model;
-		}
-	}
-
-	public T Get<T>(string name, Func<T> makeDefault)
-	{
-		try
-		{
-			if (!_cache.Has<ConfigurationCache<T>>())
-			{
-				var path = Path.Join(System.Environment.CurrentDirectory, CONFIG_PATH, name + CONFIG_EXT);
-				_cache.Store(new ConfigurationCache<T>(path, name, makeDefault, _logger));
-			}
-
-			return _cache.Get<ConfigurationCache<T>>()!.Value;
-		}
-		catch (Exception e)
-		{
-			_logger.Warning(e,"[BitMod Config] Failed to fetch config {@Name}. Using default", name);
-		}
-		return makeDefault();
-	}
+	public IConfigObject Get(string name)
+		=> _parent.Get<ConfigCache>().GetObject(name);
 }
