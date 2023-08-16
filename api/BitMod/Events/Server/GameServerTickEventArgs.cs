@@ -16,7 +16,7 @@ public class GameServerTickEventArgs : IEventArgs, IGameserverEvent
 	/// <summary>
 	/// The server that is currently ticking
 	/// </summary>
-	public BitServer Server { get; init; }
+	public BitServer Server { get; }
 
 	/// <inheritdoc />
 	public BitServer RelevantGameserver => Server;

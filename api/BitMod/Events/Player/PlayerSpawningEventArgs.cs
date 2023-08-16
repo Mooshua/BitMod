@@ -13,7 +13,7 @@ namespace BitMod.Events.Player
         /// <summary>
         /// The player who is spawning.
         /// </summary>
-        public BitPlayer Player { get; init; }
+        public BitPlayer Player { get; }
 
         /// <summary>
         /// The spawn request (which you can modify).

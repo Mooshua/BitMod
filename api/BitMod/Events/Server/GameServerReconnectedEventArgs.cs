@@ -16,7 +16,7 @@ public class GameServerReconnectedEventArgs : IEventArgs, IGameserverEvent
 	/// <summary>
 	/// The server that successfully reconnected
 	/// </summary>
-	public BitServer Server { get; init; }
+	public BitServer Server { get; }
 
 	/// <inheritdoc />
 	public BitServer RelevantGameserver => Server;

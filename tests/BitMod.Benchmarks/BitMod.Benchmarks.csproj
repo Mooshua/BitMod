@@ -8,6 +8,7 @@
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
         <Configurations>Debug;Release;Publish</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

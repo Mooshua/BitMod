@@ -14,31 +14,31 @@ namespace BitMod.Events.Player
         /// <summary>
         /// The killer.
         /// </summary>
-        public BitPlayer Killer { get; init; }
+        public BitPlayer Killer { get; }
 
         /// <summary>
         /// The position of the killer.
         /// </summary>
-        public Vector3 KillerPosition { get; init; }
+        public Vector3 KillerPosition { get; }
 
         /// <summary>
         /// The target.
         /// </summary>
-        public BitPlayer Target { get; init; }
+        public BitPlayer Target { get; }
 
         /// <summary>
         /// The position of the target.
         /// </summary>
-        public Vector3 TargetPosition { get; init; }
+        public Vector3 TargetPosition { get; }
 
         /// <summary>
         /// The tool used to kill the target.
         /// </summary>
-        public string Tool { get; init; }
+        public string Tool { get; }
 
-        public PlayerBody BodyPart { get; init; }
+        public PlayerBody BodyPart { get; }
 
-        public ReasonOfDamage Source { get; init; }
+        public ReasonOfDamage Source { get; }
 
         internal PlayerKilledPlayerEventArgs(BitServer server, BitPlayer killer, Vector3 killerPosition, BitPlayer target, Vector3 targetPosition, string tool, PlayerBody bodyPart, ReasonOfDamage source)
         {

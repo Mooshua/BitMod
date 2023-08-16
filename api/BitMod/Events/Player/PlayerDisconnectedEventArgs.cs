@@ -15,7 +15,7 @@ public class PlayerDisconnectedEventArgs : IEventArgs, IResponsiblePlayerEvent
 	/// <summary>
 	/// The player that just disconnected.
 	/// </summary>
-	public BitPlayer Player { get; init; }
+	public BitPlayer Player { get; }
 
 	/// <inheritdoc />
 	public BitPlayer ResponsiblePlayer => Player;

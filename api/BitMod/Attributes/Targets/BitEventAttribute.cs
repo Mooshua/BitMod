@@ -16,7 +16,7 @@ public class BitEventAttribute : BitTargetAttribute
 	public override string Name => "BitEvent";
 
 	internal override bool IsValidEvent(Type arg)
-		=> arg.IsAssignableTo(typeof(IEventArgs));
+		=> typeof(IEventArgs).IsAssignableFrom(arg);
 
 	internal override void Setup(RouterContext context, LilikoiMutator mutator)
 	{

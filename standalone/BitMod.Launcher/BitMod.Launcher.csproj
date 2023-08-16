@@ -12,6 +12,7 @@
 
         <PublishDir>../../build</PublishDir>
         <OutDir>../../dev</OutDir>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup>

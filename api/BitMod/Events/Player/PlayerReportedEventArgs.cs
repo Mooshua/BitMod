@@ -12,22 +12,22 @@ namespace BitMod.Events.Player
         /// <summary>
         /// The player who made the report.
         /// </summary>
-        public BitPlayer Reporter { get; init; }
+        public BitPlayer Reporter { get; }
 
         /// <summary>
         /// The player being reported.
         /// </summary>
-        public BitPlayer Reported { get; init; }
+        public BitPlayer Reported { get; }
 
         /// <summary>
         /// The report reason.
         /// </summary>
-        public ReportReason Reason { get; init; }
+        public ReportReason Reason { get; }
 
         /// <summary>
         /// Additional details about the report.
         /// </summary>
-        public string Detail { get; init; }
+        public string Detail { get; }
 
         internal PlayerReportedEventArgs(BitServer server, BitPlayer reporter, BitPlayer reported, ReportReason reason, string detail)
         {

@@ -25,7 +25,7 @@ public class BitHookAttribute : BitTargetAttribute
 	public override string Name => "BitHook";
 
 	internal override bool IsValidEvent(Type arg)
-		=> arg.IsAssignableTo(typeof(IHookArgs));
+		=> typeof(IHookArgs).IsAssignableFrom(arg);
 
 
 	internal override void Setup(RouterContext context, LilikoiMutator mutator)

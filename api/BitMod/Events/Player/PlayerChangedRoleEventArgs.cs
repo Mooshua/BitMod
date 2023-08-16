@@ -12,12 +12,12 @@ namespace BitMod.Events.Player
         /// <summary>
         /// The player who changed role.
         /// </summary>
-        public BitPlayer Player { get; init; }
+        public BitPlayer Player { get; }
 
         /// <summary>
         /// The new role of the player.
         /// </summary>
-        public GameRole Role { get; init; }
+        public GameRole Role { get; }
 
         internal PlayerChangedRoleEventArgs(BitServer server, BitPlayer player, GameRole role)
         {

@@ -15,7 +15,7 @@ public class PlayerConnectedEventArgs : IEventArgs, IResponsiblePlayerEvent
 	/// <summary>
 	/// The player that connected
 	/// </summary>
-	public BitPlayer Player { get; init; }
+	public BitPlayer Player { get; }
 
 	/// <inheritdoc />
 	public BitPlayer ResponsiblePlayer => Player;

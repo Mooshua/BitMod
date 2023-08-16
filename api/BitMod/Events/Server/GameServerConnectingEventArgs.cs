@@ -9,7 +9,7 @@ namespace BitMod.Events.Server
         /// <summary>
         /// IP of incoming connection
         /// </summary>
-        public IPAddress IPAddress { get; init; }
+        public IPAddress IPAddress { get; }
 
         public GameServerConnectingEventArgs(IPAddress ipAddress)
         {

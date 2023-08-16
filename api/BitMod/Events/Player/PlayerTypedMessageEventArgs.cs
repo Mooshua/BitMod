@@ -12,17 +12,17 @@ namespace BitMod.Events.Player
         /// <summary>
         /// The player who typed the message.
         /// </summary>
-        public BitPlayer Player { get; init; }
+        public BitPlayer Player { get; }
 
         /// <summary>
         /// The channel the message was sent in.
         /// </summary>
-        public ChatChannel ChatChannel { get; init; }
+        public ChatChannel ChatChannel { get; }
 
         /// <summary>
         /// The message.
         /// </summary>
-        public string Message { get; init; }
+        public string Message { get; }
 
         internal PlayerTypedMessageEventArgs(BitServer server, BitPlayer player, ChatChannel chatChannel, string message)
         {

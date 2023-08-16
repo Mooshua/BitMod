@@ -16,7 +16,7 @@ public class GameServerDisconnectedEventArgs : IEventArgs, IGameserverEvent
 	/// <summary>
 	/// The server that was disconnected
 	/// </summary>
-	public BitServer Server { get; init; }
+	public BitServer Server { get; }
 
 	/// <inheritdoc />
 	public BitServer RelevantGameserver => Server;

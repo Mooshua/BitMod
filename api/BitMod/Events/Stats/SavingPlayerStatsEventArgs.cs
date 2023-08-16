@@ -10,12 +10,12 @@ namespace BitMod.Events.Stats
         /// <summary>
         /// The player's SteamID
         /// </summary>
-        public ulong SteamID { get; init; }
+        public ulong SteamID { get; }
 
         /// <summary>
         /// The player's stats
         /// </summary>
-        public PlayerStats PlayerStats { get; init; }
+        public PlayerStats PlayerStats { get; }
 
         internal SavingPlayerStatsEventArgs(ulong steamID, PlayerStats playerStats)
         {

@@ -16,7 +16,7 @@ public class PlayerDiedEventArgs : IEventArgs, IResponsiblePlayerEvent
 	/// The player that died.
 	/// For information on the killer, hook PlayerKilledPlayer instead.
 	/// </summary>
-	public BitPlayer Player { get; init; }
+	public BitPlayer Player { get; }
 
 	/// <inheritdoc />
 	public BitPlayer ResponsiblePlayer => Player;

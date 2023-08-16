@@ -15,7 +15,7 @@ public class PlayerSpawnedEventArgs : IEventArgs, IResponsiblePlayerEvent
 	/// <summary>
 	/// The player that just spawned.
 	/// </summary>
-	public BitPlayer Player { get; init; }
+	public BitPlayer Player { get; }
 
 	/// <inheritdoc />
 	public BitPlayer ResponsiblePlayer => Player;

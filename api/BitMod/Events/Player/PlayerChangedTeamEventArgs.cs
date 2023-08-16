@@ -12,12 +12,12 @@ namespace BitMod.Events.Player
         /// <summary>
         /// The player who joined a team.
         /// </summary>
-        public BitPlayer Player { get; init; }
+        public BitPlayer Player { get; }
 
         /// <summary>
         /// The new team which the player joined.
         /// </summary>
-        public Team Team { get; init; }
+        public Team Team { get; }
 
         internal PlayerChangedTeamEventArgs(BitServer server, BitPlayer player, Team team)
         {
