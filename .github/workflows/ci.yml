@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
+    name: Build Nightlies
     needs: [test]
     runs-on: ubuntu-latest
     strategy:
@@ -24,25 +25,17 @@ jobs:
           dotnet-version: '7.0.x'
           dotnet-quality: 'ga'
 
-      - name: Install dependencies
-        run: dotnet restore --force -r ${{ matrix.runtime }}
-
       - name: Build ${{ matrix.runtime }}
-        run: dotnet publish --no-restore -f net6.0 -c Release -r ${{ matrix.runtime }}
+        run: dotnet publish BitMod.sln -c Release -r ${{ matrix.runtime }}
 
       - name: Upload Files
         uses: actions/upload-artifact@v3
         with:
-          name: Nightly ${{ matrix.runtime }}
+          name: nightly_${{ matrix.runtime }}
           path: build/
   test:
-
+    name: Tests
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        framework-version: [ 'net6.0' ]
-      fail-fast: false
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -57,8 +50,8 @@ jobs:
           dotnet-quality: 'ga'
 
       - name: Install dependencies
-        run: dotnet restore
-      - name: Build for ${{ matrix.framework-version }}
-        run: dotnet build tests/BitMod.Tests --framework ${{ matrix.framework-version }} --configuration Release --no-restore
-      - name: Test for ${{ matrix.framework-version }}
-        run: dotnet test tests/BitMod.Tests --framework ${{ matrix.framework-version }} --configuration Release --no-build --no-restore --verbosity normal
+        run: dotnet restore BitMod.sln
+      - name: Build
+        run: dotnet build tests/BitMod.Tests --framework net6.0 --configuration Release --no-restore
+      - name: Test
+        run: dotnet test tests/BitMod.Tests --framework net6.0 --configuration Release --no-build --no-restore --verbosity normal

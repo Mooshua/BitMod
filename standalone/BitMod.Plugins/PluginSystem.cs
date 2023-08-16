@@ -132,7 +132,7 @@ public class PluginSystem : IPluginSystem
 
 	internal void Deleted(string name)
 	{
-		foreach (Plugin plugin1 in _plugins.Where(plugin => plugin.Name == name))
+		foreach (Plugin plugin1 in _plugins.Where(plugin => plugin.Name == name).ToList())
 		{
 			plugin1.UnloadPlugin();
 		}
