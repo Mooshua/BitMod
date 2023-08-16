@@ -10,7 +10,7 @@ jobs:
       matrix:
         runtime: [ 'win-x64', 'win-x86', 'linux-x64', linux-musl-x64 ]
       fail-fast: false
-      
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,10 +25,10 @@ jobs:
           dotnet-quality: 'ga'
 
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore --force -r ${{ matrix.runtime }}
 
       - name: Build ${{ matrix.runtime }}
-        run: dotnet publish -f net6.0 -c Release -r ${{ matrix.runtime }}
+        run: dotnet publish --no-restore -f net6.0 -c Release -r ${{ matrix.runtime }}
 
       - name: Upload Files
         uses: actions/upload-artifact@v3
@@ -42,7 +42,7 @@ jobs:
       matrix:
         framework-version: [ 'net6.0' ]
       fail-fast: false
-      
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
