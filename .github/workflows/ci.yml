@@ -24,11 +24,8 @@ jobs:
           dotnet-version: '7.0.x'
           dotnet-quality: 'ga'
 
-      - name: Install dependencies
-        run: dotnet restore --force -r ${{ matrix.runtime }}
-
       - name: Build ${{ matrix.runtime }}
-        run: dotnet publish --no-restore -f net6.0 -c Release -r ${{ matrix.runtime }}
+        run: dotnet publish -f net6.0 -c Release -r ${{ matrix.runtime }}
 
       - name: Upload Files
         uses: actions/upload-artifact@v3
