@@ -1,6 +1,7 @@
 ﻿using BattleBitAPI.Common;
 
 using BitMod.Attributes.Targets;
+using BitMod.Compatibility;
 using BitMod.Events.Server;
 using BitMod.Events.Stats;
 using BitMod.Internal.Public;
@@ -38,7 +39,7 @@ public class PluginProducerInvocation : GlobalSetup
 		var mod = BitMock.Mock();
 
 		mod.Context.Load("invoke_test", typeof(Host));
-		var result = mod.Invoker.Produce<GetPlayerStatsEventArgs, PlayerStats>( new GetPlayerStatsEventArgs(default, 0, null), () => null);
+		var result = mod.Invoker.Produce<GetPlayerStatsEventArgs, PlayerStats>( new GetPlayerStatsEventArgs(new BitServer(), 0, null), () => null);
 
 		Assert.Fail("Did not reach mutator block");
 	}

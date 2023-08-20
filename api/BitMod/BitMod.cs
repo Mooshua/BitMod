@@ -45,8 +45,6 @@ public sealed class BitMod : Mount
 
 	private ServerListener<BitPlayer, BitServer> _server;
 
-	public RoutingGameserver Gameserver => Get<RoutingGameserver>()!;
-
 	public PluginInvoker Invoker => Get<PluginInvoker>()!;
 
 	public PluginContext Context => Get<PluginContext>()!;

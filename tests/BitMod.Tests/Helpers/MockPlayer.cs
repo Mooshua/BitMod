@@ -14,8 +14,15 @@ public static class MockPlayer
 		var server = new BitServer();
 		var player = new BitPlayer();
 
-		player.GetType().GetProperty(nameof(player.GameServer), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-			.SetValue(player, server);
+		/*var internalBlock = player
+			.GetType()
+			.GetField("mInternal",
+				BindingFlags.Instance | BindingFlags.NonPublic);
+
+		internalBlock.FieldType
+			.GetField("GameServer", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
+			.SetValue( internalBlock.GetValue(player), server );
+		*/
 
 		return (player, server);
 	}
