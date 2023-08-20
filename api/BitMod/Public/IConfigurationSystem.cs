@@ -15,4 +15,10 @@ public interface IConfigurationSystem : IBitModComponent
 	/// <returns></returns>
 	IConfigObject Get(string name);
 
+	/// <summary>
+	/// Create a fake symbol with the provided string value.
+	/// </summary>
+	/// <param name="symbol"></param>
+	/// <returns></returns>
+	IConfigSymbol Fake(string symbol);
 }

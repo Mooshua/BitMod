@@ -1,7 +1,33 @@
-﻿namespace BitMod.Moderation.Votekick;
+﻿using BitMod.Commands.Sources;
+using BitMod.Compatibility;
+
+namespace BitMod.Moderation.Votekick;
 
 public class VotekickState
 {
+
+	public VotekickState(BitPlayer target, ICommandSource creator)
+	{
+		Creator = creator;
+		Target = target.SteamID;
+		Name = target.Name;
+	}
+
+	public DateTime RemindedAt { get; set; } = DateTime.Now;
+
+	public DateTime CreatedAt { get; } = DateTime.Now;
+
+	public ICommandSource Creator { get; }
+
+	/// <summary>
+	/// The steam ID targeted by the votekick
+	/// </summary>
+	public ulong Target { get; }
+
+	/// <summary>
+	/// The name of the player.
+	/// </summary>
+	public string Name { get; }
 
 	/// <summary>
 	/// List of SteamIDs which voted yes

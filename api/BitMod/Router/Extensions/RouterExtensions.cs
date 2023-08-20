@@ -10,6 +10,12 @@ namespace BitMod.Router.Extensions;
 public static class RouterExtensions
 {
 
+	public static void ConfigUpdated(this RouterContext context, LilikoiMutator self)
+	{
+		context.Register( () => new ConfigUpdateAssembler(context.Logger) );
+		context.Append<ConfigUpdatedRegistry, string>(self);
+	}
+
 	/// <summary>
 	/// Register this mutator as a hook
 	/// </summary>

@@ -2,7 +2,6 @@
 using System.Reflection;
 
 using BattleBitAPI.Common;
-using BattleBitAPI.Common.Enums;
 using BattleBitAPI.Server;
 
 using BitMod.Attributes.Targets;
@@ -21,7 +20,7 @@ public class PluginWildcards : GlobalSetup
 	public class Host
 	{
 		[BitEvent]
-		public async Task GetRelevant(PlayerJoinedSquadEventArgs ev, BitPlayer player, BitServer gameServer)
+		public async Task GetRelevant(PlayerConnectedEventArgs ev, BitPlayer player, BitServer gameServer)
 		{
 			Assert.NotNull(player, "player != null");
 			Assert.NotNull(gameServer, "gameServer != null");
@@ -38,7 +37,7 @@ public class PluginWildcards : GlobalSetup
 
 
 		mod.Context.Load("invoke_test", typeof(Host));
-		mod.Invoker.Event( new PlayerJoinedSquadEventArgs( server, player, Squads.Ace));
+		mod.Invoker.Event( new PlayerConnectedEventArgs( server, player ));
 
 		Assert.Fail("Did not reach container host");
 	}

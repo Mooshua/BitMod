@@ -1,4 +1,5 @@
 using BitMod.Configuration.Model;
+using BitMod.Public;
 
 using Serilog;
 
@@ -7,16 +8,20 @@ namespace BitMod.Flags.Configuration;
 public class FlagFile
 {
 
-	private IConfigObject _configObject;
-	private ILogger _logger;
+	public const string NAME = "flags";
 
-	private Dictionary<string, FlagGroup> _groups = new();
-	private FlagGroup _default;
+	private readonly IConfigurationSystem _configurationSystem;
+	private readonly IConfigObject _configObject;
+	private readonly ILogger _logger;
 
-	public FlagFile(IConfigObject configObject, ILogger logger)
+	private readonly Dictionary<string, FlagGroup> _groups = new();
+	private readonly FlagGroup _default;
+
+	public FlagFile(IConfigObject configObject, ILogger logger, IConfigurationSystem configurationSystem)
 	{
 		_configObject = configObject;
 		_logger = logger;
+		_configurationSystem = configurationSystem;
 		_default = Get("#default");
 	}
 
@@ -34,13 +39,13 @@ public class FlagFile
 			   ?.Where(kv => kv.Value != null)
 		   ?? Enumerable.Empty<KeyValuePair<IConfigSymbol, IConfigSymbol>>();
 
-	public FlagGroup Get(string key)
+	public FlagGroup Get(string key = "#default")
 	{
 		if (_groups.TryGetValue(key, out var cached))
 			return cached;
 
 		List<string> seen = new();
-		FlagGroup group = new();
+		FlagGroup group = new(_configurationSystem);
 
 		//	Inherit from default
 		if (_default != null)

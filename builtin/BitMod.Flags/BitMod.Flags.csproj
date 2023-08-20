@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>bitmod_flags</AssemblyName>
@@ -12,15 +12,10 @@
         <PublishDir>../../build/plugins/$(AssemblyName)</PublishDir>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
-    
-    
+
+
     <ItemGroup>
       <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
-    </ItemGroup>
-    
-    
-    <ItemGroup>
-      <Folder Include="Attribute\" />
     </ItemGroup>
 
 </Project>

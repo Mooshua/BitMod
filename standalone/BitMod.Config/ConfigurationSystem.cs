@@ -1,4 +1,5 @@
 ﻿using BitMod.Config.Cache;
+using BitMod.Config.Implementation;
 using BitMod.Configuration.Model;
 using BitMod.Public;
 
@@ -32,4 +33,7 @@ public class ConfigurationSystem : IConfigurationSystem
 
 	public IConfigObject Get(string name)
 		=> _parent.Get<ConfigCache>().GetObject(name);
+
+	public IConfigSymbol Fake(string symbol)
+		=> new ConfigSymbol(symbol);
 }

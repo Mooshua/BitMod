@@ -1,7 +1,3 @@
-[submodule "upstream/BattleBitAPI"]
-	path = upstream/BattleBitAPI
-	url = https://github.com/Mooshua/BattleBit-Community-Server-API/
-	branch = feat/gameserverstate
 [submodule "upstream/DotNetCorePlugins"]
 	path = upstream/DotNetCorePlugins
 	url = https://github.com/Mooshua/DotNetCorePlugins

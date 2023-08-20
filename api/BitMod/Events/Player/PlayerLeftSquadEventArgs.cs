@@ -1,5 +1,5 @@
 ﻿using BattleBitAPI.Common;
-using BattleBitAPI.Common.Enums;
+using BattleBitAPI.Server;
 
 using BitMod.Compatibility;
 using BitMod.Events.Accessors;
@@ -17,9 +17,9 @@ namespace BitMod.Events.Player
         /// <summary>
         /// The squad the player left.
         /// </summary>
-        public Squads Squads { get; }
+        public Squad<BitPlayer> Squads { get; }
 
-        internal PlayerLeftSquadEventArgs(BitServer server, BitPlayer player, Squads squad)
+        internal PlayerLeftSquadEventArgs(BitServer server, BitPlayer player, Squad<BitPlayer> squad)
         {
             Player = player;
             Squads = squad;

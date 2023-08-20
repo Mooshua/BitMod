@@ -1,5 +1,6 @@
 ﻿using BattleBitAPI.Common;
-using BattleBitAPI.Common.Enums;
+using BattleBitAPI.Common;
+using BattleBitAPI.Server;
 
 using BitMod.Compatibility;
 using BitMod.Events.Accessors;
@@ -17,9 +18,9 @@ namespace BitMod.Events.Player
         /// <summary>
         /// The squad the player joined.
         /// </summary>
-        public Squads Squads { get; }
+        public Squad<BitPlayer> Squads { get; }
 
-        public PlayerJoinedSquadEventArgs(BitServer server, BitPlayer player, Squads squad)
+        public PlayerJoinedSquadEventArgs(BitServer server, BitPlayer player, Squad<BitPlayer> squad)
         {
             Player = player;
             Squads = squad;

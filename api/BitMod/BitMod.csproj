@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>BitMod</RootNamespace>
@@ -14,10 +14,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\upstream\BattleBitAPI\BattleBitAPI\BattleBitAPI.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
+      <PackageReference Include="CommunityServerAPI" Version="1.0.2.2" />
       <PackageReference Include="Lilikoi" Version="0.1.0-prerelease.28" />
       <PackageReference Include="Serilog" Version="3.0.2-dev-02044" />
     </ItemGroup>

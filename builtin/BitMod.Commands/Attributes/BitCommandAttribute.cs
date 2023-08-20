@@ -1,5 +1,5 @@
 ﻿using BitMod.Attributes.Internal;
-using BitMod.Commands.Attributes.Inject;
+using BitMod.Commands.Attributes.Parameters;
 using BitMod.Commands.Handlers;
 using BitMod.Commands.Router;
 using BitMod.Commands.Sources;

@@ -28,8 +28,8 @@ public sealed class BitMod : Mount
 		var context = new PluginContext( this );
 		var invoker = new PluginInvoker( context );
 
-		_server = new ServerListener<BitPlayer, BitServer>(new RoutingHandlerFactory(invoker));
-		var listener = new RoutingHandler(_server, invoker);
+		_server = new ServerListener<BitPlayer, BitServer>();
+		var listener = new RoutingHandler(_server, invoker, logger);
 
 		Store(context);
 		Store(invoker);

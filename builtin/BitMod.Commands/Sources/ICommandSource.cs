@@ -8,8 +8,9 @@ public interface ICommandSource
 {
 
 	/// <summary>
-	/// Whether or not this command is from a gameserver
-	/// or another source (eg a web panel)
+	/// Whether or not this command is from a player
+	/// or another source (eg a web panel).
+	/// If this is true, then there is a BitPlayer object.
 	/// </summary>
 	public bool IsRemote { get; }
 
@@ -17,8 +18,16 @@ public interface ICommandSource
 	/// Whether or not this source is authenticated
 	/// as a Steam user. This is false if the command
 	/// is from an anonymous system like RCON or a web panel.
+	/// If this is true, there is a SteamID.
 	/// </summary>
 	public bool IsAuthenticated { get; }
+
+	/// <summary>
+	/// Whether or not the command is associated with
+	/// a gameserver.
+	/// If this is true, there is a BitServer object.
+	/// </summary>
+	public bool IsAssociatedWithGameServer { get; }
 
 	/// <summary>
 	/// If the source is authenticated, then this will be

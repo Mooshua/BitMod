@@ -23,6 +23,8 @@ public class InGameSource : ICommandSource
 
 	public bool IsAuthenticated => true;
 
+	public bool IsAssociatedWithGameServer => true;
+
 	public ulong Steam64 => _player.SteamID;
 
 	public BitServer? GameServer => _server;

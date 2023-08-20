@@ -1,6 +1,7 @@
 ﻿using BitMod.Attributes.Injects;
 using BitMod.Commands.Attributes;
-using BitMod.Commands.Attributes.Inject;
+using BitMod.Commands.Attributes.Parameters;
+using BitMod.Commands.Handlers;
 using BitMod.Commands.Sources;
 using BitMod.Compatibility;
 
@@ -56,7 +57,11 @@ public class VotekickCommands
 		}
 	}
 
-	public async Task OnStartVotekick([CommandSender] ICommandSource source, [RelevantGameserver] BitServer server)
+	[BitCommand("votekick", "")]
+	public async Task OnStartVotekick(
+		[CommandSender] ICommandSource source,
+		[RelevantGameserver] BitServer server,
+		[CommandArg(0)] CommandArg target)
 	{
 
 	}

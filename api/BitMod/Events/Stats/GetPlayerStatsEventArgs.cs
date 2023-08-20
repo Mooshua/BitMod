@@ -1,11 +1,12 @@
 ﻿using BattleBitAPI.Common;
-using BattleBitAPI.Common.Data;
 
+using BitMod.Compatibility;
+using BitMod.Events.Accessors;
 using BitMod.Events.Base;
 
 namespace BitMod.Events.Stats
 {
-    public class GetPlayerStatsEventArgs : IProducerArgs<PlayerStats>
+    public class GetPlayerStatsEventArgs : IProducerArgs<PlayerStats>, IGameserverEvent
     {
         /// <summary>
         /// The player's SteamID
@@ -17,10 +18,14 @@ namespace BitMod.Events.Stats
         /// </summary>
         public PlayerStats OfficialStats { get; }
 
-        public GetPlayerStatsEventArgs(ulong steamID, PlayerStats officialStats)
+        public GetPlayerStatsEventArgs(BitServer server, ulong steamID, PlayerStats officialStats)
         {
             SteamID = steamID;
             OfficialStats = officialStats;
+            Server = server;
         }
+
+        /// <inheritdoc />
+        public BitServer Server { get; }
     }
 }

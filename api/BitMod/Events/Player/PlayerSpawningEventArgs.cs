@@ -1,5 +1,4 @@
 ﻿using BattleBitAPI.Common;
-using BattleBitAPI.Common.Arguments;
 
 using BitMod.Compatibility;
 using BitMod.Events.Accessors;

@@ -1,6 +1,8 @@
 ﻿using System;
 
+using BitMod.Configuration.Model;
 using BitMod.Events.Base;
+using BitMod.Events.Config;
 using BitMod.Internal.Registries;
 using BitMod.Plugins.Events;
 
@@ -24,6 +26,12 @@ public class PluginInvoker
 	{
 		var chain = Context.Get<SimpleEventRegistry, Type>(typeof(TEventArgs));
 		chain?.Invoke( EventInput.From(args) );
+	}
+
+	public void ConfigUpdate(string fileName, IConfigObject updated)
+	{
+		var chain = Context.Get<ConfigUpdatedRegistry, string>(fileName);
+		chain?.Invoke( EventInput.From( new ConfigUpdatedEventArgs(fileName, updated), updated) );
 	}
 
 	public bool Hook<TEventArgs>(TEventArgs args, bool defaultValue = false)

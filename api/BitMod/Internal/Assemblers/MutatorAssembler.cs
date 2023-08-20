@@ -20,6 +20,6 @@ internal class MutatorAssembler : BaseAssembler<MutatorEventRegistry>
 	}
 
 	public override MutatorEventRegistry Assemble(IEnumerable<LilikoiContainer> containers)
-		=> new (containers.Select(container => new MutatorEventHandler(container)).ToList(), _logger);
+		=> new (containers.Select(container => new SimpleEventHandler(container)).ToList(), _logger);
 
 }

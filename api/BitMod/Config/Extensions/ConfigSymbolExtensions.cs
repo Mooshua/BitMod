@@ -18,7 +18,7 @@ public static class ConfigSymbolExtensions
 		return symbol.AsInt.Value;
 	}
 
-	public static double Float(this IConfigSymbol symbol, float fallback, float min = float.MinValue, float max = float.MaxValue)
+	public static double Float(this IConfigSymbol symbol, double fallback, double min = double.MinValue, double max = double.MaxValue)
 	{
 		if (symbol == null)
 			return fallback;
@@ -31,6 +31,9 @@ public static class ConfigSymbolExtensions
 
 		return symbol.AsFloat.Value;
 	}
+
+	public static TimeSpan AsSeconds(this IConfigSymbol symbol, double fallback, double min = double.MinValue, double max = double.MaxValue)
+		=> TimeSpan.FromSeconds(Float(symbol, fallback, min, max));
 
 	public static ushort AsPort(this IConfigSymbol symbol, ushort fallback)
 		=> (ushort)symbol.Int(fallback, 0, ushort.MaxValue);

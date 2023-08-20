@@ -2,15 +2,13 @@
 using System.Threading.Tasks;
 
 using BattleBitAPI.Common;
-using BattleBitAPI.Common.Arguments;
-using BattleBitAPI.Common.Data;
-using BattleBitAPI.Common.Enums;
 using BattleBitAPI.Server;
 
 using BitMod.Compatibility;
 using BitMod.Events.Player;
 using BitMod.Events.Result;
 using BitMod.Events.Server;
+using BitMod.Events.Squad;
 using BitMod.Events.Stats;
 using BitMod.Internal.Public;
 
@@ -42,10 +40,10 @@ public class RoutingGameserver : BitServer
 	public override async Task OnPlayerSpawned(BitPlayer player)
 		=> _invoker.Event(new PlayerSpawnedEventArgs(this, player));
 
-	public override async Task<OnPlayerSpawnArguments> OnPlayerSpawning(BitPlayer player, OnPlayerSpawnArguments request)
+	public override async Task<OnPlayerSpawnArguments?> OnPlayerSpawning(BitPlayer player, OnPlayerSpawnArguments request)
 		=> _invoker.Produce<PlayerSpawningEventArgs, SpawnRequest>(new PlayerSpawningEventArgs(this, player, request), new SpawnRequest(request));
 
-	public override async Task OnAPlayerKilledAnotherPlayer(OnPlayerKillArguments<BitPlayer> args)
+	public override async Task OnAPlayerDownedAnotherPlayer(OnPlayerKillArguments<BitPlayer> args)
 		=> _invoker.Event(new PlayerKilledPlayerEventArgs(this, args.Killer, args.KillerPosition, args.Victim, args.VictimPosition, args.KillerTool, args.BodyPart, args.SourceOfDamage));
 
 	public override async Task OnPlayerChangedRole(BitPlayer player, GameRole role)
@@ -54,13 +52,23 @@ public class RoutingGameserver : BitServer
 	public override async Task OnPlayerChangeTeam(BitPlayer player, Team team)
 		=> _invoker.Event(new PlayerChangedTeamEventArgs(this, player, team));
 
+	public override async Task<bool> OnPlayerRequestingToChangeTeam(BitPlayer player, Team requestedTeam)
+		=> _invoker.Hook(new PlayerChangingTeamEventArgs(this, player, requestedTeam), true);
 
-	public override async Task OnPlayerLeftSquad(BitPlayer player, Squads left)
-		=> _invoker.Event(new PlayerLeftSquadEventArgs(this, player, left));
+	public override async Task OnPlayerJoinedSquad(BitPlayer player, Squad<BitPlayer> squad)
+		=> _invoker.Event(new PlayerJoinedSquadEventArgs(this, player, squad));
 
-	public override async Task OnPlayerJoinedSquad(BitPlayer player, Squads joined)
-		=> _invoker.Event(new PlayerJoinedSquadEventArgs(this, player, joined));
+	public override async Task OnPlayerLeftSquad(BitPlayer player, Squad<BitPlayer> squad)
+		=> _invoker.Event(new PlayerLeftSquadEventArgs(this, player, squad));
 
+	public override async Task OnSquadPointsChanged(Squad<BitPlayer> squad, int newPoints)
+		=> _invoker.Event(new SquadPointsChangedEventArgs(this, squad, newPoints));
+
+	public override async Task OnPlayerGivenUp(BitPlayer player)
+		=> _invoker.Event(new PlayerGivenUpEventArgs(this, player));
+
+	public override async Task OnAPlayerRevivedAnotherPlayer(BitPlayer from, BitPlayer to)
+		=> _invoker.Event(new PlayerRevivedEventArgs(this, from, to));
 
 	public override async Task<bool> OnPlayerTypedMessage(BitPlayer sender, ChatChannel channel, string message)
 		=> _invoker.Hook(new PlayerTypedMessageEventArgs(this, sender, channel, message), true);
@@ -77,9 +85,6 @@ public class RoutingGameserver : BitServer
 
 	public override async Task OnDisconnected()
 		=> _invoker.Event(new GameServerDisconnectedEventArgs(this));
-
-	public override async Task OnReconnected()
-		=> _invoker.Event(new GameServerReconnectedEventArgs(this));
 
 	public override async Task OnTick()
 		=> _invoker.Event(new GameServerTickEventArgs(this));
@@ -100,9 +105,23 @@ public class RoutingGameserver : BitServer
 	public override async Task OnSavePlayerStats(ulong steamId, PlayerStats currentStats)
 		=> _invoker.Event(new SavingPlayerStatsEventArgs(steamId, currentStats));
 
-	public override async Task<PlayerStats> OnGetPlayerStats(ulong steamId, PlayerStats fromOfficialServers)
-		=> _invoker.Produce(new GetPlayerStatsEventArgs(steamId, fromOfficialServers), fromOfficialServers);
+	public override async Task OnPlayerJoiningToServer(ulong steamID, PlayerJoiningArguments args)
+	{
+		var statsArgs = new GetPlayerStatsEventArgs(this, steamID, args.Stats);
+		var matchmakingArgs = new GameServerMatchmakingEventArgs(this, steamID);
+		var stats = _invoker.Produce(statsArgs, () => args.Stats);
+		var matchmaking = _invoker.Produce(matchmakingArgs, () => new PlayerMatchmaking());
+
+		args.Stats = stats;
+		args.Team = matchmaking.Team;
+		args.Squad = matchmaking.Squad;
+	}
 
 	#endregion
 
+	public override Task OnSessionChanged(long oldSessionID, long newSessionID)
+	{
+		//	TODO: WTH is this? Implement event once documented
+		return base.OnSessionChanged(oldSessionID, newSessionID);
+	}
 }

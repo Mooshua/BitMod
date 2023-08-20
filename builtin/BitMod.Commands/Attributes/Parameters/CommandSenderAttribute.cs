@@ -5,7 +5,7 @@ using BitMod.Internal;
 using Lilikoi.Attributes.Typed;
 using Lilikoi.Context;
 
-namespace BitMod.Commands.Attributes.Inject;
+namespace BitMod.Commands.Attributes.Parameters;
 
 public class CommandSenderAttribute : LkTypedParameterAttribute<ICommandSource, EventInput>
 {

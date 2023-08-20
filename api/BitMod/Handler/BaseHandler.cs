@@ -23,16 +23,30 @@ public abstract class BaseHandler<TPlayer, TGameServer> : IDisposable
 	public BaseHandler(ServerListener<TPlayer, TGameServer> server)
 	{
 		_server = server;
+		_server.LogLevel |= LogLevel.All;
 
 		_server.OnGameServerConnecting += OnGameServerConnecting;
+		_server.OnCreatingGameServerInstance += OnCreatingGameServerInstance;
+		_server.OnCreatingPlayerInstance += OnCreatingPlayerInstance;
+
+		_server.OnLog += OnLog;
 	}
 
 	public void Dispose()
 	{
-
 		_server.OnGameServerConnecting -= OnGameServerConnecting;
+		_server.OnCreatingGameServerInstance -= OnCreatingGameServerInstance;
+		_server.OnCreatingPlayerInstance -= OnCreatingPlayerInstance;
+
+		_server.OnLog -= OnLog;
 	}
 
 	public abstract Task<bool> OnGameServerConnecting(IPAddress arg);
-	
+
+	public abstract TGameServer OnCreatingGameServerInstance(IPAddress address, ushort port);
+
+	public abstract TPlayer OnCreatingPlayerInstance(ulong steamId);
+
+	public abstract void OnLog(LogLevel name, string value, object? sender);
+
 }

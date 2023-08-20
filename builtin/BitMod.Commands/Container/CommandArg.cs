@@ -2,10 +2,19 @@
 
 public class CommandArg
 {
+	public CommandArg()
+	{
+		Exists = false;
+		AsString = string.Empty;
+	}
+
 	public CommandArg(string asString)
 	{
 		AsString = asString;
+		Exists = true;
 	}
+
+	public bool Exists { get; }
 
 	public string AsString { get; }
 

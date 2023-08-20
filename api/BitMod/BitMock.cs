@@ -29,6 +29,11 @@ public static class BitMock
 		{
 			throw new NotImplementedException();
 		}
+
+		public IConfigSymbol Fake(string symbol)
+		{
+			throw new NotImplementedException();
+		}
 	}
 
 	public class MockInSystem : IPluginSystem

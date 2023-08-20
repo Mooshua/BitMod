@@ -9,7 +9,7 @@ namespace BitMod.Internal.Registries;
 
 internal class MutatorEventRegistry
 {
-	public MutatorEventRegistry(List<MutatorEventHandler> children, ILogger logger)
+	public MutatorEventRegistry(List<SimpleEventHandler> children, ILogger logger)
 	{
 		Children = children;
 		_logger = logger;
@@ -17,11 +17,11 @@ internal class MutatorEventRegistry
 
 	private ILogger _logger;
 
-	public List<MutatorEventHandler> Children { get; }
+	public List<SimpleEventHandler> Children { get; }
 
 	public void Invoke(EventInput input)
 	{
-		foreach (MutatorEventHandler eventHandler in Children)
+		foreach (SimpleEventHandler eventHandler in Children)
 		{
 			try
 			{

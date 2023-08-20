@@ -1,6 +1,14 @@
 <Project>
 
     <PropertyGroup>
+        <!--Where the dev build should be by default-->
+        <BitModDev Condition=" '$(BitModDev)' == '' " >$(MSBuildThisFileDirectory)\dev</BitModDev>
+
+        <!--Ditto for publishes-->
+        <BitModBuild Condition=" '$(BitModDev)' == '' " >$(MSBuildThisFileDirectory)\dev</BitModBuild>
+    </PropertyGroup>
+
+    <PropertyGroup>
         <!--Language version-->
         <LangVersion>11</LangVersion>
         <Deterministic>false</Deterministic>

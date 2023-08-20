@@ -12,6 +12,8 @@ public class BitCommandRequireAttribute : LkTypedWrapAttribute<EventInput, Task>
 {
 	public bool InGame { get; set; } = false;
 
+	public bool HasServer { get; set; } = false;
+
 	public bool IsLoggedIn { get; set; } = false;
 
 	public BitCommandRequireAttribute()
@@ -34,6 +36,9 @@ public class BitCommandRequireAttribute : LkTypedWrapAttribute<EventInput, Task>
 
 		if (IsLoggedIn && !sender.IsAuthenticated)
 			return Reject(sender, "You must have an associated steamid to use this command!");
+
+		if (HasServer && !sender.IsAssociatedWithGameServer)
+			return Reject(sender, "You must associate this command with a gameserver!");
 
 		return WrapResult<Task>.Continue();
 	}
