@@ -10,8 +10,8 @@
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU</Platforms>
 
-        <PublishDir>../../build</PublishDir>
-        <OutDir>../../dev</OutDir>
+        <PublishDir>$(BitModBuild)</PublishDir>
+        <OutDir>$(BitModDev)</OutDir>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 

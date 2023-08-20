@@ -5,7 +5,7 @@
         <BitModDev Condition=" '$(BitModDev)' == '' " >$(MSBuildThisFileDirectory)\dev</BitModDev>
 
         <!--Ditto for publishes-->
-        <BitModBuild Condition=" '$(BitModDev)' == '' " >$(MSBuildThisFileDirectory)\dev</BitModBuild>
+        <BitModBuild Condition=" '$(BitModBuild)' == '' " >$(MSBuildThisFileDirectory)\build</BitModBuild>
     </PropertyGroup>
 
     <PropertyGroup>

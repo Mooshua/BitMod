@@ -7,8 +7,8 @@
 
         <AssemblyName>bitmod_provision</AssemblyName>
 
-        <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
-        <PublishDir>../../build/plugins/$(AssemblyName)</PublishDir>
+        <OutDir>$(BitModDev)/plugins/$(AssemblyName)/</OutDir>
+        <PublishDir>$(BitModBuild)/plugins/$(AssemblyName)/</PublishDir>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
