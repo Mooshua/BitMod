@@ -28,7 +28,7 @@ public class ConfigurationSystem : IConfigurationSystem
 		_logger = _parent.Logger;
 
 		//	Set up the cache
-		_parent.Store(new ConfigCache(Options, Serializer, _logger));
+		_parent.Store(new ConfigCache(Options, Serializer, _logger, _parent.Invoker));
 	}
 
 	public IConfigObject Get(string name)

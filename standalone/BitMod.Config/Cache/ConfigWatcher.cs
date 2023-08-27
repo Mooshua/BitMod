@@ -2,6 +2,7 @@
 
 using BitMod.Config.Implementation;
 using BitMod.Configuration.Model;
+using BitMod.Internal.Public;
 
 using Serilog;
 
@@ -24,19 +25,22 @@ public class ConfigWatcher
 
 	private ILogger _logger;
 
+	private PluginInvoker _invoker;
+
 	private KVSerializer _serializer;
 
 	private KVSerializerOptions _serializerOptions;
 
 	private FileSystemWatcher _watcher;
 
-	public ConfigWatcher(string configFileName, ILogger logger, KVSerializer serializer, KVSerializerOptions serializerOptions)
+	public ConfigWatcher(string configFileName, ILogger logger, KVSerializer serializer, KVSerializerOptions serializerOptions, PluginInvoker invoker)
 	{
 		_configFileName = configFileName;
 		_configFilePath = Path.Join(System.Environment.CurrentDirectory, CONFIG_PATH, $"{_configFileName}.{CONFIG_EXT}");
 		_logger = logger;
 		_serializer = serializer;
 		_serializerOptions = serializerOptions;
+		_invoker = invoker;
 		//	Create an empty config object
 		_configObject = new ConfigObject(
 			new KVObject(_configFileName, Enumerable.Empty<KVObject>()));
@@ -59,6 +63,8 @@ public class ConfigWatcher
 	{
 		_logger.Information("[BitMod Config] Reloading config file {@Name} due to update.", _configFileName);
 		TryRead();
+
+		_invoker.ConfigUpdate(_configFileName, _configObject);
 	}
 
 
@@ -69,7 +75,6 @@ public class ConfigWatcher
 			using (var reader = File.OpenRead(_configFilePath))
 			{
 				var kvObject = _serializer.Deserialize(reader, _serializerOptions);
-
 				_configObject = new ConfigObject(kvObject);
 			}
 		}
