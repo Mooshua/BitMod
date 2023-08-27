@@ -46,7 +46,6 @@ public class ConfigWatcher
 			new KVObject(_configFileName, Enumerable.Empty<KVObject>()));
 
 		_watcher = new FileSystemWatcher();
-		_watcher = new FileSystemWatcher();
 		_watcher.Path = Path.Join(System.Environment.CurrentDirectory, CONFIG_PATH);
 		_watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.Size;
 		_watcher.Filter = $"{configFileName}.{CONFIG_EXT}";

@@ -1,20 +1,21 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-
-using BitMod.Config;
+﻿using BitMod.Config;
 using BitMod.Logging;
 using BitMod.Plugins;
 
-var configSystem = new ConfigurationSystem();
-var logging = new LoggingSystem(configSystem);
-var pluginSystem = new PluginSystem();
+public static class Program
+{
+	public static void Main()
+	{
+		var configSystem = new ConfigurationSystem();
+		var logging = new LoggingSystem(configSystem);
+		var pluginSystem = new PluginSystem();
 
-var log = logging.GetLogger();
+		var log = logging.GetLogger();
 
-var bitmod = new BitMod.BitMod(log, configSystem, pluginSystem);
+		log.Information("Launching BitMod...");
 
-bitmod.Start();
+		var bitmod = new BitMod.BitMod(log, configSystem, pluginSystem);
 
-ManualResetEvent close = new ManualResetEvent(false);
-
-close.WaitOne();
+		bitmod.Start();
+	}
+}

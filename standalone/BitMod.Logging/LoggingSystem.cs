@@ -1,4 +1,6 @@
-﻿using BitMod.Public;
+﻿using System.IO;
+
+using BitMod.Public;
 
 using Serilog;
 using Serilog.Events;
@@ -28,7 +30,7 @@ public class LoggingSystem
 				LevelAlias.Minimum,
 				theme: AnsiConsoleTheme.Sixteen,
 				outputTemplate: "[{Timestamp:HH:mm:ss}] {Properties} {Level:u4}: {Message:lj}{NewLine}{Exception}" )
-			.WriteTo.File(Path.Join(System.Environment.CurrentDirectory, LOG_PATH, LOG_NAME), LogEventLevel.Debug)
+			.WriteTo.File(Path.Join(System.Environment.CurrentDirectory, LOG_PATH, LOG_NAME), LogEventLevel.Debug, rollingInterval: RollingInterval.Day, retainedFileCountLimit: 60)
 			.CreateLogger();
 	}
 }

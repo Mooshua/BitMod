@@ -23,7 +23,7 @@ public abstract class BaseHandler<TPlayer, TGameServer> : IDisposable
 	public BaseHandler(ServerListener<TPlayer, TGameServer> server)
 	{
 		_server = server;
-		_server.LogLevel |= LogLevel.All;
+		_server.LogLevel = LogLevel.All;
 
 		_server.OnGameServerConnecting += OnGameServerConnecting;
 		_server.OnCreatingGameServerInstance += OnCreatingGameServerInstance;

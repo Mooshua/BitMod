@@ -15,7 +15,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
-      <ProjectReference Include="..\BitMod.Flags\BitMod.Flags.csproj" />
     </ItemGroup>
 
 </Project>

@@ -33,5 +33,5 @@ public class RoutingHandler : BaseHandler<BitPlayer, BitServer>
 		=> new BitPlayer();
 
 	public override void OnLog(LogLevel name, string value, object? sender)
-		=> _logger.Verbose("[API] {@Level} {@Value} ({@Sender})", name, value, sender);
+		=> _logger.Verbose("[API] {@Level} {@Value}", name, value);
 }

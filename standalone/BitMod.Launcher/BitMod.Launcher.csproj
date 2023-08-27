@@ -10,6 +10,8 @@
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU</Platforms>
 
+        <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+
         <PublishDir>$(BitModBuild)</PublishDir>
         <OutDir>$(BitModDev)</OutDir>
         <LangVersion>latest</LangVersion>
