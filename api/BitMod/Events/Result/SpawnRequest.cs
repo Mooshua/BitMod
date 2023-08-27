@@ -18,7 +18,6 @@ public class SpawnRequest
 	public PlayerSpawningPosition RequestedPoint
 	{
 		get => _request.RequestedPoint;
-		set => _request.RequestedPoint = value;
 	}
 
 	public PlayerLoadout Loadout
