@@ -26,4 +26,6 @@
         <toc-element topic="Plugins-Routing.topic"/>
     </toc-element>
 
+    <toc-element topic="Embedding-BitMod.topic"/>
+
 </instance-profile>

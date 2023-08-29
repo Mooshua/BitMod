@@ -2,7 +2,7 @@
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <variables>
         <color-preset>vivid</color-preset>
-        <primary-color>halloween</primary-color>
+        <primary-color>metallic</primary-color>
         <header-logo>../images/bitmod.svg</header-logo>
     </variables>
     <build-profile instance="BitMod Docs"></build-profile>
@@ -12,5 +12,6 @@
         <link href="https://github.com/mooshua/bitmod">Source</link>
         <link href="https://github.com/Mooshua/BitMod/blob/master/LICENSE">License</link>
         <link href="https://github.com/Mooshua/BitMod/issues">Issues</link>
+        <link href="https://discord.gg/7TEwFT2hpg">Discord</link>
     </footer>
 </buildprofiles>

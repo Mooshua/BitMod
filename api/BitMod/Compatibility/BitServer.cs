@@ -11,7 +11,6 @@ public class BitServer : GameServer<BitPlayer>, IBitObject
 	public override string ToString()
 		=> $"{this.GameIP}:{this.GamePort}";
 
-
 	public static implicit operator string(BitServer value)
 		=> value.ToString();
 }

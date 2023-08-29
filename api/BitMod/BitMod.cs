@@ -66,11 +66,6 @@ public sealed class BitMod : Mount
 
 		Logger.Information("[BitMod] Starting server on {@IP}:{@Port}", ip.ToString(), port);
 		_server.Start(ip, port);
-
-		while (true)
-		{
-
-		}
 	}
 
 	public void Stop()

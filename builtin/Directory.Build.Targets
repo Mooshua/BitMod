@@ -1,0 +1,5 @@
+<Project>
+    <PropertyGroup>
+        <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    </PropertyGroup>
+</Project>

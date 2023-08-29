@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <AssemblyName>sample_plugin</AssemblyName>
 
         <OutDir>../../dev/plugins/$(AssemblyName)/</OutDir>
         <PublishDir>../../build/plugins/$(AssemblyName)</PublishDir>
@@ -14,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
+      <ProjectReference Include="..\..\builtin\BitMod.Flags\BitMod.Flags.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,10 @@
 ﻿using BitMod.Attributes.Injects;
 using BitMod.Attributes.Mutators;
 using BitMod.Attributes.Targets;
+using BitMod.Configuration.Model;
 using BitMod.Events.Meta;
+using BitMod.Events.Server;
+using BitMod.Flags.Attribute;
 
 using Lilikoi.Standard;
 
@@ -11,12 +14,18 @@ namespace SamplePlugin.SampleEvents;
 
 public class EventListener
 {
+
 	[BitEvent]
 	[Log]
-	public Task OnEvent(PluginLoadEvent ev, ILogger logger)
+	public async Task OnEvent(PluginLoadEvent ev, ILogger logger)
 	{
 		logger.Information("hello there, {@Name}!", ev.Name);
+	}
 
-		return Task.CompletedTask;
+	[BitEvent]
+	[Log]
+	public async Task OnServerConnect(GameServerConnectedEventArgs ev, [Flag("sample_flag", "nothing!")] IConfigSymbol flag, ILogger logger)
+	{
+		logger.Information("Hello new gameserver! Your flag value is {@Value}.", flag.Symbol);
 	}
 }

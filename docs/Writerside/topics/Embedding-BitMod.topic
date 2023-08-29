@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://helpserver.labs.jb.gg/help/schemas/mvp/html-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
+       title="Embedding BitMod" id="Embedding-BitMod">
+
+    <p>
+        BitMod has zero dependency on any kind of local filesystem.
+        As long as you are able to implement it's public interfaces, you can run
+        BitMod anywhere using any data source.
+
+        Pure bitmod plugins are completely portable and do not depend on the underlying runtime or filesystem.
+    </p>
+
+    <p>
+        (Individual plugins may use the filesystem, but that is something plugin authors
+        will have to go out of their way to use)
+    </p>
+
+    <chapter id="embedding-whats-possible" title="What's Possible?">
+        <p>
+            BitMod is designed to be used in a variety of simple and large-scale deployments
+            and is built with reflection on various modding frameworks released over the years.
+        </p>
+        <p>
+            While BitMod encourages filesystem configuration (as is present in the standard implementation),
+            it is not required--enabling advanced users to (i.e) use object storage or relational databases
+            to manage their BitMod deployment.
+        </p>
+        <p>
+            Configuration files could be stored in MongoDB, or logs could be funneled over
+            WebSockets to a gameserver panel. Plugins could be fetched from CI/CD workflows.
+            Plugins that do not use low-level .NET APIs (such as filesystem methods)
+            will be fully portable between BitMod runtimes.
+        </p>
+    </chapter>
+
+    <chapter id="embedding-logging" title="Logging">
+        <p>
+            Your BitMod runtime <emphasis>must</emphasis> provide a <code>ILogger</code>
+            object from SeriLog. The actual sinks here don't matter (you can even code your own) as long as
+            all of the methods in the Serilog ILogger interface are fully functional.
+        </p>
+        <p>
+            Failing to provide a functional ILogger will prevent BitMod from booting.
+        </p>
+    </chapter>
+
+    <chapter id="embedding-plugins" title="Plugins">
+        <p>
+            Your BitMod runtime <emphasis>must</emphasis> provide a <code>IPluginSystem</code> object
+            that will load and monitor running plugins.
+        </p>
+        <p>
+            This object does not need to be functional or have any of the hot-reloading
+            functionality of the built-in plugin system, but it should. What you do
+            with this interface is entirely up to you.
+        </p>
+        <p>
+            If you choose to load a plugin, you should call <code>PluginContext.Load(string, any)</code>
+            with a name unique to the plugin and either a <code>Type</code> or <code>Assembly</code>
+            which is scanned for Lilikoi containers.
+        </p>
+        <p>
+            If you choose to unload a plugin, you should call <code>PluginContext.Unload(string)</code>
+            with the unique name of the plugin you passed earlier. This will unregister all events,
+            but will do nothing to the underlying types or assemblies.
+        </p>
+    </chapter>
+
+    <chapter id="embedding-config" title="Config">
+        <p>
+            Your BitMod runtime <emphasis>must</emphasis> provide a fully functional <code>IConfigurationSystem</code>
+            object. Failing to do so will prevent BitMod from booting.
+        </p>
+        <p>
+            All a config system does is return a tree of <code>IConfigObject</code> and <code>IConfigSymbol</code> objects.
+            These can be in any format--JSON, YAML, etc. as long as they comply with the object-symbol semantics.
+        </p>
+        <note>
+            The default implementation uses Valve KeyValues; unless you have a good reason to the contrary,
+            you should probably stick with that for ease of use.
+        </note>
+    </chapter>
+
+    <chapter id="embedding-events" title="Standard Events">
+        <p>
+            Your BitMod runtime <emphasis>should</emphasis> emit certain events at certain times.
+            All of these are optional; with the worst case scenario being bugs cropping up in plugins.
+        </p>
+        <list>
+            <li>
+                <code>StandardInputEventArgs</code>
+                <p>
+                    When a full line is entered into the standard input,
+                    invoke this event with it's contents.
+                    Used by the command system and other things.
+                </p>
+            </li>
+            <li>
+                <code>ConfigUpdatedEventArgs</code>
+                <p>
+                    Used by built-in plugins to hot-reload
+                    config files without having to do expensive polling
+                    within hot loops.
+                </p>
+            </li>
+            <li>
+                <code>PluginLoad/UnloadEvent</code>
+                <p>
+                    Can be used by plugins. Optional.
+                </p>
+            </li>
+        </list>
+    </chapter>
+
+</topic>

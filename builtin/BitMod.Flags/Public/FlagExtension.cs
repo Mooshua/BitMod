@@ -15,13 +15,19 @@ public class FlagExtension : IExtension
 	public void Register(Mount mount)
 	{
 		var cfg = mount.Get<IConfigurationSystem>();
+		var logger = mount.Get<ILogger>();
 		var cfgObject = cfg.Get(FlagFile.NAME);
-		var flagFile = new FlagFile(cfgObject, mount.Get<ILogger>(), cfg);
-		mount.Store(flagFile);
+		var flagFile = new FlagFile(cfgObject, logger, cfg);
+
+		logger.Information("Registering FlagFile");
+		mount.Store<FlagFile>(flagFile);
 	}
 
 	public void Unregister(Mount mount)
 	{
+		var logger = mount.Get<ILogger>();
+		logger.Information("Unregistering FlagFile");
+
 		mount.Store<FlagFile>(null);
 	}
 }

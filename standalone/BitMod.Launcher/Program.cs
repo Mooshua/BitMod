@@ -1,4 +1,5 @@
 ﻿using BitMod.Config;
+using BitMod.Events.Core;
 using BitMod.Logging;
 using BitMod.Plugins;
 
@@ -17,5 +18,13 @@ public static class Program
 		var bitmod = new BitMod.BitMod(log, configSystem, pluginSystem);
 
 		bitmod.Start();
+
+		while (true)
+		{
+			var command = Console.ReadLine();
+
+			if (command != null)
+				bitmod.Invoker.Event(new StandardInputEventArgs(command));
+		}
 	}
 }

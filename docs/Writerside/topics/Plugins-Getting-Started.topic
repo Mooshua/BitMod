@@ -5,5 +5,40 @@
        xsi:noNamespaceSchemaLocation="https://helpserver.labs.jb.gg/help/schemas/mvp/topic.v2.xsd"
        title="Getting Started" id="Plugins-Getting-Started">
 
-    <p>Start typing here...</p>
+    <tip>
+        Page is still under development :^)
+    </tip>
+
+    <chapter id="getting-started-dependencies" title="Common Dependencies">
+        <list>
+            <li>
+                <code>BitMod</code>
+                <p>
+                    Contains the reference to the community server API
+                    and all event types
+                </p>
+            </li>
+            <li>
+                <code>BitMod.Commands</code>
+                <p>
+                    Contains code, types, and event handlers for the
+                    built-in command system
+                </p>
+            </li>
+            <li>
+                <code>BitMod.Flags</code>
+                <p>
+                    Contains code, types, and event handlers for
+                    the built-in flag system (very similar to ConVars)
+                </p>
+            </li>
+            <li>
+                <code>BitMod.Moderation</code>
+                <p>
+                    Contains event handlers and commands for common moderation
+                    tasks. Currently only supports votekicking
+                </p>
+            </li>
+        </list>
+    </chapter>
 </topic>

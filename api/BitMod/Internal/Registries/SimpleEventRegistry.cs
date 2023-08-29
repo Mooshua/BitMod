@@ -29,7 +29,7 @@ internal class SimpleEventRegistry
 			}
 			catch (Exception ex)
 			{
-				_logger.Warning(ex, "Event handler failed during execution!");
+				_logger.Warning(ex, "Event handler for {@Type} failed during execution!", input.Type?.FullName);
 				if (Environment.DoNotCatchEventExceptions)
 					throw;
 			}

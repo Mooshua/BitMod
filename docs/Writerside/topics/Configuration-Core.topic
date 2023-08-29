@@ -22,10 +22,10 @@
             {
                 //  Configures the port and IP where BitMod will listen for requests.
                 //  If this is not present, BitMod will listen on all IPs at port 9000.
-                "Listener"
+                "listener"
                 {
-                    "PublicIP"  "0.0.0.0"
-                    "Port"      "9000"
+                    "public_ip"  "0.0.0.0"
+                    "port"      "9000"
                 }
             }
         </code-block>
