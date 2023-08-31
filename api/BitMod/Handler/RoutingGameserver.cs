@@ -55,15 +55,6 @@ public class RoutingGameserver : BitServer
 	public override async Task<bool> OnPlayerRequestingToChangeTeam(BitPlayer player, Team requestedTeam)
 		=> _invoker.Hook(new PlayerChangingTeamEventArgs(this, player, requestedTeam), true);
 
-	public override async Task OnPlayerJoinedSquad(BitPlayer player, Squad<BitPlayer> squad)
-		=> _invoker.Event(new PlayerJoinedSquadEventArgs(this, player, squad));
-
-	public override async Task OnPlayerLeftSquad(BitPlayer player, Squad<BitPlayer> squad)
-		=> _invoker.Event(new PlayerLeftSquadEventArgs(this, player, squad));
-
-	public override async Task OnSquadPointsChanged(Squad<BitPlayer> squad, int newPoints)
-		=> _invoker.Event(new SquadPointsChangedEventArgs(this, squad, newPoints));
-
 	public override async Task OnPlayerGivenUp(BitPlayer player)
 		=> _invoker.Event(new PlayerGivenUpEventArgs(this, player));
 
@@ -75,6 +66,22 @@ public class RoutingGameserver : BitServer
 
 	public override async Task<bool> OnPlayerRequestingToChangeRole(BitPlayer player, GameRole role)
 		=> _invoker.Hook(new PlayerRequestingToChangeRoleEventArgs(this, player, role), true);
+
+	#endregion
+
+	#region Squad
+
+	public override async Task OnSquadLeaderChanged(Squad<BitPlayer> squad, BitPlayer newLeader)
+		=> _invoker.Event(new SquadLeaderChangedEventArgs(this, squad, newLeader));
+
+	public override async Task OnPlayerJoinedSquad(BitPlayer player, Squad<BitPlayer> squad)
+		=> _invoker.Event(new PlayerJoinedSquadEventArgs(this, player, squad));
+
+	public override async Task OnPlayerLeftSquad(BitPlayer player, Squad<BitPlayer> squad)
+		=> _invoker.Event(new PlayerLeftSquadEventArgs(this, player, squad));
+
+	public override async Task OnSquadPointsChanged(Squad<BitPlayer> squad, int newPoints)
+		=> _invoker.Event(new SquadPointsChangedEventArgs(this, squad, newPoints));
 
 	#endregion
 
