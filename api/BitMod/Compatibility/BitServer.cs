@@ -6,7 +6,7 @@ namespace BitMod.Compatibility;
 
 public class BitServer : GameServer<BitPlayer>, IBitObject, IMount
 {
-	public Mount Mount { get; }
+	public Mount Mount { get; } = new();
 
 	public void Store<T>(T value) where T : class
 		=> Mount.Store(value);
