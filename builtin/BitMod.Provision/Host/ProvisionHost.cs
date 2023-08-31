@@ -1,4 +1,5 @@
 using BattleBitAPI.Common;
+using BattleBitAPI.Server;
 
 using BitMod.Attributes.Injects;
 using BitMod.Attributes.Targets;
@@ -41,18 +42,20 @@ public class ProvisionHost
 		var globalAdapter = new ProvisionConfigAdapter(_config);
 		var localAdapter = globalAdapter.GetServer(server);
 
+		_logger.Information("Provision for for server {@Server}: {@Local}", server.ToString(), localAdapter);
+
 		if (localAdapter == null)
 			return;
 
 		if (localAdapter.HasMapcycle())
 		{
-			_logger.Verbose("Provisioning {@Server}'s mapcycle to {@Mapcycle}", server.ToString(), localAdapter.GetMapcycle());
+			_logger.Debug("Provisioning {@Server}'s mapcycle to {@Mapcycle}", server.ToString(), localAdapter.GetMapcycle());
 			server.MapRotation.SetRotation(localAdapter.GetMapcycle());
 		}
 
 		if (localAdapter.HasGamemodes())
 		{
-			_logger.Verbose("Provisioning {@Server}'s gamemodes to {@Gamemodes}", server.ToString(), localAdapter.GetGamemodes());
+			_logger.Debug("Provisioning {@Server}'s gamemodes to {@Gamemodes}", server.ToString(), localAdapter.GetGamemodes());
 			server.GamemodeRotation.SetRotation(localAdapter.GetGamemodes());
 		}
 	}

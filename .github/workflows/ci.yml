@@ -1,4 +1,4 @@
-name: BitMod.Tests
+name: BitMod.Nightlies
 
 on: [push, pull_request]
 
@@ -26,15 +26,15 @@ jobs:
           dotnet-quality: 'ga'
 
       - name: Build ${{ matrix.runtime }}
-        run: dotnet publish BitMod.sln -c Release -r ${{ matrix.runtime }}
+        run: dotnet publish BitMod.Stable.sln -c Release -r ${{ matrix.runtime }}
 
       - name: Upload Files
         uses: actions/upload-artifact@v3
         with:
-          name: nightly_${{ matrix.runtime }}
+          name: nightly-${{ matrix.runtime }}
           path: build/
   test:
-    name: Tests
+    name: Test Nightlies
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
