@@ -39,6 +39,9 @@
         <None Update="configs\core.cfg">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="configs\provisions.cfg">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>

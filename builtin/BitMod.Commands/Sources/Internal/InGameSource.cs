@@ -38,6 +38,6 @@ public class InGameSource : ICommandSource
 			_player.SteamID,
 			message);
 
-		_player.Message(message);
+		_player.SayToChat(message);
 	}
 }

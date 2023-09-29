@@ -8,6 +8,7 @@ using BitMod.Configuration.Model;
 using BitMod.Events.Meta;
 using BitMod.Events.Server;
 using BitMod.Provision.Config;
+using BitMod.Provision.Helpers;
 using BitMod.Public;
 
 using Lilikoi.Standard;
@@ -50,13 +51,27 @@ public class ProvisionHost
 		if (localAdapter.HasMapcycle())
 		{
 			_logger.Debug("Provisioning {@Server}'s mapcycle to {@Mapcycle}", server.ToString(), localAdapter.GetMapcycle());
+			MapcycleValidator.ValidateMaps(_logger, localAdapter.GetMapcycle());
 			server.MapRotation.SetRotation(localAdapter.GetMapcycle());
 		}
 
 		if (localAdapter.HasGamemodes())
 		{
 			_logger.Debug("Provisioning {@Server}'s gamemodes to {@Gamemodes}", server.ToString(), localAdapter.GetGamemodes());
+			GamemodeValidator.ValidateGamemodes(_logger, localAdapter.GetGamemodes());
 			server.GamemodeRotation.SetRotation(localAdapter.GetGamemodes());
+		}
+
+		if (localAdapter.HasLoadingText())
+		{
+			_logger.Debug("Provisioning {@Server}'s loading text to {@Text}", server.ToString(), localAdapter.GetLoadingText());
+			server.SetLoadingScreenText(localAdapter.GetLoadingText());
+		}
+
+		if (localAdapter.HasMinPlayers())
+		{
+			_logger.Debug("Provisioning {@Server}'s min players to {@MinPlayers}", server.ToString(), localAdapter.GetMinPlayers());
+			server.RoundSettings.PlayersToStart = (int) localAdapter.GetMinPlayers();
 		}
 	}
 }

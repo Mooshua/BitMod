@@ -28,8 +28,10 @@ public class ChatCommandHost
 		{
 			//	This is a command (starts with ! or /)
 			//	Send to command handler and prevent it from being shown in chat.
+			var withoutPrefix = ev.Message.Substring(1);
+
 			var source = new InGameSource(server, sender, _logger);
-			var input = CommandInput.FromString(source, ev.Message);
+			var input = CommandInput.FromString(source, withoutPrefix);
 
 			_logger.Information("Player {@Name} {@SteamId} used command: {@Command} {@Args} (From string {@Message})",
 				sender.Name, sender.SteamID, input.Command, input.Arguments, ev.Message);
