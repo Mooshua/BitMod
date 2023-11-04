@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <AssemblyName>bitmod_storage_local</AssemblyName>
+
+        <OutDir>$(BitModDev)/plugins/$(AssemblyName)/</OutDir>
+        <PublishDir>$(BitModBuild)/plugins/$(AssemblyName)/</PublishDir>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\api\BitMod\BitMod.csproj" />
+    </ItemGroup>
+</Project>

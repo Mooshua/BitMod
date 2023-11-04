@@ -42,6 +42,9 @@
         <None Update="configs\provisions.cfg">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <None Update="configs\storage_local.cfg">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
