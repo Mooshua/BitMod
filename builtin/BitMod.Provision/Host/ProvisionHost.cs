@@ -38,6 +38,12 @@ public class ProvisionHost
 		Provision(ev.Server);
 	}
 
+	[BitEvent]
+    	public async Task OnPlayerConnected(PlayerConnectedEventArgs ev)
+    	{
+       		Provision(ev.Server);
+	}
+
 	private void Provision(BitServer server)
 	{
 		var globalAdapter = new ProvisionConfigAdapter(_config);
